@@ -9,22 +9,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
-const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    margin: {
-      margin: theme.spacing(1),
-    },
-    withoutLabel: {
-      marginTop: theme.spacing(3),
-    },
-    textField: {
-      width: 200,
-    },
-  }));
+import Button from '@material-ui/core/Button';
 
 class LoginPage extends Component {
 
@@ -32,44 +17,84 @@ class LoginPage extends Component {
         super(props)
 
         this.state = {
-            emailAddress: '',
-            mobile: '',
-            password: ''
+            fields: {},
+            errors: {},
+            showPassword: false
         }
-        this.showPassword =  false
+
+        this.changeHandler = this.changeHandler.bind(this)
+        this.submitHandler = this.submitHandler.bind(this)
     }
 
-    
+
 
     submitHandler = e => {
         e.preventDefault()
-        console.log(this.state)
-        axios.put(Constants.loginApi, this.state)
-            .then(response => {
-                localStorage.setItem('response', response.data)
-                console.log(response)
-            }).catch(error => {
-                console.log('err')
-            })
+        if (this.isValidForm()) {
+            let fields = {}
+            fields["mailOrMobile"] = ""
+            fields["password"] = ""
+            this.setState({ fields: fields })
+            axios.put(Constants.loginApi, this.state.fields)
+                .then(response => {
+                     localStorage.setItem('response', JSON.stringify(response.data))
+                    console.log(response)
+                }).catch(err => {
+                    console.log(err)
+                })
+        }
     }
 
-changeHandler = e => {
-    this.setState({ [e.target.name]: e.target.value })
-}
+    changeHandler = e => {
+        let fields = this.state.fields
+        fields[e.target.name] = e.target.value
+        this.setState({
+            fields
+        })
+    }
 
-render() {
-    const { emailAddress, mobile, password } = this.state
-    return (
-        <div>
-            <form onSubmit={this.submitHandler}>
-                <div className='root'>
-                    {/* <input type='text' name="emailAddress" value={emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
-                    <TextField
+    handleClickShowPassword = () => {
+        let showPassword = !this.state.showPassword
+        this.setState({ showPassword })
+    }
+
+    isValidForm() {
+        let fields = this.state.fields
+        let errors = {}
+        let formIsValid = true
+
+        if (!fields["mailOrMobile"]) {
+            formIsValid = false
+            errors["mailOrMobile"] = "*Please enter your mail id or moblie"
+        }
+
+        if (!fields["password"]) {
+            formIsValid = false;
+            errors["password"] = "*Please enter your password.";
+        }
+
+        this.setState({
+            errors: errors
+        })
+
+        return formIsValid
+    }
+
+    render() {
+        const { mailOrMobile, password } = this.state.fields
+        const {errors} = this.state
+        const { showPassword } = this.state
+        return (
+            <div>
+                <form onSubmit={this.submitHandler}>
+                    <div className='root'>
+                        {/* <input type='text' name="emailAddress" value={emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
+                        <TextField
                             className="margin"
-                            name="emailAddress"
-                            value={emailAddress}
+                            name="mailOrMobile"
+                            value={mailOrMobile}
                             onChange={this.changeHandler}
-                            label="Email"
+                            label="Email or Mobile"
                             variant="outlined"
                             size="small"
                             InputProps={{
@@ -80,31 +105,15 @@ render() {
                                 ),
                             }}
                         />
-                    <h3>----------------Or---------------</h3>
-                    {/* <input type='text' name="mobile" value={mobile} onChange={this.changeHandler} placeholder='Mobile No.' /> */}
-                    <TextField
-                            className="margin"
-                            name="mobile"
-                            value={mobile}
-                            onChange={this.changeHandler}
-                            label="MobileNo."
-                            variant="outlined"
-                            size="small"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <ContactPhoneRoundedIcon />
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    {/* <input type='password' name="password" value={password} onChange={this.changeHandler} placeholder='Password' /> */}
-                    {/* <FormControl variant="outlined" size="small">
+                        <div className="errorMsg">{errors.mailOrMobile}</div>
+                        {/* <input type='password' name="password" value={password} onChange={this.changeHandler} placeholder='Password' /> */}
+                        <FormControl className="margin" variant="outlined" size="small">
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
+                                name="password"
                                 type={showPassword ? 'text' : 'password'}
-                                value={fields.password}
+                                value={password}
                                 onChange={this.changeHandler}
                                 endAdornment={
                                     <InputAdornment position="end">
@@ -116,14 +125,16 @@ render() {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                />
-                        </FormControl> */}
-                    <button type='submit'>Login</button>
-                    <Link to="/" >Registration</Link>
-                </div>
-            </form>
-        </div>
-    );
+                            />
+                        </FormControl>
+                        <div className="errorMsg">{errors.password}</div>
+                        {/* <button type='submit'>Login</button> */}
+                        <Button className='btn' type='submit' variant="contained" color="primary">Signin</Button><br />
+                        <Link to="/" >Registration</Link>
+                    </div>
+                </form>
+            </div>
+        );
 
     }
 }

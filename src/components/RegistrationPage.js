@@ -70,7 +70,7 @@ class RegistrationPage extends Component {
             fields["emailid"] = "";
             fields["mobileno"] = "";
             fields["password"] = "";
-            this.setState({ fields: fields });
+            this.setState({ fields: fields })
             axios.post(Constants.registerApi, this.state.fields)
                 .then(response => {
                     console.log(response)
@@ -81,8 +81,7 @@ class RegistrationPage extends Component {
         }
     }
 
-    handleClickShowPassword() {
-        console.log(this.state.showPassword)
+    handleClickShowPassword = () => {
         let showPassword = !this.state.showPassword
         this.setState({ showPassword })
     }
@@ -245,6 +244,7 @@ class RegistrationPage extends Component {
                             <OutlinedInput
                                 id="outlined-adornment-password"
                                 type={showPassword ? 'text' : 'password'}
+                                name="password"
                                 value={fields.password}
                                 onChange={this.changeHandler}
                                 endAdornment={
