@@ -67,7 +67,7 @@ class RegistrationPage extends Component {
             fields["mobileno"] = "";
             fields["password"] = "";
             this.setState({ fields: fields });
-            axios.post(Constants.registerApi, this.state.fields)
+            UserService.registrationService(this.state.fields)
                 .then(response => {
                     console.log(response)
                 })

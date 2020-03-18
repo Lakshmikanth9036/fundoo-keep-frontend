@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../css/register.scss'
-import { TextField, InputAdornment } from '@material-ui/core';
+import { TextField, InputAdornment, Card } from '@material-ui/core';
 import EmailIcon from '@material-ui/icons/Email';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Constants from '../constants/Constants';
 import axios from 'axios'
+
 
 class ForgotPassword extends Component {
 
@@ -22,7 +23,6 @@ class ForgotPassword extends Component {
         this.setState({emailAddress: this.state.emailAddress})
         console.log(this.state.emailAddress)
 //        http://localhost:8080/user/forgotpassword?emailAddress=kanth1997.9036%40gmail.com
-
         axios.post(Constants.forgetPasswordApi+this.state.emailAddress)
                 .then(response => {
                     console.log(response)
@@ -54,7 +54,8 @@ class ForgotPassword extends Component {
 
     render() {
         return (
-            <div className='root'>
+            <div>
+                <Card className='root' variant="outlined">
                 <form method="post"  onSubmit={this.submitHandler}>
                     <TextField
                       className='margin'
@@ -74,6 +75,7 @@ class ForgotPassword extends Component {
                     />
                     <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button><br />
                 </form>
+                </Card>
             </div>
         )
     }

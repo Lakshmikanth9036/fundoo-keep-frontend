@@ -5,12 +5,12 @@ import axios from 'axios'
 var rootApi = 'http://localhost:8080/user/'
 
 class UserService{
-    registrationService(data) {
+    static registrationService(data) {
         const regApi = `${rootApi}register`
         return axios.post(regApi,data)
     }
 
-    loginService(data){
+   static loginService(data){
         const logApi = `${rootApi}login`
         return axios.put(logApi,data)
     }

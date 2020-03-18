@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import Constants from '../constants/Constants'
 import '../css/login.scss'
 import UserService from '../service/UserService'
 import { Link } from 'react-router-dom'
@@ -34,10 +32,10 @@ class LoginPage extends Component {
             fields["mailOrMobile"] = ""
             fields["password"] = ""
             this.setState({ fields: fields })
-            axios.put(Constants.loginApi, this.state.fields)
+            UserService.loginService(this.state.fields)
                 .then(response => {
                      localStorage.setItem('response', JSON.stringify(response.data))
-                    console.log(response)
+                    console.log(response.data)
                 }).catch(err => {
                     console.log(err)
                 })
