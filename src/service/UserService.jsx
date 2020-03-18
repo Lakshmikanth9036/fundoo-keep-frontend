@@ -13,9 +13,14 @@ class UserService{
         return axios.put(logApi,data)
     }
 
-    static forgotPassService(data){
-        const forgotPassApi = `${rootApi}forgotpassword?emailAddress=${data}`
-        return axios.post(forgotPassApi)
+    static forgotPwdService(data){
+        const forgotPwdApi = `${rootApi}forgotpassword?emailAddress=${data}`
+        return axios.post(forgotPwdApi)
+    }
+
+    static resetPwddService(token,data){
+        const resetPwdApi = `${rootApi}resetpassword/${token}/?newPassword=${data}`
+        return axios.put(resetPwdApi)
     }
 }
 export default UserService

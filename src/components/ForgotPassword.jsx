@@ -18,7 +18,7 @@ class ForgotPassword extends Component {
         this.setState({emailAddress: this.state.emailAddress})
 
         console.log(this.state.emailAddress)
-                UserService.forgotPassService(this.state.emailAddress)
+                UserService.forgotPwdService(this.state.emailAddress)
                 .then(response => {
                     console.log(response)
                 })
