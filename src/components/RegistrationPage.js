@@ -1,27 +1,23 @@
 import React, { Component } from 'react'
-import RegistrationService from '../service/RegistrationService'
 import '../css/register.scss'
 import axios from 'axios'
-import clsx from 'clsx'
 import Constants from '../constants/Constants'
-import LoginPage from './LoginPage'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import { FilledInput } from '@material-ui/core'
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import EmailIcon from '@material-ui/icons/Email';
 import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import UserService from '../service/UserService'
 
 class RegistrationPage extends Component {
 
@@ -53,7 +49,7 @@ class RegistrationPage extends Component {
             width: 200,
         },
     }));
- 
+
     changeHandler = (e) => {
         let fields = this.state.fields
         fields[e.target.name] = e.target.value
@@ -70,7 +66,7 @@ class RegistrationPage extends Component {
             fields["emailid"] = "";
             fields["mobileno"] = "";
             fields["password"] = "";
-            this.setState({ fields: fields })
+            this.setState({ fields: fields });
             axios.post(Constants.registerApi, this.state.fields)
                 .then(response => {
                     console.log(response)
@@ -164,8 +160,9 @@ class RegistrationPage extends Component {
         const { showPassword } = this.state
         return (
             <div>
-                <form method="post" onSubmit={this.submitHandler}>
-                    <div className='root'>
+                <Card className='root' variant="outlined">
+                    <h3>Sign Up</h3>
+                    <form method="post" onSubmit={this.submitHandler}>
                         {/* <input type='text' name="firstName" value={fields.firstName} onChange={this.changeHandler} placeholder='First Name' /> */}
                         <TextField
                             className={this.useStyles.margin}
@@ -257,14 +254,14 @@ class RegistrationPage extends Component {
                                         </IconButton>
                                     </InputAdornment>
                                 }
-                                />
+                            />
                         </FormControl>
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit' >Submit</button> */}
-                        <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button><br/>
+                        <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button><br />
                         <Link to="/login" >Login</Link>
-                    </div>
-                </form>
+                    </form>
+                </Card>
             </div>
         )
     }

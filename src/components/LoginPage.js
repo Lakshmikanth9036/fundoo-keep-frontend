@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Constants from '../constants/Constants'
 import '../css/login.scss'
+import UserService from '../service/UserService'
 import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
-import { TextField, InputAdornment, InputLabel, FormControl, OutlinedInput, IconButton } from '@material-ui/core'
+import { TextField, InputAdornment, InputLabel, FormControl, OutlinedInput, IconButton, Card } from '@material-ui/core'
 import EmailIcon from '@material-ui/icons/Email';
-import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
@@ -86,8 +85,9 @@ class LoginPage extends Component {
         const { showPassword } = this.state
         return (
             <div>
+                <Card className='root' variant="outlined">
+                <h3>Sign in</h3>
                 <form onSubmit={this.submitHandler}>
-                    <div className='root'>
                         {/* <input type='text' name="emailAddress" value={emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
                         <TextField
                             className="margin"
@@ -130,9 +130,10 @@ class LoginPage extends Component {
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit'>Login</button> */}
                         <Button className='btn' type='submit' variant="contained" color="primary">Signin</Button><br />
-                        <Link to="/" >Registration</Link>
-                    </div>
+                        <Link to="/forgotPassword">Forgot password?</Link><br/>
+                        <Link to="/" >Create account</Link>
                 </form>
+                </Card>
             </div>
         );
 
