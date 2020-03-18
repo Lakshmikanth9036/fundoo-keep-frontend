@@ -1,11 +1,11 @@
-.root {
+.register {
     min-width: 275;
 	color: #000000;
 	position: absolute;
 	transform: translate(-50%,-50%);
 	left: 50%;
     top: 50%;
-	padding: 50px 30px;
+	padding: 40px 40px 36px;;
 	box-sizing: border-box;
 	border-radius: 10px;
 	border-style: solid;
@@ -16,11 +16,22 @@
 	margin-bottom: 12px;
 }
 
-.btn{
+.register .btn1{
+	background-color: #1a73e8;
 	position: relative;
-	left: 30%;
-	background-color: rgb(0, 110, 253);
+	left: 40%;
 	margin-bottom: 12px;
+}
+
+.register .btn2{
+	color: #1a73e8;
+    cursor: pointer;
+    font-family: 'Google Sans',arial,sans-serif;
+    font-weight: 500;
+    letter-spacing: .25px;
+    line-height: 36px;
+    padding: 6px 0;
+    position: relative;
 }
 
 .errorMsg {

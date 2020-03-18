@@ -160,8 +160,11 @@ class RegistrationPage extends Component {
         const { showPassword } = this.state
         return (
             <div>
-                <Card className='root' variant="outlined">
+                <Card className='register' variant="outlined">
+                    <div>
+                        <h2>Fondoo</h2>
                     <h3>Sign Up</h3>
+                    </div>
                     <form method="post" onSubmit={this.submitHandler}>
                         {/* <input type='text' name="firstName" value={fields.firstName} onChange={this.changeHandler} placeholder='First Name' /> */}
                         <TextField
@@ -258,8 +261,8 @@ class RegistrationPage extends Component {
                         </FormControl>
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit' >Submit</button> */}
-                        <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button><br />
-                        <Link to="/login" >Login</Link>
+                        <Button className='btn2' href="/login" >Signin</Button>
+                        <Button className='btn1'  type='submit' color="primary" variant='contained'>Signup</Button>
                     </form>
                 </Card>
             </div>

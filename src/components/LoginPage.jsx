@@ -83,7 +83,7 @@ class LoginPage extends Component {
         const { showPassword } = this.state
         return (
             <div>
-                <Card className='root' variant="outlined">
+                <Card className='login' variant="outlined">
                 <h3>Sign in</h3>
                 <form onSubmit={this.submitHandler}>
                         {/* <input type='text' name="emailAddress" value={emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
@@ -127,9 +127,9 @@ class LoginPage extends Component {
                         </FormControl>
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit'>Login</button> */}
-                        <Button className='btn' type='submit' variant="contained" color="primary">Signin</Button><br />
-                        <Link to="/forgotPassword">Forgot password?</Link><br/>
-                        <Link to="/" >Create account</Link>
+                        <Link className='PrDSKc' to="/forgotPassword">Forgot password?</Link><br/>
+                        <Button className='btnn2' href="/" >Sigin Up</Button>
+                        <Button className='btnn1' type='submit' color="primary" variant='contained'>Signin</Button>
                 </form>
                 </Card>
             </div>

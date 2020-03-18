@@ -72,8 +72,8 @@ class ForgotPassword extends Component {
                                 </InputAdornment>
                             ),
                         }}
-                    />
-                    <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button><br />
+                    /><br />
+                    <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button>
                 </form>
                 </Card>
             </div>
