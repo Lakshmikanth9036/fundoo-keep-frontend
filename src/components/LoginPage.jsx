@@ -141,7 +141,7 @@ class LoginPage extends Component {
                         </FormControl>
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit'>Login</button> */}
-                        <Link className='PrDSKc' to="/forgotPassword">Forgot password?</Link><br />
+                        <Button className='btnn2' href="/forgotPassword">Forgot password?</Button><br />
                         <Button className='btnn2' href="/" >Sigin Up</Button>
                         <Button className='btnn1' type='submit' color="primary" variant='contained'>Signin</Button>
                     </form>
