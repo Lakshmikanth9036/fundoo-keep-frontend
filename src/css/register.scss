@@ -6,10 +6,15 @@
 	left: 50%;
     top: 50%;
 	padding: 40px 40px 36px;;
-	box-sizing: border-box;
-	border-radius: 10px;
-	border-style: solid;
-	border-color: rgb(185, 180, 180);
+	h2{
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		font-style: oblique;
+	}
+}
+
+.register .hdr{
+	text-align: center;
+	font-family: 'Google Sans',arial,sans-serif;
 }
 
 .margin{
@@ -19,7 +24,7 @@
 .register .btn1{
 	background-color: #1a73e8;
 	position: relative;
-	left: 40%;
+	left: 35%;
 	margin-bottom: 12px;
 }
 

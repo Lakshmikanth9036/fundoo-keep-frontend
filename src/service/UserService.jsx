@@ -1,5 +1,3 @@
-import React, { Component } from 'react'
-import Constants from '../constants/Constants'
 import axios from 'axios'
 
 var rootApi = 'http://localhost:8080/user/'
@@ -13,6 +11,11 @@ class UserService{
    static loginService(data){
         const logApi = `${rootApi}login`
         return axios.put(logApi,data)
+    }
+
+    static forgotPassService(data){
+        const forgotPassApi = `${rootApi}forgotpassword?emailAddress=${data}`
+        return axios.post(forgotPassApi)
     }
 }
 export default UserService

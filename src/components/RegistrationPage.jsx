@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import '../css/register.scss'
-import axios from 'axios'
-import Constants from '../constants/Constants'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -33,22 +29,6 @@ class RegistrationPage extends Component {
         this.changeHandler = this.changeHandler.bind(this)
         this.submitHandler = this.submitHandler.bind(this)
     }
-
-    useStyles = makeStyles(theme => ({
-        root: {
-            display: 'flex',
-            flexWrap: 'wrap',
-        },
-        margin: {
-            margin: theme.spacing(1),
-        },
-        withoutLabel: {
-            marginTop: theme.spacing(3),
-        },
-        textField: {
-            width: 200,
-        },
-    }));
 
     changeHandler = (e) => {
         let fields = this.state.fields
@@ -161,14 +141,24 @@ class RegistrationPage extends Component {
         return (
             <div>
                 <Card className='register' variant="outlined">
-                    <div>
-                        <h2>Fondoo</h2>
-                    <h3>Sign Up</h3>
+                    <div className='hdr'>
+                        <h2>
+                            <span style={{ color: '#1a73e8' }}>F</span>
+                            <span style={{ color: '#df1a1a' }}>u</span>
+                            <span style={{ color: '#ffc107' }}>n</span>
+                            <span style={{ color: '#1a73e8' }}>d</span>
+                            <span style={{ color: '#0fb12a' }}>o</span>
+                            <span> </span>
+                            <span style={{ color: '#df1a1a' }}>K</span>
+                            <span style={{ color: '#e2b111' }}>e</span>
+                            <span style={{ color: '#0fb12a' }}>e</span>
+                            <span style={{ color: '#1a73e8' }}>p</span>
+                        </h2>
+                        <h4>Sign Up</h4>
                     </div>
                     <form method="post" onSubmit={this.submitHandler}>
                         {/* <input type='text' name="firstName" value={fields.firstName} onChange={this.changeHandler} placeholder='First Name' /> */}
                         <TextField
-                            className={this.useStyles.margin}
                             name="firstName"
                             value={fields.firstName}
                             onChange={this.changeHandler}
@@ -186,7 +176,6 @@ class RegistrationPage extends Component {
                         <div className="errorMsg">{errors.firstName}</div>
                         {/* <input type='text' name="lastName" value={fields.lastName} onChange={this.changeHandler} placeholder='Last Name' /> */}
                         <TextField
-                            className={this.useStyles.margin}
                             name="lastName"
                             value={fields.lastName}
                             onChange={this.changeHandler}
@@ -204,7 +193,6 @@ class RegistrationPage extends Component {
                         <div className="errorMsg">{errors.lastName}</div>
                         {/* <input type='text' name="emailAddress" value={fields.emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
                         <TextField
-                            className={this.useStyles.margin}
                             name="emailAddress"
                             value={fields.emailAddress}
                             onChange={this.changeHandler}
@@ -222,7 +210,6 @@ class RegistrationPage extends Component {
                         <div className="errorMsg">{errors.emailAddress}</div>
                         {/* <input type='text' name="mobile" value={fields.mobile} onChange={this.changeHandler} placeholder='Mobile No.' /> */}
                         <TextField
-                            className={this.useStyles.margin}
                             name="mobile"
                             value={fields.mobile}
                             onChange={this.changeHandler}
@@ -239,7 +226,7 @@ class RegistrationPage extends Component {
                         />
                         <div className="errorMsg">{errors.mobile}</div>
                         {/* <input type='password' name="password" value={fields.password} onChange={this.changeHandler} placeholder='Password' /> */}
-                        <FormControl variant="outlined" size="small">
+                        <FormControl variant="outlined" size="small" >
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"
@@ -261,8 +248,8 @@ class RegistrationPage extends Component {
                         </FormControl>
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit' >Submit</button> */}
-                        <Button className='btn2' href="/login" >Signin</Button>
-                        <Button className='btn1'  type='submit' color="primary" variant='contained'>Signup</Button>
+                        <Button className='btn2' href="/login" >Sign in</Button>
+                        <Button className='btn1' type='submit' color="primary" variant='contained'>Signup</Button>
                     </form>
                 </Card>
             </div>

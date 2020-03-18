@@ -34,7 +34,7 @@ class LoginPage extends Component {
             this.setState({ fields: fields })
             UserService.loginService(this.state.fields)
                 .then(response => {
-                     localStorage.setItem('response', JSON.stringify(response.data))
+                    localStorage.setItem('response', JSON.stringify(response.data))
                     console.log(response.data)
                 }).catch(err => {
                     console.log(err)
@@ -79,13 +79,27 @@ class LoginPage extends Component {
 
     render() {
         const { mailOrMobile, password } = this.state.fields
-        const {errors} = this.state
+        const { errors } = this.state
         const { showPassword } = this.state
         return (
             <div>
                 <Card className='login' variant="outlined">
-                <h3>Sign in</h3>
-                <form onSubmit={this.submitHandler}>
+                    <div className='hdr'>
+                        <h2>
+                            <span style={{ color: '#1a73e8' }}>F</span>
+                            <span style={{ color: '#df1a1a' }}>u</span>
+                            <span style={{ color: '#ffc107' }}>n</span>
+                            <span style={{ color: '#1a73e8' }}>d</span>
+                            <span style={{ color: '#0fb12a' }}>o</span>
+                            <span> </span>
+                            <span style={{ color: '#df1a1a' }}>K</span>
+                            <span style={{ color: '#e2b111' }}>e</span>
+                            <span style={{ color: '#0fb12a' }}>e</span>
+                            <span style={{ color: '#1a73e8' }}>p</span>
+                        </h2>
+                        <h4>Sign in</h4>
+                    </div>
+                    <form onSubmit={this.submitHandler}>
                         {/* <input type='text' name="emailAddress" value={emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
                         <TextField
                             className="margin"
@@ -127,14 +141,13 @@ class LoginPage extends Component {
                         </FormControl>
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit'>Login</button> */}
-                        <Link className='PrDSKc' to="/forgotPassword">Forgot password?</Link><br/>
+                        <Link className='PrDSKc' to="/forgotPassword">Forgot password?</Link><br />
                         <Button className='btnn2' href="/" >Sigin Up</Button>
                         <Button className='btnn1' type='submit' color="primary" variant='contained'>Signin</Button>
-                </form>
+                    </form>
                 </Card>
             </div>
         );
-
     }
 }
 export default LoginPage

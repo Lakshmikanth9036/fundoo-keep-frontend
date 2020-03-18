@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import '../css/register.scss'
+import UserService from '../service/UserService';
 import { TextField, InputAdornment, Card } from '@material-ui/core';
 import EmailIcon from '@material-ui/icons/Email';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Constants from '../constants/Constants';
-import axios from 'axios'
-
-
+import '../css/login.scss'
 class ForgotPassword extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {
             emailAddress: ''
         }
@@ -22,8 +17,7 @@ class ForgotPassword extends Component {
         e.preventDefault()
         this.setState({emailAddress: this.state.emailAddress})
         console.log(this.state.emailAddress)
-//        http://localhost:8080/user/forgotpassword?emailAddress=kanth1997.9036%40gmail.com
-        axios.post(Constants.forgetPasswordApi+this.state.emailAddress)
+                UserService.forgotPassService()
                 .then(response => {
                     console.log(response)
                 })
@@ -36,29 +30,27 @@ class ForgotPassword extends Component {
         this.setState({[e.target.name]: e.target.value})
     } 
 
-    useStyles = makeStyles(theme => ({
-        root: {
-            display: 'flex',
-            flexWrap: 'wrap',
-        },
-        margin: {
-            margin: theme.spacing(1),
-        },
-        withoutLabel: {
-            marginTop: theme.spacing(3),
-        },
-        textField: {
-            width: 200,
-        },
-    }));
-
     render() {
         return (
             <div>
-                <Card className='root' variant="outlined">
+                <Card className='forgot' variant="outlined">
+                <div className='hdr'>
+                        <h2>
+                            <span style={{ color: '#1a73e8' }}>F</span>
+                            <span style={{ color: '#df1a1a' }}>u</span>
+                            <span style={{ color: '#ffc107' }}>n</span>
+                            <span style={{ color: '#1a73e8' }}>d</span>
+                            <span style={{ color: '#0fb12a' }}>o</span>
+                            <span> </span>
+                            <span style={{ color: '#df1a1a' }}>K</span>
+                            <span style={{ color: '#e2b111' }}>e</span>
+                            <span style={{ color: '#0fb12a' }}>e</span>
+                            <span style={{ color: '#1a73e8' }}>p</span>
+                        </h2>
+                        <h3>Account Recovery</h3>
+                    </div>
                 <form method="post"  onSubmit={this.submitHandler}>
                     <TextField
-                      className='margin'
                         name="emailAddress"
                         value={this.state.emailAddress}
                         onChange={this.changeHandler}
@@ -73,7 +65,7 @@ class ForgotPassword extends Component {
                             ),
                         }}
                     /><br />
-                    <Button className='btn' type='submit' variant="contained" color="primary">Signup</Button>
+                    <Button type='submit' variant="contained" color="primary">Signup</Button>
                 </form>
                 </Card>
             </div>
