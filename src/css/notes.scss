@@ -1,0 +1,29 @@
+.notes{
+    display: flex;
+    margin-top: 80px;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.cards{
+    padding:  40px 40px 36px;
+   
+}
+
+.nic{
+    width: 40px;
+    height: 40px;
+    padding-right: 4px;
+}
+
+.niciv{
+    padding-left: 4px;
+    color: #5f6368;
+    opacity: 1;
+    display: inline-block;
+    font-family: 'Product Sans',Arial,sans-serif;
+    font-size: 22px;
+    line-height: 24px;
+    position: relative;
+    top: -1.5px;
+}
+
