@@ -226,7 +226,7 @@ class RegistrationPage extends Component {
                         />
                         <div className="errorMsg">{errors.mobile}</div>
                         {/* <input type='password' name="password" value={fields.password} onChange={this.changeHandler} placeholder='Password' /> */}
-                        <FormControl variant="outlined" size="small" >
+                        <FormControl variant="outlined" size="small" style={{maxWidth:'254.67px'}}>
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"

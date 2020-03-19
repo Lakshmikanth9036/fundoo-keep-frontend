@@ -3,7 +3,7 @@ import UserService from '../service/UserService';
 import { TextField, InputAdornment, Card } from '@material-ui/core';
 import EmailIcon from '@material-ui/icons/Email';
 import Button from '@material-ui/core/Button';
-import '../css/register.scss'
+import '../css/forgot.scss'
 class ForgotPassword extends Component {
 
     constructor(props) {

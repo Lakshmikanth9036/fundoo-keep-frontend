@@ -119,7 +119,7 @@ class LoginPage extends Component {
                         />
                         <div className="errorMsg">{errors.mailOrMobile}</div>
                         {/* <input type='password' name="password" value={password} onChange={this.changeHandler} placeholder='Password' /> */}
-                        <FormControl className="margin" variant="outlined" size="small">
+                        <FormControl className="margin" variant="outlined" size="small" style={{maxWidth:'254.67px'}} >
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
                                 id="outlined-adornment-password"

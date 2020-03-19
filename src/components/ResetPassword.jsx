@@ -4,6 +4,7 @@ import { FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, Car
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import UserService from '../service/UserService'
+import '../css/reset.scss'
 
 function ResetPassword() {
     let { token } = useParams()
@@ -32,7 +33,7 @@ function ResetPassword() {
 
     return (
         <div>
-            <Card className='forgot' variant="outlined">
+            <Card className='reset' variant="outlined">
                 <div className='hdr'>
                     <h2>
                         <span style={{ color: '#1a73e8' }}>F</span>
@@ -49,7 +50,7 @@ function ResetPassword() {
                     <h4>Reset Password</h4>
                 </div>
                 <form method='put' onSubmit={submitHandler}>
-                    <FormControl variant="outlined" size='small'>
+                    <FormControl variant="outlined" size='small' style={{maxWidth:'254.67px'}}>
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"

@@ -1,5 +1,4 @@
 .login {
-    min-width: 275;
 	color: #000000;
 	position: absolute;
 	transform: translate(-50%,-50%);
@@ -22,9 +21,9 @@
 }
 
 .login .btnn1{
-    background-color: #1a73e8;
+	background-color: #1a73e8;
 	position: relative;
-	left: 40%;
+	left: 30%;
 	margin-bottom: 12px;
 }
 
@@ -32,7 +31,6 @@
 	color: #1a73e8;
     cursor: pointer;
     font-family: 'Google Sans',arial,sans-serif;
-    position: relative;
 }
 
 .login .PrDSKc{
