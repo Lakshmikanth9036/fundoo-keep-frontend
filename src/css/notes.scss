@@ -27,3 +27,39 @@
     top: -1.5px;
 }
 
+.search{
+    display: flex;
+    position: relative;
+    width: 750px;
+    border-style:solid;
+    border-color: #eaecee;
+    border-radius: 11px; 
+    background-color:#eaecee;
+    margin-right: 16px;
+    margin-left: 20px;
+}
+
+.search:hover{
+        background-color: #ffff;
+}
+
+.searchIcon{
+    color: #5f6368;
+    padding: 0px 16px;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputRoot{
+    display: flex;
+    padding: inherit;
+    padding-left: 64px;
+}
+
+.accBtn{
+    justify-content: end;
+}
+
