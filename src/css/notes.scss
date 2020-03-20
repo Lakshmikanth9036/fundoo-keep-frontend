@@ -1,12 +1,17 @@
-.notes{
-    display: flex;
+.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1em;
+    grid-auto-rows: minmax(100px,auto) ;
     margin-top: 80px;
-    flex-direction: row;
-    justify-content: space-around;
+    // display: flex;
+    // justify-content: space-around;
+    // column-gap: 1em;
+    align-items: flex-start;
+    // flex-wrap: wrap;
 }
 .cards{
     padding:  40px 40px 36px;
-   
 }
 
 .nic{

@@ -6,7 +6,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-
 class Note extends Component {
 
     token;
@@ -41,6 +40,7 @@ class Note extends Component {
         const { notes } = this.state
 
         return (
+            <div>
             <Container component="main" maxWidth="lg">
                 <AppBar position="fixed" color="transparent" >
                     <Toolbar>
@@ -75,23 +75,21 @@ class Note extends Component {
                                 <AccountCircle />
                             </IconButton>
                     </Toolbar>
-                    
                 </AppBar>
-                <Container component="main" maxWidth="xs">
-                    <Box className='notes' color="text.primary">
-                        {
+                </Container>
+                <Container className='container' component="main" maxWidth="lg">
+                        {      
                             notes.map(note =>
                                 <Card className='cards' variant="outlined" >
                                     <div key={note.noteId}>
-                                        {note.title}
-                                        {note.description}<br />
+                                        {note.title}<br />
+                                        {note.description}
                                     </div>
                                 </Card>
                             )
                         }
-                    </Box>
                 </Container>
-            </Container>
+            </div>
         )
     }
 }
