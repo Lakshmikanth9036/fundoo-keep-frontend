@@ -1,22 +1,16 @@
 import axios from 'axios'
 
 var rootApi = 'http://localhost:8080/note/'
+const Token = JSON.parse(localStorage.getItem('Token'))
 
 class NoteService{
-    static getAllNoteService(token){
-        var config = {
-            headers: {"header": token }
-        };
-        return axios.get(`${rootApi}getallNotes`,config)
+    static getAllNoteService(){
+        return axios.get(`${rootApi}getallNotes`, {headers: {"header": Token }})
     }
 
-    static createNoteService(token,data){
-        var config = {
-            headers: {"header": token }
-        };
-        // data=JSON.stringify(data)
-        // console.log(data)
-        return axios.post(`${rootApi}create`,data,{headers:config})
+    static createNoteService(data){
+        console.log(data)
+        return axios.post(`${rootApi}create`,data, {headers: {"header": Token }})
     }
 }
 export default NoteService

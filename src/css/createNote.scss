@@ -1,0 +1,27 @@
+.contnr{
+    display: flex;
+    width: 100%;
+    margin-top: 80px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.inpDiv{
+    flex-basis: 100%;
+    min-width: 620px;
+}
+
+.inp{
+    padding: 10px;
+}
+
+.inpDiv1{
+    flex-basis: 100%;
+    min-width: 520px;
+}
+
+.inp1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 10px;
+}
+

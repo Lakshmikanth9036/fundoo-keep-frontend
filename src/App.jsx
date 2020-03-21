@@ -5,7 +5,7 @@ import {BrowserRouter as Router,Route, Switch} from 'react-router-dom'
 import LoginPage from './components/LoginPage';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
-import Note from './components/Note';
+import Dashboard from './components/Dashboard'
 
 class App extends Component {
   render() {
@@ -16,7 +16,7 @@ class App extends Component {
           <Route exact path="/login" component={LoginPage}/>
           <Route exact path="/forgotPassword" component={ForgotPassword}/>
           <Route exact path="/resetPassword/:token" component={ ResetPassword } />
-          <Route exact path="/note/dashboard" component={ Note }/>
+          <Route exact path="/note/dashboard" component={ Dashboard }/>
         </Switch>
       </Router>
      

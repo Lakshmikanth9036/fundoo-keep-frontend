@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import '../css/login.scss'
 import UserService from '../service/UserService'
-import { Link } from 'react-router-dom'
 import { TextField, InputAdornment, InputLabel, FormControl, OutlinedInput, IconButton, Card } from '@material-ui/core'
 import EmailIcon from '@material-ui/icons/Email';
 import Visibility from '@material-ui/icons/Visibility';
@@ -34,6 +33,7 @@ class LoginPage extends Component {
             this.setState({ fields: fields })
             UserService.loginService(this.state.fields)
                 .then(response => {
+                    localStorage.setItem('Token', JSON.stringify(response.data.token))
                     localStorage.setItem('response', JSON.stringify(response.data))
                     console.log(response.data)
                 }).catch(err => {
