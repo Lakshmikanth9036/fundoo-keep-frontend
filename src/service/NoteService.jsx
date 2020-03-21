@@ -7,8 +7,16 @@ class NoteService{
         var config = {
             headers: {"header": token }
         };
-        console.log(config)
         return axios.get(`${rootApi}getallNotes`,config)
+    }
+
+    static createNoteService(token,data){
+        var config = {
+            headers: {"header": token }
+        };
+        // data=JSON.stringify(data)
+        // console.log(data)
+        return axios.post(`${rootApi}create`,data,{headers:config})
     }
 }
 export default NoteService

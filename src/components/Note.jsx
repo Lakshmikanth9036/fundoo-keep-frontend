@@ -37,7 +37,13 @@ class Note extends Component {
         // note["title"] = ""
         // note["description"] = ""
         // this.setState({note: note})
-        console.log(this.state.note)
+        NoteService.createNoteService(this.token.token,this.state.note)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 
     componentDidMount() {
