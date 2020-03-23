@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import '../css/createNote.scss'
-import { Card, InputBase, Button, Divider } from '@material-ui/core'
+import { Card, InputBase, Button, Divider, IconButton } from '@material-ui/core'
+import ColorLensIcon from '@material-ui/icons/ColorLens';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import CropOriginalIcon from '@material-ui/icons/CropOriginal';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import NoteService from '../service/NoteService'
 
  class CreateNote extends Component {
@@ -35,7 +39,7 @@ import NoteService from '../service/NoteService'
 
     render() {
         return (
-            <div>
+            <div className='rootCont'>
                 <div className='contnr'>
                     <Card variant="outlined">
                         {
@@ -65,9 +69,25 @@ import NoteService from '../service/NoteService'
                                     name="description"
                                     multiline
                                     inputProps={{"aria-label":"naked"}}/>
+                                    </div>
+                                    <div class='icbtn'>
+                                       <div>
+                                 <IconButton>
+                                        <ColorLensIcon fontSize="small" />
+                                    </IconButton>
+                                    <IconButton>
+                                        <ArchiveIcon fontSize="small" />
+                                    </IconButton>
+                                    <IconButton>
+                                        <CropOriginalIcon fontSize="small" />
+                                    </IconButton>
+                                    <IconButton>
+                                        <PersonAddIcon fontSize="small" />
+                                    </IconButton>
+                                    </div> 
+                                     <div className="close"><Button onClick={this.expandTakeNote}>close</Button></div>
                                 </div>
-                                <Divider/>
-                                    <Button onClick={this.expandTakeNote}>close</Button>
+                                  
                             </div> : null}
                     </Card>
                 </div>

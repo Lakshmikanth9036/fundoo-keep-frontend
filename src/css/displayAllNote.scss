@@ -1,0 +1,31 @@
+@media(min-width: 800px){
+    .container{
+    display: flex;
+    justify-content: space-around;
+    .cards{
+        max-width: 240px;
+    }
+}
+}
+
+.container{
+    flex-direction: row;  
+    align-items: flex-start;
+    flex-wrap: wrap;  
+}
+
+.cards{
+    margin-left: 30px;
+    flex-basis: 30%;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.icon{
+    display: flex;
+    justify-content: space-between;
+}
+
+.notes{
+    margin-left: 13%;
+}

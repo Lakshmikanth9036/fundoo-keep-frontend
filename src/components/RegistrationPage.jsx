@@ -49,7 +49,9 @@ class RegistrationPage extends Component {
             this.setState({ fields: fields });
             UserService.registrationService(this.state.fields)
                 .then(response => {
-                    console.log(response)
+                    if(response.status === 200){
+                        this.props.history.push("/login")
+                    }
                 })
                 .catch(error => {
                     console.log(error)

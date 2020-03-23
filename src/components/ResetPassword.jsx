@@ -25,7 +25,9 @@ function ResetPassword() {
          e.preventDefault()
          UserService.resetPwddService(token,values.newPassword)
          .then(response => {
-            console.log(response.data)
+            if(response.status === 200){
+                this.props.history.push("/login")
+            }
         }).catch(err => {
             console.log(err)
         })

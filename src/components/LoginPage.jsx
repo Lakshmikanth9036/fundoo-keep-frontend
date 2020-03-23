@@ -6,6 +6,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
+import { Redirect,useHistory } from 'react-router-dom';
 
 class LoginPage extends Component {
 
@@ -22,8 +23,6 @@ class LoginPage extends Component {
         this.submitHandler = this.submitHandler.bind(this)
     }
 
-
-
     submitHandler = e => {
         e.preventDefault()
         if (this.isValidForm()) {
@@ -35,13 +34,16 @@ class LoginPage extends Component {
                 .then(response => {
                     localStorage.setItem('Token', JSON.stringify(response.data.token))
                     localStorage.setItem('response', JSON.stringify(response.data))
-                    console.log(response.data)
+                    console.log(response.status)
+                    if(response.status === 200){
+                        this.props.history.push("/note/dashboard")
+                    }
                 }).catch(err => {
-                    console.log(err)
+                    this.props.history.push("/login")
                 })
         }
     }
-
+  
     changeHandler = e => {
         let fields = this.state.fields
         fields[e.target.name] = e.target.value

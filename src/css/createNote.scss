@@ -1,14 +1,22 @@
-.contnr{
-    display: flex;
-    width: 100%;
-    margin-top: 80px;
-    justify-content: center;
-    margin-bottom: 20px;
+@media(min-width: 800px){
+    .inpDiv{
+        display: flex;
+        flex-basis: 100%;
+        min-width: 620px;
+    }
 }
 
-.inpDiv{
-    flex-basis: 100%;
-    min-width: 620px;
+.rootCont{
+    display: flex;
+    justify-content: center;
+}
+
+.contnr{
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    border-color: #e0e0e0;
+    box-shadow: 1px 0px 7px rgba(0,0,0,0.20);
 }
 
 .inp{
@@ -17,11 +25,23 @@
 
 .inpDiv1{
     flex-basis: 100%;
-    min-width: 520px;
+    min-width: 620px;
+    padding: 5px;
 }
 
 .inp1{
+    padding-top: 10px;
+    padding-left: 15px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    padding: 10px;
 }
 
+.icbtn{
+    width: 100%;
+    display: flex;
+}
+
+.close{
+    position: relative;
+    left:60%;
+    font-family: 'Product Sans',Arial,sans-serif;
+}

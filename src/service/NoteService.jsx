@@ -9,8 +9,11 @@ class NoteService{
     }
 
     static createNoteService(data){
-        console.log(data)
         return axios.post(`${rootApi}create`,data, {headers: {"header": Token }})
+    }
+
+    static removeLabelFromNoteService(labelId,noteId){
+        return axios.delete(`${rootApi}remove/label?labelId=${labelId}&noteId=${noteId}`,{headers: {"header": Token }})
     }
 }
 export default NoteService
