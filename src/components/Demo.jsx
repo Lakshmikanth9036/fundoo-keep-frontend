@@ -81,40 +81,49 @@ const useStyles = makeStyles(theme => ({
 
 export default class PrimarySearchAppBar extends Component {
     classes = useStyles;
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            isMenuOpen: false
+        }
+    }
+    
+   
 
-    anchorEl = null;
-    isMenuOpen = Boolean(this.anchorEl);
-
-    handleProfileMenuOpen = event => {
-        this.anchorEl = event.currentTarget;
-        this.isMenuOpen = Boolean(this.anchorEl)
-        console.log(this.anchorEl)
-        console.log(this.isMenuOpen)
-    };
+    // handleProfileMenuOpen = event => {
+    //     this.anchorEl = event.currentTarget;
+    //     this.isMenuOpen = Boolean(this.anchorEl)
+    //     console.log(this.anchorEl)
+    //     console.log(this.isMenuOpen)
+    // };
 
     handleMenuClose = () => {
-        this.anchorEl = null;
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen
+        })
     };
 
-    menuId = 'primary-search-account-menu';
-    renderMenu = (
-        <Menu
-            anchorEl={this.anchorEl}
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            id={this.menuId}
-            keepMounted
-            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={this.isMenuOpen}
-            onClose={this.handleMenuClose}
-        >
-           {console.log(this.anchorEl)}
-           {console.log(this.isMenuOpen)}
-            <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-        </Menu>
-    );
+    // menuId = 'primary-search-account-menu';
+    // renderMenu = (
+    //     <Menu
+    //         anchorEl={this.anchorEl}
+    //         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //         id={this.menuId}
+    //         keepMounted
+    //         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+    //         open={this.isMenuOpen}
+    //         onClose={this.handleMenuClose}
+    //     >
+    //         {console.log(this.anchorEl)}
+    //         {console.log(this.isMenuOpen)}
+    //         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+    //         <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+    //     </Menu>
+    // );
 
     render() {
+
         return (
             <div className={this.classes.grow}>
                 <AppBar position="static">
@@ -122,6 +131,7 @@ export default class PrimarySearchAppBar extends Component {
                         <div className={this.classes.grow} />
                         <div className={this.classes.sectionDesktop}>
                             <IconButton
+                                buttonRef={node => { this.anchorEl = node; }}
                                 edge="end"
                                 aria-label="account of current user"
                                 aria-controls={this.menuId}
@@ -130,9 +140,22 @@ export default class PrimarySearchAppBar extends Component {
                                 color="inherit"
                             >
                                 {console.log(this.anchorEl)}
-                                {console.log(this.isMenuOpen)}
                                 <MoreIcon />
                             </IconButton>
+                            <Menu
+                                anchorEl={this.anchorEl}
+                                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                id={this.menuId}
+                                keepMounted
+                                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                                open="true"
+                                onClose={this.handleMenuClose}
+                            >
+                                {console.log(this.anchorEl)}
+                                {console.log(this.state.isMenuOpen)}
+                                <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+                                <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+                            </Menu>
                         </div>
                     </Toolbar>
                 </AppBar>

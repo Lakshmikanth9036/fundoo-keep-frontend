@@ -1,15 +1,11 @@
+
+
 .cnt input{
     width: 100%;
     border-style: none;
     outline: none;
     margin-bottom: 20px;
     font-size: 16px;
-}
-
-//demo
-.cards2{
-    position: relative;
-    top: 20%;
 }
 
 .nic{
@@ -21,8 +17,6 @@
 .niciv{
     padding-left: 4px;
     color: #5f6368;
-    opacity: 1;
-    display: inline-block;
     font-family: 'Product Sans',Arial,sans-serif;
     font-size: 22px;
     line-height: 24px;
@@ -32,7 +26,6 @@
 
 .search{
     display: flex;
-    flex: 1;
     position: relative;
     width: 750px;
     border-style:solid;
@@ -63,3 +56,27 @@
     padding-left: 64px;
 }
 
+.slideBar{
+    display: flex;
+    height: 100%;
+    background-color: white;
+    flex-direction: column;
+    position: fixed;
+    top:57px;
+    left: 0px;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+    width: 350px;
+    flex-wrap: wrap;
+}
+
+.sideCont{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 24px;
+    margin-bottom: 5px;
+}

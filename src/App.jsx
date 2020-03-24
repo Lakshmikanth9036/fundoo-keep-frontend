@@ -21,7 +21,7 @@ class App extends Component {
           <Route exact path="/note/dashboard" component={ Dashboard }/>
         </Switch>
       </Router>
-  // <Demo/>
+  //<Demo/>
       //<Demo2/>
     );
   }
