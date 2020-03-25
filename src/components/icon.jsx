@@ -1,0 +1,161 @@
+import React, { Component } from 'react'
+import ColorLensIcon from '@material-ui/icons/ColorLens';
+import ArchiveIcon from '@material-ui/icons/Archive';
+import CropOriginalIcon from '@material-ui/icons/CropOriginal';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import MoreIcon from '@material-ui/icons/MoreVert';
+import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip } from '@material-ui/core';
+import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
+import NoteService from '../service/NoteService';
+import LabelService from '../service/LabelService';
+import AllLabels from './AllLabels';
+import '../css/icons.scss'
+
+export class Icon extends Component {
+
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            open: false,
+            value: false,
+            changeColor: false,
+            colors: [{name:"White",color:"#fff"},{name:"Red",color:"#f28b82"},{name:"Orange",color:"#fbbc04"},{name:"Yellow",color:"#fff475"},
+                     {name:"Green",color:"#ccff90"},{name:"Teal",color:"#a7ffeb"},{name:"Blue",color:"#cbf0f8"},{name:"Darkblue",color:"#aecbfa"},
+                     {name:"Purple",color:"#d7aefb"},{name:"Pink",color:"#fdcfe8"},{name:"Brown",color:"#e6c9a8"},{name:"Gray",color:"#e8eaed"}]
+        }
+    }
+
+    handleToggle = () => {
+        this.setState(
+            prevState => ({ open: !prevState.open })
+        )
+    }
+
+    handleClose = event => {
+        if(this.anchorEl.contains(event.target)){
+            return;
+        }
+        this.setState({ open: false })
+    }
+
+    handleToggleCloseColor = () => {
+        this.setState({changeColor: !this.state.changeColor})
+    }
+
+    handleCloseColor = event => {
+        if(this.anchorEl.contains(event.target)){
+            return;
+        }
+        this.setState({ changeColor: false })
+    }
+
+    moveToTrash = () => {
+        var data = {value: !this.state.value}
+        NoteService.moveToTrashService(this.props.nts.noteId,data)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    moveToArchive = () => {
+        var data = {value: this.state.value}
+        NoteService.moveToArchiveService(this.props.nts.noteId,data)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    render() {
+        const { open } = this.state
+        const { colors } = this.state
+        const buttonColor = colors.map(color => {
+            return(
+            <div key={this.props.nts.noteId}>
+                <div className="color">
+                    <IconButton style={{backgroundColor: color.color}}/>
+                </div>
+            </div>)
+        })
+        return (
+            <div>
+                <CardActionArea style={{ width: "100%" }} disableSpacing>
+                    <div className="icon">
+                        <Tooltip title="Color">
+                        <IconButton onClick={this.handleToggleCloseColor}>
+                            <ColorLensIcon fontSize="small" />
+                        </IconButton>
+                        </Tooltip>
+                        <Paper>
+                            {
+                                this.state.changeColor ?
+                                <ClickAwayListener onClickAway={this.handleCloseColor}>
+                                <Card className="colorBox">
+                                    {buttonColor}
+                                </Card>
+                                </ClickAwayListener>:null
+                            }
+                        </Paper>
+                        <IconButton
+                         onClick={this.moveToArchive}>
+                            <ArchiveIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton>
+                            <CropOriginalIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton>
+                            <PersonAddIcon fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                            buttonRef={node => { this.anchorEl = node }}
+                            aria-label="show more"
+                            aria-haspopup="true"
+                            onClick={this.handleToggle}
+                            fontSize="small">
+                            <MoreIcon />
+                        </IconButton>
+                        <Popper
+                            open={open}
+                            // placement="right"
+                            anchorEl={this.anchorEl}
+                            style={{ zIndex: 1 }}>
+                            <Card>
+                                <ClickAwayListener onClickAway={this.handleClose}>
+                                <MenuList>
+                                            <MenuItem onClick={this.moveToTrash}>Delete note</MenuItem>
+                                            <PopupState variant="popper" popupId="demo-popup-popper" style={{ zIndex: 1 }}>
+                                                {popupState => (
+                                                    <div>
+                                                        <MenuItem variant="contained"  {...bindToggle(popupState)}>
+                                                            Add Label
+                                                       </MenuItem>
+                                                        <Popper style={{ zIndex: 1 }} {...bindPopper(popupState)} transition>
+                                                            {({ TransitionProps }) => (
+                                                                <Fade {...TransitionProps} timeout={350}>
+                                                                    <Paper>
+                                                                        <AllLabels nId={this.props.nts.noteId}></AllLabels>
+                                                                    </Paper>
+                                                                </Fade>
+                                                            )}
+                                                        </Popper>
+                                                    </div>
+                                                )}
+                                            </PopupState>
+                                        </MenuList>
+                                </ClickAwayListener>
+                            </Card>
+                        </Popper>
+                    </div>
+                </CardActionArea>
+            </div>
+        )
+    }
+}
+
+export default Icon

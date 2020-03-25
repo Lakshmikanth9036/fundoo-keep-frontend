@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import NoteService from '../service/NoteService';
-import { Container, Card, CardHeader, CardContent, Typography, CardActionArea, IconButton, Chip, InputBase, Divider, Button, Popper, ClickAwayListener, MenuList, MenuItem } from '@material-ui/core';
-import ColorLensIcon from '@material-ui/icons/ColorLens';
-import ArchiveIcon from '@material-ui/icons/Archive';
-import CropOriginalIcon from '@material-ui/icons/CropOriginal';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import { Container, Card,CardContent, Chip } from '@material-ui/core';
+
 import '../css/displayAllNote.scss'
+import Icon from './icon';
 
 
 class DisplayAllNotes extends Component {
@@ -17,7 +14,6 @@ class DisplayAllNotes extends Component {
         this.state = {
             notes: [],
             editNote: false,
-            open: false
         }
     }
 
@@ -39,18 +35,6 @@ class DisplayAllNotes extends Component {
         this.setState({editNote: !this.state.editNote})
     }
 
-    handleToggle = () => {
-        this.setState(
-            prevState => ({ open: !prevState.open})
-    )}
-
-    handleClose = event => {
-        if(this.anchorEl.contains(event.target)){
-            return;
-        }
-        this.setState({open: false})
-    }
-
     deleteLabel = (note,label) => {
         NoteService.removeLabelFromNoteService(label,note)
         .then(response => {
@@ -64,7 +48,6 @@ class DisplayAllNotes extends Component {
     render() {
 
         const { notes } = this.state
-        const { open } = this.state
 
         return (
             <div>
@@ -84,43 +67,9 @@ class DisplayAllNotes extends Component {
                                         )
                                     }
                                 </CardContent>
-                                <CardActionArea style={{width:"100%"}} disableSpacing>
-                                    <div className="icon">
-                                    <IconButton>
-                                        <ColorLensIcon fontSize="small" />
-                                    </IconButton>
-                                    <IconButton>
-                                        <ArchiveIcon fontSize="small" />
-                                    </IconButton>
-                                    <IconButton>
-                                        <CropOriginalIcon fontSize="small" />
-                                    </IconButton>
-                                    <IconButton>
-                                        <PersonAddIcon fontSize="small" />
-                                    </IconButton>
-                                    <IconButton 
-                                        buttonRef = {node => {this.anchorEl = node}}
-                                        aria-label="show more"
-                                        aria-haspopup="true"
-                                        onClick={this.handleToggle}
-                                        fontSize="small">
-                                            {console.log(this.anchorEl)}
-                                            {console.log(open)}
-                                        <MoreIcon />
-                                    </IconButton>
-                                    <Popper 
-                                        open={open}
-                                        anchorEl={this.anchorEl}>
-                                            <Card>
-                                                <ClickAwayListener onClick={this.handleClose}>
-                                                    <MenuList>
-                                                        <MenuItem onClick={this.trashNote}>Delete Note</MenuItem>
-                                                    </MenuList>
-                                                </ClickAwayListener>
-                                            </Card>
-                                    </Popper>
-                                    </div>
-                                </CardActionArea>
+                              <div>
+                                <Icon  nts = {note}/>
+                              </div>
                             </Card>
                             // <Card className='cards2' variant="outlined" >
                             //     <InputBase

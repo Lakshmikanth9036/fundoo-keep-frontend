@@ -15,5 +15,17 @@ class NoteService{
     static removeLabelFromNoteService(labelId,noteId){
         return axios.delete(`${rootApi}remove/label?labelId=${labelId}&noteId=${noteId}`,{headers: {"header": Token }})
     }
+
+    static moveToTrashService(nId,data){
+        return axios.put(`${rootApi}trash/${nId}`,data,{headers: {"header": Token }})
+    }
+
+    static moveToArchiveService(nId,data){
+        return axios.put(`${rootApi}archive/${nId}`,data,{headers: {"header": Token }})
+    }
+
+    static addLabelToNoteService(label,nId){
+        return axios.put(`${rootApi}add/label?nId=${nId}`,label,{headers: {"header": Token }})
+    }
 }
 export default NoteService
