@@ -1,3 +1,18 @@
 .colorBox{
-    display: flex;
+    display: grid;
+    position: absolute;
+    margin-top: -68px;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 0.6em;
+    padding: 5px;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+    z-index: 1;
 }
+
+.color{
+    display: flex;
+    border-style: solid;
+    border-radius: 50%;
+    border-color:  1px "black";
+}
+

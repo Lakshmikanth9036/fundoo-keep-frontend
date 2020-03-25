@@ -55,15 +55,16 @@ class DisplayAllNotes extends Component {
                     {
                         notes.map(note =>
                             
-                            <Card className='cards' variant="outlined" key={note.noteId}>
+                            <Card className='cards' variant="outlined" key={note.noteId} style={{backgroundColor:note.color}}>
                                 <div className='notes'>
+                                    {console.log(note.color)}
                                 <h3>{note.title}</h3>
                                 <p>{note.description}</p>
                                 </div>
                                 <CardContent>
                                     {
                                         note.labels.map(label =>
-                                            <Chip size="small" key={label.labelId} label={label.labelName} onDelete={() => this.deleteLabel(note.noteId,label.labelId)} />
+                                            <Chip variant="outlined" style={{backgroundColor:note.color !== "white" ? note.color: "inherit"}} size="small" key={label.labelId} label={label.labelName} onDelete={() => this.deleteLabel(note.noteId,label.labelId)} />
                                         )
                                     }
                                 </CardContent>

@@ -20,9 +20,9 @@ export class Icon extends Component {
             open: false,
             value: false,
             changeColor: false,
-            colors: [{name:"White",color:"#fff"},{name:"Red",color:"#f28b82"},{name:"Orange",color:"#fbbc04"},{name:"Yellow",color:"#fff475"},
-                     {name:"Green",color:"#ccff90"},{name:"Teal",color:"#a7ffeb"},{name:"Blue",color:"#cbf0f8"},{name:"Darkblue",color:"#aecbfa"},
-                     {name:"Purple",color:"#d7aefb"},{name:"Pink",color:"#fdcfe8"},{name:"Brown",color:"#e6c9a8"},{name:"Gray",color:"#e8eaed"}]
+            colors: [{name:"White",color:"fff"},{name:"Red",color:"f28b82"},{name:"Orange",color:"fbbc04"},{name:"Yellow",color:"fff475"},
+                     {name:"Green",color:"ccff90"},{name:"Teal",color:"a7ffeb"},{name:"Blue",color:"cbf0f8"},{name:"Darkblue",color:"aecbfa"},
+                     {name:"Purple",color:"d7aefb"},{name:"Pink",color:"fdcfe8"},{name:"Brown",color:"e6c9a8"},{name:"Gray",color:"e8eaed"}]
         }
     }
 
@@ -48,6 +48,20 @@ export class Icon extends Component {
             return;
         }
         this.setState({ changeColor: false })
+    }
+
+    changeBackgroundColor = (data) => {
+        console.log(data)
+        console.log(this.props.nts.noteId)
+
+        NoteService.changeNoteColorService(data,this.props.nts.noteId)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        this.handleToggleCloseColor()
     }
 
     moveToTrash = () => {
@@ -77,9 +91,13 @@ export class Icon extends Component {
         const { colors } = this.state
         const buttonColor = colors.map(color => {
             return(
-            <div key={this.props.nts.noteId}>
+            <div key={color.name}>
                 <div className="color">
-                    <IconButton style={{backgroundColor: color.color}}/>
+                    <Tooltip title={color.name}>
+                    <IconButton style={{backgroundColor: "#"+color.color}}
+                        onClick = {() => this.changeBackgroundColor(color.color)}
+                    />
+                    </Tooltip>
                 </div>
             </div>)
         })

@@ -27,5 +27,11 @@ class NoteService{
     static addLabelToNoteService(label,nId){
         return axios.put(`${rootApi}add/label?nId=${nId}`,label,{headers: {"header": Token }})
     }
+
+    static changeNoteColorService(data,nId){
+        var clr = JSON.stringify(data)
+        console.log(clr)
+        return axios.put(`${rootApi}color?color=%23${data}&nId=${nId}`,true,{headers: {"header": Token }})
+    }
 }
 export default NoteService
