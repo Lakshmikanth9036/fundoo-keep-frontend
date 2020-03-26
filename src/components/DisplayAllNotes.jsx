@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import NoteService from '../service/NoteService';
-import { Container, Card,CardContent, Chip } from '@material-ui/core';
+import { Container, Card, CardContent, Chip } from '@material-ui/core';
 
 import '../css/displayAllNote.scss'
 import Icon from './icon';
+import UpdateNote from './UpdateNote';
 
 
 class DisplayAllNotes extends Component {
@@ -14,6 +15,10 @@ class DisplayAllNotes extends Component {
         this.state = {
             notes: [],
             editNote: false,
+            noteId: '',
+            title: '',
+            description: '',
+            color: ''
         }
     }
 
@@ -31,66 +36,47 @@ class DisplayAllNotes extends Component {
             )
     }
 
-    hideNote = () => {
-        this.setState({editNote: !this.state.editNote})
+    updateNote = () => {
+        // this.setState({
+        //     noteId: this.note
+        // })
+        this.setState(prevState => ({ editNote: !prevState.editNote }))
     }
 
-    deleteLabel = (note,label) => {
-        NoteService.removeLabelFromNoteService(label,note)
-        .then(response => {
-            console.log(response)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+    deleteLabel = (note, label) => {
+        NoteService.removeLabelFromNoteService(label, note)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
 
-        const { notes } = this.state
-
+        const { note } = this.props
         return (
             <div>
-                <Container className='container' component="main" maxWidth="lg">
-                    {
-                        notes.map(note =>
-                            
-                            <Card className='cards' variant="outlined" key={note.noteId} style={{backgroundColor:note.color}}>
-                                <div className='notes'>
-                                    {console.log(note.color)}
-                                <h3>{note.title}</h3>
-                                <p>{note.description}</p>
-                                </div>
-                                <CardContent>
-                                    {
-                                        note.labels.map(label =>
-                                            <Chip variant="outlined" style={{backgroundColor:note.color !== "white" ? note.color: "inherit"}} size="small" key={label.labelId} label={label.labelName} onDelete={() => this.deleteLabel(note.noteId,label.labelId)} />
-                                        )
-                                    }
-                                </CardContent>
-                              <div>
-                                <Icon  nts = {note}/>
-                              </div>
-                            </Card>
-                            // <Card className='cards2' variant="outlined" >
-                            //     <InputBase
-                            //         value={note.title}
-                            //         onChange={this.handlerChange}
-                            //         name="title"
-                            //         multiline
-                            //         inputProps={{"aria-label":"naked"}}/><br/>
-                            //     <InputBase
-                            //         value={note.description}
-                            //         onChange={this.handlerChange}
-                            //         name="description"
-                            //         multiline
-                            //         inputProps={{"aria-label":"naked"}}/>
-                            //     <Divider/>
-                            //         <Button onClick={this.expandTakeNote}>close</Button>
-                            // </Card>
-                        )
-                    }
-                </Container>
+                <Card className='cards' variant="outlined" key={note.noteId} style={{ backgroundColor: note.color }}>
+                    <div className='notes' onClick={this.updateNote}>
+                        <h3>{note.title}</h3>
+                        <p>{note.description}</p>
+                    </div>
+                    <CardContent>
+                        {
+                            note.labels.map(label =>
+                                <Chip variant="outlined" size="small" key={label.labelId} label={label.labelName} onDelete={() => this.deleteLabel(note.noteId, label.labelId)} />
+                            )
+                        }
+                    </CardContent>
+                    <div>
+                        <Icon nts={note} />
+                    </div>
+                    <div>
+                        {this.state.editNote ? <UpdateNote note={note} /> : null}
+                    </div>
+                </Card>
             </div>
         )
     }

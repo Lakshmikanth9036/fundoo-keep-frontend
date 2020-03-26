@@ -20,7 +20,7 @@ import NoteService from '../service/NoteService'
     }
 
     handlerChange = e => {
-        this.setState({ [e.target.name]: e.target.value,})
+        this.setState({ [e.target.name]: e.target.value})
     }
 
     expandTakeNote = () => {
@@ -58,12 +58,15 @@ import NoteService from '../service/NoteService'
                             <div className='inpDiv1'>
                                 <div className='inp1'>
                                 <InputBase
+                                    style={{width: "100%"}}
                                     placeholder="Title"
                                     onChange={this.handlerChange}
                                     name="title"
                                     multiline
-                                    inputProps={{"aria-label":"naked"}}/><br/>
+                                    inputProps={{"aria-label":"naked"}}/>
+                                    
                                 <InputBase
+                                    style={{width: "100%"}}
                                     placeholder="Take a note..."
                                     onChange={this.handlerChange}
                                     name="description"
