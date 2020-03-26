@@ -6,6 +6,7 @@ import LoginPage from './components/LoginPage';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard'
+import Archive from './components/Archive';
 
 class App extends Component {
   render() {
@@ -17,6 +18,8 @@ class App extends Component {
           <Route exact path="/forgotPassword" component={ForgotPassword}/>
           <Route exact path="/resetPassword/:token" component={ ResetPassword } />
           <Route exact path="/note/dashboard" component={ Dashboard }/>
+          <Route exact path="/note/dashboard/archive" component={ Archive }/>
+          
         </Switch>
       </Router>
   //<Demo/>

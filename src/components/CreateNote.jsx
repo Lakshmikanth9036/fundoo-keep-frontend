@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import '../css/createNote.scss'
-import { Card, InputBase, Button, Divider, IconButton } from '@material-ui/core'
+import { Card, InputBase, Button, IconButton } from '@material-ui/core'
 import ColorLensIcon from '@material-ui/icons/ColorLens';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';

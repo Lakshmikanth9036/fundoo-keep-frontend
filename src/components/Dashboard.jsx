@@ -10,7 +10,8 @@ class Note extends Component {
         super(props)
     
         this.state = {
-             notes:[]
+             notes:[],
+             pinned:[]
         }
     }
     
@@ -26,11 +27,22 @@ class Note extends Component {
                     console.log(error)
                 }
             )
+            NoteService.getAllPinnedNoteService()
+            .then(response => {
+                this.setState({
+                    pinned: response.data.obj
+                })
+            })
+            .catch(
+                error => {
+                    console.log(error)
+                }
+            )
     }
 
     render() {
 
-        const { notes } = this.state
+        const { notes,pinned } = this.state
 
         return (
             <div style={{height: '100%'}}>
@@ -41,11 +53,24 @@ class Note extends Component {
                     <CreateNote/>
                 </div>
 
-                <div className='container'>
+                {pinned.length ?
+                <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>PINNED</h5></div>:null}
+                {pinned.length ?
+                <div className='container'>  
+                    {pinned.map(note => 
+                    <DisplayAllNotes note={note}/>
+                    )}
+                </div> : null
+                }
+
+                {pinned.length ?
+                <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>OTHERS</h5></div>:null}
+                <div className='container'>  
                     {notes.map(note => 
                     <DisplayAllNotes note={note}/>
                     )}
                 </div>
+                
             </div>
         )
     }

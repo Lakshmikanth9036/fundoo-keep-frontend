@@ -27,7 +27,23 @@
     justify-content: space-between;
 }
 
-.notes{
+.secondDiv{
+    display: flex;
     margin-left: 10%;
     margin-right: 5%;
+    margin-top: -20px;
 }
+
+.firstDiv{
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    margin-right: 5%; 
+}
+
+.title{
+    display: flex;
+    padding: none;
+    flex: 1;
+}
+

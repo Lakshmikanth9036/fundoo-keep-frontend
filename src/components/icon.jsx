@@ -7,7 +7,6 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip } from '@material-ui/core';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import NoteService from '../service/NoteService';
-import LabelService from '../service/LabelService';
 import AllLabels from './AllLabels';
 import '../css/icons.scss'
 

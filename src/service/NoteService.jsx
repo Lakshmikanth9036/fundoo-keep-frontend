@@ -8,6 +8,18 @@ class NoteService{
         return axios.get(`${rootApi}getallNotes`, {headers: {"header": Token }})
     }
 
+    static getAllPinnedNoteService(){
+        return axios.get(`${rootApi}getallPinnedNotes`, {headers: {"header": Token }})
+    }
+
+    static getArchivedNoteService(){
+        return axios.get(`${rootApi}getArchivedNotes`, {headers: {"header": Token }})
+    }
+
+    static getTrashNoteService(){
+        return axios.get(`${rootApi}getTrashNotes`, {headers: {"header": Token }})
+    }
+
     static createNoteService(data){
         return axios.post(`${rootApi}create`,data, {headers: {"header": Token }})
     }
@@ -34,6 +46,10 @@ class NoteService{
 
     static updateNoteService(data,nId){
         return axios.put(`${rootApi}update/${nId}`,data,{headers: {"header": Token }})
+    }
+
+    static pinNoteService(nId){
+        return axios.put(`${rootApi}pin/${nId}`,true,{headers: {"header": Token }})
     }
 }
 export default NoteService

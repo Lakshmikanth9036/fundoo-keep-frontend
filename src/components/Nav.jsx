@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, AppBar, Toolbar, IconButton, InputBase, Typography, Divider } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, InputBase, Typography, Divider, ClickAwayListener } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -52,6 +52,7 @@ class Nav extends Component {
                         {
                             this.state.open ?
                                 <div>
+                                    <ClickAwayListener onClickAway={this.slideBarToggel}>
                                     <div className='slideBar' style={{ display: 'flex' }}>
                                         <div className='sideCont' >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
@@ -106,6 +107,7 @@ class Nav extends Component {
                                         </div>
                                         <div className='sideCont' style={{color:'black', justifyContent:'center', marginTop:'-2px'}}>Privacy · Terms Open-source licenses</div>
                                     </div>
+                                    </ClickAwayListener>
                                 </div> : null
                         }
 
