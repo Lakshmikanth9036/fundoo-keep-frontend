@@ -29,9 +29,11 @@ class NoteService{
     }
 
     static changeNoteColorService(data,nId){
-        var clr = JSON.stringify(data)
-        console.log(clr)
         return axios.put(`${rootApi}color?color=%23${data}&nId=${nId}`,true,{headers: {"header": Token }})
+    }
+
+    static updateNoteService(data,nId){
+        return axios.put(`${rootApi}update/${nId}`,data,{headers: {"header": Token }})
     }
 }
 export default NoteService

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import NoteService from '../service/NoteService';
-import { Container, Card, CardContent, Chip } from '@material-ui/core';
-
-import '../css/displayAllNote.scss'
+import { Container, Card, CardContent, Chip, IconButton } from '@material-ui/core';
+import pin from '../images/pin.png';
+import unpin from '../images/unpin.png';
+import '../css/displayAllNote.scss';
 import Icon from './icon';
 import UpdateNote from './UpdateNote';
 
@@ -37,9 +38,6 @@ class DisplayAllNotes extends Component {
     }
 
     updateNote = () => {
-        // this.setState({
-        //     noteId: this.note
-        // })
         this.setState(prevState => ({ editNote: !prevState.editNote }))
     }
 
@@ -60,8 +58,19 @@ class DisplayAllNotes extends Component {
             <div>
                 <Card className='cards' variant="outlined" key={note.noteId} style={{ backgroundColor: note.color }}>
                     <div className='notes' onClick={this.updateNote}>
+                        <div>
                         <h3>{note.title}</h3>
+                        <IconButton onClick={() => this.pinNote(note)}>
+                        {
+                            note.isPin ?
+                            <img src={pin} alt="Pin"/> :
+                            <img src={unpin} alt="Unpin"/>
+                        }
+                        </IconButton>
+                        </div>
+                        <div>
                         <p>{note.description}</p>
+                        </div>
                     </div>
                     <CardContent>
                         {
@@ -73,7 +82,7 @@ class DisplayAllNotes extends Component {
                     <div>
                         <Icon nts={note} />
                     </div>
-                    <div>
+                    <div style={{width:"600px"}}>
                         {this.state.editNote ? <UpdateNote note={note} /> : null}
                     </div>
                 </Card>

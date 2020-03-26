@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Dialog, InputBase, DialogContent, DialogActions, Button } from '@material-ui/core'
 import Icon from './icon'
+import NoteService from '../service/NoteService'
 
 export class UpdateNote extends Component {
 
@@ -10,6 +11,7 @@ export class UpdateNote extends Component {
         this.state = {
              title: '',
              description:'',
+             color: '',
              closeDialog: false,
              openDialog: true
         }
@@ -31,15 +33,25 @@ export class UpdateNote extends Component {
     componentDidMount() {
         this.setState({
             title: this.props.note.title,
-            description: this.props.note.description
+            description: this.props.note.description,
+            color: this.props.note.color
         })    
     }
     
     updateNote = () => {
         var data = {
             title: this.state.title,
-            description: this.state.description
+            description: this.state.description,
+            color: this.state.color
         }
+        console.log(data+this.props.note.noteId)
+        NoteService.updateNoteService(data,this.props.note.noteId)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
         this.handleClose()
     }
 
@@ -49,7 +61,7 @@ export class UpdateNote extends Component {
 
         return (
             <div>
-                <Dialog open={this.state.openDialog} onClose={this.handleClose}>
+                <Dialog open={this.state.openDialog} onClose={this.handleClose} >
                     <DialogContent style={{backgroundColor:this.props.note.color}}>
                         <div>
                             <InputBase
