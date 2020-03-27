@@ -75,4 +75,10 @@
     margin-top: 5px;
     margin-left: 24px;
     margin-bottom: 5px;
+    border-bottom-right-radius: 150px;
+    border-top-right-radius: 150px;
+}
+
+.slideBar :hover{
+    background-color: rgb(250, 221, 93);
 }

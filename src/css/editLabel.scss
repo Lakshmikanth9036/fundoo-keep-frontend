@@ -1,0 +1,18 @@
+.labelsCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.labels{
+    display: flex;
+    flex-direction: row;
+}
+
+.createLabel{
+    display: flex;
+    position: relative;
+    left: 5%;
+    margin-right: 5%;
+}

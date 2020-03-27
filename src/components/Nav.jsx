@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import '../css/notes.scss';
 import LabelService from '../service/LabelService';
+import EditLabel from './EditLabel';
 
 class Nav extends Component {
 
@@ -13,7 +14,11 @@ class Nav extends Component {
 
         this.state = {
             labels: [],
-            open: false
+            open: false,
+            isTrash:false,
+            isNote:false,
+            isArchive:false,
+            edit: false
         }
     }
 
@@ -23,6 +28,7 @@ class Nav extends Component {
                 this.setState({
                     labels: response.data.obj
                 })
+                console.log(response.data.obj)
             })
             .catch(
                 error => {
@@ -31,14 +37,31 @@ class Nav extends Component {
         )
     }
 
+    editLabel = () => {
+        this.setState(prevState => ({
+            edit: !prevState.edit
+        }))
+    }
+
     slideBarToggel = () => {
         this.setState(
             prevState => ({ open: !prevState.open })
         )
     }
 
+    allNotes = () => {
+        this.setState({isTrash: false, isArchive:true, isNote: false})
+        this.props.history.push("/dashboard/note")
+    }
+
     archive = () => {
-    
+        this.setState({isTrash: false, isArchive:true, isNote: false})
+        this.props.history.push("/dashboard/archive")
+    }
+
+    trash = () => {
+        this.setState({isTrash: true, isArchive:false, isNote: false})
+        this.props.history.push("/dashboard/trash")
     }
 
     render() {
@@ -89,6 +112,13 @@ class Nav extends Component {
                                                 </div>
                                         )}
                                         </div>
+                                        <div className='sideCont' onClick={this.editLabel}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gb_Rc">
+                                            <path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L13.4 6.41 3 16.82V21h4.18l10.46-10.46 2.77-2.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path>
+                                        </svg>
+                                            <Typography variant="h6" noWrap style={{ color: "black", marginLeft: '36px', fontSize:'1.1rem', fontWeight: '550' }}>
+                                            Edit Labels
+                                        </Typography></div>
                                         <div style={{marginBottom: '7px', marginTop:'7px'}}>
                                             <Divider/>
                                         </div>
@@ -143,6 +173,7 @@ class Nav extends Component {
                         </div>
                     </Toolbar>
                 </AppBar>
+                {this.state.edit ? <EditLabel labels={this.state.labels}/> : null}
             </div>
         )
     }
