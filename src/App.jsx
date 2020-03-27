@@ -7,6 +7,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard'
 import Archive from './components/Archive';
+import Trash from './components/Trash';
 
 class App extends Component {
   render() {
@@ -17,13 +18,11 @@ class App extends Component {
           <Route exact path="/login" component={LoginPage}/>
           <Route exact path="/forgotPassword" component={ForgotPassword}/>
           <Route exact path="/resetPassword/:token" component={ ResetPassword } />
-          <Route exact path="/note/dashboard" component={ Dashboard }/>
-          <Route exact path="/note/dashboard/archive" component={ Archive }/>
-          
+          <Route exact path="/dashboard/note" component={ Dashboard }/>
+          <Route exact path="/dashboard/archive" component={ Archive }/>
+          <Route exact path="/dashboard/trash" component={ Trash }/>
         </Switch>
       </Router>
-  //<Demo/>
-      //<Demo2/>
     );
   }
 }

@@ -34,7 +34,7 @@ class LoginPage extends Component {
                     localStorage.setItem('Token', JSON.stringify(response.data.token))
                     localStorage.setItem('response', JSON.stringify(response.data))
                     if(response.status === 200){
-                        this.props.history.push("/note/dashboard")
+                        this.props.history.push("/dashboard/note")
                     }
                 }).catch(err => {
                     this.props.history.push("/login")
@@ -100,7 +100,7 @@ class LoginPage extends Component {
                         <h4>Sign in</h4>
                     </div>
                     <form onSubmit={this.submitHandler}>
-                        {/* <input type='text' name="emailAddress" value={emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
+                     
                         <TextField
                             className="margin"
                             name="mailOrMobile"
@@ -118,7 +118,7 @@ class LoginPage extends Component {
                             }}
                         />
                         <div className="errorMsg">{errors.mailOrMobile}</div>
-                        {/* <input type='password' name="password" value={password} onChange={this.changeHandler} placeholder='Password' /> */}
+                       
                         <FormControl className="margin" variant="outlined" size="small" style={{maxWidth:'254.67px'}} >
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
@@ -142,7 +142,7 @@ class LoginPage extends Component {
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit'>Login</button> */}
                         <Button className='btnn2' href="/forgotPassword">Forgot password?</Button><br />
-                        <Button className='btnn2' href="/" >Sigin Up</Button>
+                        <Button className='btnn2' href="/register" >Sigin Up</Button>
                         <Button className='btnn1' type='submit' color="primary" variant='contained'>Signin</Button>
                     </form>
                 </Card>

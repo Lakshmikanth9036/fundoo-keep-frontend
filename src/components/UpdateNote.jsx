@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Dialog, InputBase, DialogContent, DialogActions, Button } from '@material-ui/core'
 import Icon from './icon'
 import NoteService from '../service/NoteService'
+import '../css/updateNote.scss'
 
 export class UpdateNote extends Component {
 
@@ -61,7 +62,7 @@ export class UpdateNote extends Component {
 
         return (
             <div>
-                <Dialog open={this.state.openDialog} onClose={this.handleClose} >
+                <Dialog open={this.state.openDialog} onClose={this.handleClose} fullWidth="true" >
                     <DialogContent style={{backgroundColor:this.props.note.color}}>
                         <div>
                             <InputBase
@@ -85,7 +86,7 @@ export class UpdateNote extends Component {
                         </div>
                     </DialogContent>
                     <DialogActions style={{backgroundColor:this.props.note.color}}>
-                        <div>
+                        <div className="updateIcons">
                             <Icon  nts = {this.props.note}/>
                         </div>
                         <div>

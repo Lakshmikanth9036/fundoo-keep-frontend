@@ -95,7 +95,7 @@ class DisplayAllNotes extends Component {
                         <div>
                             <Icon nts={note} />
                         </div>
-                        <div style={{ width: "600px" }}>
+                        <div >
                             {this.state.editNote ? <UpdateNote note={note} /> : null}
                         </div>
                 </Card>

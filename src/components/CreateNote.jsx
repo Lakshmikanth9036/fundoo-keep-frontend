@@ -5,7 +5,9 @@ import ColorLensIcon from '@material-ui/icons/ColorLens';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import CropOriginalIcon from '@material-ui/icons/CropOriginal';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import NoteService from '../service/NoteService'
+import NoteService from '../service/NoteService';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import BrushIcon from '@material-ui/icons/Brush';
 
  class CreateNote extends Component {
 
@@ -50,7 +52,17 @@ import NoteService from '../service/NoteService'
                                     placeholder="Take a note..."
                                     inputProps={{"aria-label":"naked"}}
                                     onClick={this.expandTakeNote}/>
+                               
                              </div>
+                             <IconButton>
+                                    <CheckBoxIcon/>
+                                </IconButton>
+                                <IconButton>
+                                    <BrushIcon/>
+                                </IconButton>
+                                <IconButton>
+                                    <CropOriginalIcon/>
+                                </IconButton>
                             </div> : null
                         }
                         {
