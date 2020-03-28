@@ -7,6 +7,7 @@ import '../css/notes.scss';
 import LabelService from '../service/LabelService';
 import EditLabel from './EditLabel';
 import {Redirect} from 'react-router-dom';
+import { withRouter } from 'react-router'; 
 
 class Nav extends Component {
 
@@ -61,12 +62,12 @@ class Nav extends Component {
     }
 
     archive = () => {
-        this.setState({isTrash: false, isArchive:true, isNote: false})
-        this.props.history.push("/dashboard/archive")
+        //this.setState({isTrash: false, isArchive:true, isNote: false})
+        this.props.history.push("/dashboard/archive");
     }
 
     trash = () => {
-        this.setState({isTrash: true, isArchive:false, isNote: false})
+       // this.setState({isTrash: true, isArchive:false, isNote: false})
         this.props.history.push("/dashboard/trash")
     }
 
@@ -90,7 +91,7 @@ class Nav extends Component {
                                 <div>
                                     <ClickAwayListener onClickAway={this.slideBarToggel}>
                                     <div className='slideBar' style={{ display: 'flex' }}>
-                                        <div className='sideCont' >
+                                        <div className='sideCont' onClick={this.allNotes} >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
                                                 <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"></path>
                                             </svg>
@@ -111,7 +112,7 @@ class Nav extends Component {
                                         <div>
                                         {
                                             this.state.labels.map(label =>
-                                                <div className='sideCont' key={label.labelId} >
+                                                <div className='sideCont' key={label.labelId} onClick={this.labeledNotes}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                         <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"></path>
                                                     </svg>
@@ -125,7 +126,7 @@ class Nav extends Component {
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="gb_Rc">
                                             <path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L13.4 6.41 3 16.82V21h4.18l10.46-10.46 2.77-2.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path>
                                         </svg>
-                                            <Typography variant="h6" noWrap style={{ color: "black", marginLeft: '36px', fontSize:'1.1rem', fontWeight: '550' }}>
+                                        <Typography variant="h6" noWrap style={{ color: "black", marginLeft: '36px', fontSize:'1.1rem', fontWeight: '550' }}>
                                             Edit Labels
                                         </Typography></div>
                                         <div style={{marginBottom: '7px', marginTop:'7px'}}>
@@ -136,7 +137,7 @@ class Nav extends Component {
                                             <Typography variant="h6" noWrap style={{ color: "black", marginLeft: '36px',fontSize:'1.1rem', fontWeight: '550'  }}>
                                                 Archive
                                         </Typography></div>
-                                        <div className='sideCont'>
+                                        <div className='sideCont' onClick={this.trash}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                 <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
                                                 <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
@@ -188,4 +189,4 @@ class Nav extends Component {
     }
 }
 
-export default Nav
+export default withRouter(Nav);

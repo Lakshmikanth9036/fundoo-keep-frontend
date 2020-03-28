@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import NoteService from '../service/NoteService'
 import DisplayAllNotes from './DisplayAllNotes'
+import Nav from './Nav'
+import CreateNote from './CreateNote'
 
 class Archive extends Component {
 
@@ -33,7 +35,13 @@ class Archive extends Component {
 
         return (
             <div>
-                {/* <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>:null} */}
+                  <div>
+                        <Nav/>
+                    </div>
+                <div>
+                    <CreateNote/>
+                </div>
+                <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>
                 <div className='container'>  
                     {notes.map(note => 
                     <DisplayAllNotes note={note}/>

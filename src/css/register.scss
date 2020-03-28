@@ -1,4 +1,6 @@
 .register {
+	display: flex;
+	flex-direction: column;
 	color: #000000;
 	position: absolute;
 	transform: translate(-50%,-50%);

@@ -14,13 +14,13 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/register" component={ RegistrationPage } />
-          <Route exact path="/login" component={LoginPage}/>
-          <Route exact path="/forgotPassword" component={ForgotPassword}/>
-          <Route exact path="/resetPassword/:token" component={ ResetPassword } />
-          <Route exact path="/dashboard/note" component={ Dashboard }/>
-          <Route exact path="/dashboard/archive" component={ Archive }/>
-          <Route exact path="/dashboard/trash" component={ Trash }/>
+          <Route path="/register" component={ RegistrationPage } />
+          <Route path="/login" component={LoginPage}/>
+          <Route path="/forgotPassword" component={ForgotPassword}/>
+          <Route path="/resetPassword/:token" component={ ResetPassword } />
+          <Route path="/dashboard/note" component={ Dashboard }/>
+          <Route path="/dashboard/archive" component={ Archive }/>
+          <Route path="/dashboard/trash" component={ Trash }/>
         </Switch>
       </Router>
     );

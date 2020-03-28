@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import DisplayAllNotes from './DisplayAllNotes'
 import NoteService from '../service/NoteService'
+import Nav from './Nav';
+import '../css/trash.scss'
 
 class Trash extends Component {
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             notes: []
+            notes: []
         }
     }
-    
+
     componentDidMount() {
         NoteService.getTrashNoteService()
             .then(response => {
@@ -24,7 +26,7 @@ class Trash extends Component {
                 }
             )
     }
-    
+
 
     render() {
 
@@ -32,10 +34,13 @@ class Trash extends Component {
 
         return (
             <div>
-                {/* <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>:null} */}
-                <div className='container'>  
-                    {notes.map(note => 
-                    <DisplayAllNotes note={note}/>
+                <div>
+                    <Nav />
+                </div>
+        <div className="trash">Notes in Trash are deleted after 7 days.</div>
+                <div className='trashCont'>
+                    {notes.map(note =>
+                        <DisplayAllNotes note={note} />
                     )}
                 </div>
             </div>
