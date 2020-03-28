@@ -15,7 +15,8 @@ export class EditLabel extends Component {
         this.state = {
             closeDialog: false,
             openDialog: true,
-            labelName: ''
+            labelName: '',
+            editLabel:''
         }
     }
 
@@ -87,10 +88,9 @@ export class EditLabel extends Component {
                                         <DeleteIcon fontSize="small"/>
                                     </IconButton>
                                     <InputBase
-                                        placeholder="Title"
-                                        // multiline
+                                        multiline
                                         inputProps={{ 'aria-label': 'naked' }}
-                                        name="labelName"
+                                        name="editLabel"
                                         value={label.labelName}
                                         onChange={this.handleChange}
                                     />

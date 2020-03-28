@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import '../css/login.scss'
 import UserService from '../service/UserService'
-import { TextField, InputAdornment, InputLabel, FormControl, OutlinedInput, IconButton, Card } from '@material-ui/core'
+import { TextField, InputAdornment, IconButton, Card } from '@material-ui/core'
 import EmailIcon from '@material-ui/icons/Email';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -32,7 +32,7 @@ class LoginPage extends Component {
             UserService.loginService(this.state.fields)
                 .then(response => {
                     localStorage.setItem('Token', JSON.stringify(response.data.token))
-                    localStorage.setItem('response', JSON.stringify(response.data))
+                    // localStorage.setItem('response', JSON.stringify(response.data))
                     if(response.status === 200){
                         this.props.history.push("/dashboard/note")
                     }
@@ -104,11 +104,13 @@ class LoginPage extends Component {
                         <TextField
                             className="margin"
                             name="mailOrMobile"
+                           // error={errors.mailOrMobile !== null}
                             value={mailOrMobile}
                             onChange={this.changeHandler}
                             label="Email or Mobile"
                             variant="outlined"
                             size="small"
+                          //  helperText={errors.mailOrMobile}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -119,15 +121,23 @@ class LoginPage extends Component {
                         />
                         <div className="errorMsg">{errors.mailOrMobile}</div>
                        
-                        <FormControl className="margin" variant="outlined" size="small" style={{maxWidth:'254.67px'}} >
+                        {/* <FormControl className="margin" variant="outlined" size="small" style={{maxWidth:'254.67px'}} >
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
+                            <OutlinedInput */}
+                            <TextField
+                            style={{maxWidth:'255.5px'}}
+                            size="small"
+                             variant="outlined"
+                            className="margin"
                                 id="outlined-adornment-password"
                                 name="password"
+                                label="Password"
                                 type={showPassword ? 'text' : 'password'}
                                 value={password}
                                 onChange={this.changeHandler}
-                                endAdornment={
+                                // endAdornment={
+                                    InputProps={{
+                                        endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
@@ -135,10 +145,10 @@ class LoginPage extends Component {
                                             edge="end">
                                             {showPassword ? <Visibility /> : <VisibilityOff />}
                                         </IconButton>
-                                    </InputAdornment>
+                                    </InputAdornment>)}
                                 }
                             />
-                        </FormControl>
+                        {/* </FormControl> */}
                         <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit'>Login</button> */}
                         <Button className='btnn2' href="/forgotPassword">Forgot password?</Button><br />

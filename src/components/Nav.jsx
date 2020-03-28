@@ -6,6 +6,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import '../css/notes.scss';
 import LabelService from '../service/LabelService';
 import EditLabel from './EditLabel';
+import {Redirect} from 'react-router-dom';
 
 class Nav extends Component {
 
@@ -28,13 +29,18 @@ class Nav extends Component {
                 this.setState({
                     labels: response.data.obj
                 })
-                console.log(response.data.obj)
             })
             .catch(
                 error => {
                     console.log(error)
                 }
         )
+    }
+
+    logout = () => {
+        localStorage.clear();
+        // this.props.history.push("/login")
+        return <Redirect to="/login"/>
     }
 
     editLabel = () => {
@@ -65,6 +71,9 @@ class Nav extends Component {
     }
 
     render() {
+        if(localStorage.getItem('Token') === null){
+            return <Redirect to="/login"/>
+        }
         return (
             <div>
                 <AppBar position="fixed" style={{ backgroundColor: 'whitesmoke', zIndex: 1 }} >
@@ -135,7 +144,7 @@ class Nav extends Component {
                                             <Typography variant="h6" noWrap style={{ color: "black", marginLeft: '36px',fontSize:'1.1rem', fontWeight: '550'  }}>
                                                 Trash
                                         </Typography></div>
-                                        <div className='sideCont' style={{color:'black', justifyContent:'center', marginTop:'-2px'}}>Logout</div>
+                                        <div className='sideCont' style={{color:'black', justifyContent:'center', marginTop:'-2px'}} onClick={this.logout}>Logout</div>
                                         <div style={{marginBottom: '7px', marginTop:'7px'}}>
                                             <Divider/>
                                         </div>

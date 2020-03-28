@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={ RegistrationPage } />
+          <Route exact path="/register" component={ RegistrationPage } />
           <Route exact path="/login" component={LoginPage}/>
           <Route exact path="/forgotPassword" component={ForgotPassword}/>
           <Route exact path="/resetPassword/:token" component={ ResetPassword } />
