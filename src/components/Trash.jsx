@@ -40,7 +40,7 @@ class Trash extends Component {
         <div className="trash">Notes in Trash are deleted after 7 days.</div>
                 <div className='trashCont'>
                     {notes.map(note =>
-                        <DisplayAllNotes note={note} />
+                        <DisplayAllNotes key={note.noteId} note={note} />
                     )}
                 </div>
             </div>

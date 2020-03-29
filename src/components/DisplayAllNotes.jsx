@@ -65,8 +65,8 @@ class DisplayAllNotes extends Component {
 
         const { note } = this.props
         return (
-            <div>
-                <Card className='cards' variant="outlined" key={note.noteId} style={{ backgroundColor: note.color }}>
+            <div key={note.noteId}>
+                <Card className='cards' variant="outlined" style={{ backgroundColor: note.color }}>
                     <div className='firstDiv'>
 
                         <div className="title" onClick={this.updateNote}>

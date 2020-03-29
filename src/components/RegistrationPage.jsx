@@ -30,7 +30,6 @@ class RegistrationPage extends Component {
     }
 
     firstNameHandler = (e) => {
-        e.preventDefault()
         let fields = this.state.fields
         let errors = this.state.errors
         fields[e.target.name] = e.target.value
@@ -52,7 +51,6 @@ class RegistrationPage extends Component {
     }
 
     lastNameHandler = (e) => {
-        e.preventDefault()
         let fields = this.state.fields
         let errors = this.state.errors
         fields[e.target.name] = e.target.value
@@ -74,7 +72,6 @@ class RegistrationPage extends Component {
     }
 
     mailHandler = (e) => {
-        e.preventDefault()
         let fields = this.state.fields
         let errors = this.state.errors
         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
@@ -97,7 +94,6 @@ class RegistrationPage extends Component {
     }
 
     mobileHandler = (e) => {
-        e.preventDefault()
         let fields = this.state.fields
         let errors = this.state.errors
         fields[e.target.name] = e.target.value
@@ -119,7 +115,6 @@ class RegistrationPage extends Component {
     } 
 
     passwordHandler = e => {
-        e.preventDefault()
         let fields = this.state.fields
         let errors = this.state.errors
         fields[e.target.name] = e.target.value
@@ -152,7 +147,7 @@ class RegistrationPage extends Component {
 
     submitHandler(e) {
         e.preventDefault();
-        console.log(this.state.fields)
+       // console.log(object)
         // if (this.isValidForm()) {
         //     UserService.registrationService(this.state.fields)
         //         .then(response => {

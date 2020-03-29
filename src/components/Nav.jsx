@@ -155,7 +155,7 @@ class Nav extends Component {
                                 </div> : null
                         }
 
-                        <img className='nic' src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" srcset="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x " alt="" aria-hidden="true" style={{ width: '40px', height: '40px' }}></img>
+                        <img className='nic' src="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png" srcSet="https://www.gstatic.com/images/branding/product/1x/keep_48dp.png 1x, https://www.gstatic.com/images/branding/product/2x/keep_48dp.png 2x " alt="" aria-hidden="true" style={{ width: '40px', height: '40px' }}></img>
                         <h1 className='niciv'>Keep</h1>
                         <div className='search'>
                             <div className='searchIcon'>
