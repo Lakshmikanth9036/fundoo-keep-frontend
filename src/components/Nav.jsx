@@ -58,7 +58,7 @@ class Nav extends Component {
     }
 
     allNotes = () => {
-        this.setState({isTrash: false, isArchive:true, isNote: false})
+       // this.setState({isTrash: false, isArchive:true, isNote: false})
         this.props.history.push("/dashboard/note")
     }
 
