@@ -1,3 +1,12 @@
+@media(min-width: 800px){
+    .iocbtns{
+        display: flex;
+        position: relative;
+        margin-left: 200px;
+    }
+
+}
+
 .cnt input{
     width: 100%;
     border-style: none;
@@ -26,16 +35,12 @@
     display: flex;
     position: relative;
     width: 750px;
+    height: 45px;
     border-style:solid;
-    border-color: #eaecee;
-    border-radius: 11px; 
-    background-color:#eaecee;
-    margin-right: 16px;
-    margin-left: 20px;
-}
-
-.search:hover{
-        background-color: #ffff;
+    border-radius: 7px;
+    margin-left: 100px;
+    background-color: #ffff;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
 }
 
 .searchIcon{

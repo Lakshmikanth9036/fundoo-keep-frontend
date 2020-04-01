@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { AppBar, Toolbar, IconButton, InputBase, Typography, Divider, ClickAwayListener } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import SettingsIcon from '@material-ui/icons/Settings';
 import '../css/notes.scss';
 import LabelService from '../service/LabelService';
 import EditLabel from './EditLabel';
@@ -77,7 +80,7 @@ class Nav extends Component {
         }
         return (
             <div>
-                <AppBar position="fixed" style={{ backgroundColor: 'whitesmoke', zIndex: 1 }} >
+                <AppBar position="fixed" style={{ backgroundColor: 'white', zIndex: 1 }} >
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -169,6 +172,15 @@ class Nav extends Component {
                         </div>
 
                         <div className='iocbtns'>
+                            <IconButton>
+                                <RefreshIcon/>
+                            </IconButton>
+                            <IconButton>
+                                <ViewStreamIcon/>
+                            </IconButton>
+                            <IconButton>
+                                <SettingsIcon/>
+                            </IconButton>
                             <IconButton
                                 className='accBtn'
                                 edge="end"
@@ -176,7 +188,6 @@ class Nav extends Component {
                                 aria-controls='primary-search-account-menu'
                                 aria-haspopup="true"
                                 onClick={this.handleProfileMenuOpen}
-                                color="inherit"
                             >
                                 <AccountCircle />
                             </IconButton>
