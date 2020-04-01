@@ -66,6 +66,7 @@ export class UpdateNote extends Component {
                     <DialogContent style={{backgroundColor:this.props.note.color}}>
                         <div>
                             <InputBase
+                                style={{width: "100%"}}
                                 placeholder="Title"
                                 multiline
                                 inputProps={{'aria-label': 'naked'}}
@@ -76,6 +77,7 @@ export class UpdateNote extends Component {
                             </div>
                             <div>
                             <InputBase
+                                style={{width: "100%"}}
                                 placeholder="Take a note..."
                                 multiline
                                 inputProps={{'aria-label': 'naked'}}

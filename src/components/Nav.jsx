@@ -20,10 +20,8 @@ class Nav extends Component {
         this.state = {
             labels: [],
             open: false,
-            isTrash:false,
-            isNote:false,
-            isArchive:false,
-            edit: false
+            edit: false,
+            text:''
         }
     }
 
@@ -72,6 +70,16 @@ class Nav extends Component {
     trash = () => {
        // this.setState({isTrash: true, isArchive:false, isNote: false})
         this.props.history.push("/dashboard/trash")
+    }
+
+    seachChangeHandler = e => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    onEnter = e => {
+        if(e.charCode === 13){
+            this.props.history.push("/dashboard/search",this.state.text)
+        }
     }
 
     render() {
@@ -167,6 +175,10 @@ class Nav extends Component {
                             <InputBase
                                 placeholder="Search…"
                                 className='inputRoot'
+                                type="text"
+                                name="text"
+                                onChange={this.seachChangeHandler}
+                                onKeyPress={this.onEnter}
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </div>

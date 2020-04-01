@@ -4,9 +4,10 @@
     justify-content: flex-start;
     max-width: 1200px;
     position: relative;
-    margin-left: 11%;
+    margin-left: 20%;
+    margin-right: 7%;
     .cards{
-        width: 240px;
+        width: 260px;
     }
 }
 }
@@ -25,7 +26,8 @@
 
 .icon{
     display: flex;
-    justify-content: space-between;
+    position: relative;
+    margin-right: 15px;
 }
 
 .secondDiv{

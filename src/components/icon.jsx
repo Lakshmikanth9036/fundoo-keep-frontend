@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import ColorLensIcon from '@material-ui/icons/ColorLens';
-import ArchiveIcon from '@material-ui/icons/Archive';
-import CropOriginalIcon from '@material-ui/icons/CropOriginal';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ColorLensOutlinedIcon from '@material-ui/icons/ColorLensOutlined';
+import CropOriginalOutlinedIcon from '@material-ui/icons/CropOriginalOutlined';
+import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
+import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip } from '@material-ui/core';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import NoteService from '../service/NoteService';
@@ -104,9 +105,12 @@ export class Icon extends Component {
             <div>
                 <CardActionArea style={{ width: "100%" }} disableSpacing>
                     <div className="icon">
+                    <IconButton>
+                             <AddAlertOutlinedIcon  fontSize="small" />
+                        </IconButton>
                         <Tooltip title="Color">
                         <IconButton onClick={this.handleToggleCloseColor}>
-                            <ColorLensIcon fontSize="small" />
+                            <ColorLensOutlinedIcon fontSize="small" />
                         </IconButton>
                         </Tooltip>
                         <Paper>
@@ -121,13 +125,13 @@ export class Icon extends Component {
                         </Paper>
                         <IconButton
                          onClick={this.moveToArchive}>
-                            <ArchiveIcon fontSize="small" />
+                            <ArchiveOutlinedIcon fontSize="small" />
                         </IconButton>
                         <IconButton>
-                            <CropOriginalIcon fontSize="small" />
+                            <CropOriginalOutlinedIcon fontSize="small" />
                         </IconButton>
                         <IconButton>
-                            <PersonAddIcon fontSize="small" />
+                            <PersonAddOutlinedIcon fontSize="small" />
                         </IconButton>
                         <IconButton
                             buttonRef={node => { this.anchorEl = node }}

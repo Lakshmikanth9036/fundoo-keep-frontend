@@ -41,7 +41,7 @@ class Archive extends Component {
                 <div>
                     <CreateNote/>
                 </div>
-                <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>
+                <div className="heading" style={{marginLeft:"23.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>
                 <div className='container'>  
                     {notes.map(note => 
                     <DisplayAllNotes note={note}/>

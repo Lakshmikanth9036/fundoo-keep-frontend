@@ -43,7 +43,7 @@ import BrushIcon from '@material-ui/icons/Brush';
         return (
             <div className='rootCont'>
                 <div className='contnr'>
-                    <Card variant="outlined">
+                    <Card variant="outlined" style={{borderRadius:"12px"}}>
                         {
                             !this.state.takeNote ?
                             <div className='inpDiv'>

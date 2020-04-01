@@ -55,7 +55,7 @@ class Note extends Component {
 
                 <div>
                 {pinned.length ?
-                <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>PINNED</h5></div>:null}
+                <div className="heading" style={{marginLeft:"23.5%"}}><h5 style={{color:"#5f6368"}}>PINNED</h5></div>:null}
                 {pinned.length ?
                 <div className='container'>  
                     {pinned.map(note => 
@@ -65,7 +65,7 @@ class Note extends Component {
                 }
 
                 {pinned.length ?
-                <div className="heading" style={{marginLeft:"13.5%"}}><h5 style={{color:"#5f6368"}}>OTHERS</h5></div>:null}
+                <div className="heading" style={{marginLeft:"23.5%"}}><h5 style={{color:"#5f6368"}}>OTHERS</h5></div>:null}
                 <div className='container'>  
                     {notes.map(note => 
                     <DisplayAllNotes note={note}/>

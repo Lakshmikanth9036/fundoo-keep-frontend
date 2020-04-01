@@ -8,6 +8,7 @@ import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard'
 import Archive from './components/Archive';
 import Trash from './components/Trash';
+import Search from './components/Search';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/dashboard/note" component={ Dashboard }/>
           <Route path="/dashboard/archive" component={ Archive }/>
           <Route path="/dashboard/trash" component={ Trash }/>
+          <Route path="/dashboard/search" component={ Search }/>
         </Switch>
       </Router>
     );

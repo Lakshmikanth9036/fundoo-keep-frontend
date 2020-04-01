@@ -51,5 +51,9 @@ class NoteService{
     static pinNoteService(nId){
         return axios.put(`${rootApi}pin/${nId}`,true,{headers: {"header": Token }})
     }
+
+    static getNoteByTitleOrDescService(text){
+        return axios.get(`${rootApi}getNoteByTitleAndDescription/${text}`)
+    }
 }
 export default NoteService
