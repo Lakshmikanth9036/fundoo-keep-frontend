@@ -6,7 +6,7 @@ import unpin from '../images/unpin.png';
 import '../css/displayAllNote.scss';
 import Icon from './icon';
 import UpdateNote from './UpdateNote';
-
+import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined';
 
 class DisplayAllNotes extends Component {
 
@@ -90,6 +90,10 @@ class DisplayAllNotes extends Component {
                                 note.labels.map(label =>
                                     <Chip variant="outlined" size="small" key={label.labelId} label={label.labelName} onDelete={() => this.deleteLabel(note.noteId, label.labelId)} />
                                 )
+                            }
+
+                            {
+                                note.reminder !== null ? <Chip  icon={<AccessTimeOutlinedIcon/>} variant="outlined" size="small" label={moment(note.reminder).format('DD MMM, YYYY')} onDelete={() => {}}/> : null
                             }
                         </CardContent>
                         <div>

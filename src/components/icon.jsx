@@ -166,10 +166,7 @@ export class Icon extends Component {
                         <IconButton onClick={this.reminderHandler}>
                             <AddAlertOutlinedIcon fontSize="small" />
                         </IconButton>
-                        {/* <Paper>
-                            {
-                                this.state.isReminder ?
-                                    // <Card className="reminder"> */}
+                
                         <Popper
                             open={this.state.isReminder}
                             placement='bottom-end'
@@ -196,10 +193,7 @@ export class Icon extends Component {
                             <div className="btnPos">
                                 <Button onClick={this.setRemainder}>Done</Button>
                             </div>
-                             </Card> {/*:
-                                    null
-                            }
-                        </Paper> */}
+                             </Card> 
                          </Popper>
                             <IconButton onClick={this.handleToggleCloseColor}>
                                 <ColorLensOutlinedIcon fontSize="small" />
