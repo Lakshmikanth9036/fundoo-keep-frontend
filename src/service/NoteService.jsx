@@ -55,5 +55,9 @@ class NoteService{
     static getNoteByTitleOrDescService(text){
         return axios.get(`${rootApi}getNoteByTitleAndDescription/${text}`)
     }
+
+    static addRemainderService(data,nId){
+        return axios.put(`${rootApi}add/remainder?nId=${nId}`,data,{headers: {"header": Token }})
+    }
 }
 export default NoteService

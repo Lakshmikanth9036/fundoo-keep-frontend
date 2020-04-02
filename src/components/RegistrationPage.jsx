@@ -29,111 +29,111 @@ class RegistrationPage extends Component {
         }
     }
 
-    firstNameHandler = (e) => {
-        let fields = this.state.fields
-        let errors = this.state.errors
-        fields[e.target.name] = e.target.value
-        this.setState({
-            fields
-        })
-        if(!fields[e.target.name].match(/^[a-zA-Z ]*$/)){
-            errors[e.target.name] = "*Please enter alphabet characters only."
-            this.setState({
-                errors,
-                isfirstName: true
-            })
-        }
-        else{
-            this.setState({
-                isfirstName: false
-            })
-        }
-    }
+    // firstNameHandler = (e) => {
+    //     let fields = this.state.fields
+    //     let errors = this.state.errors
+    //     fields[e.target.name] = e.target.value
+    //     this.setState({
+    //         fields
+    //     })
+    //     if(!fields[e.target.name].match(/^[a-zA-Z ]*$/)){
+    //         errors[e.target.name] = "*Please enter alphabet characters only."
+    //         this.setState({
+    //             errors,
+    //             isfirstName: true
+    //         })
+    //     }
+    //     else{
+    //         this.setState({
+    //             isfirstName: false
+    //         })
+    //     }
+    // }
 
-    lastNameHandler = (e) => {
-        let fields = this.state.fields
-        let errors = this.state.errors
-        fields[e.target.name] = e.target.value
-        this.setState({
-            fields
-        })
-        if(!fields[e.target.name].match(/^[a-zA-Z ]*$/)){
-            errors[e.target.name] = "*Please enter alphabet characters only."
-            this.setState({
-                errors,
-                islastName: true
-            })
-        }
-        else{
-            this.setState({
-                islastName: false
-            })
-        }
-    }
+    // lastNameHandler = (e) => {
+    //     let fields = this.state.fields
+    //     let errors = this.state.errors
+    //     fields[e.target.name] = e.target.value
+    //     this.setState({
+    //         fields
+    //     })
+    //     if(!fields[e.target.name].match(/^[a-zA-Z ]*$/)){
+    //         errors[e.target.name] = "*Please enter alphabet characters only."
+    //         this.setState({
+    //             errors,
+    //             islastName: true
+    //         })
+    //     }
+    //     else{
+    //         this.setState({
+    //             islastName: false
+    //         })
+    //     }
+    // }
 
-    mailHandler = (e) => {
-        let fields = this.state.fields
-        let errors = this.state.errors
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        fields[e.target.name] = e.target.value
-        this.setState({
-            fields
-        })
-        if (!pattern.test(fields[e.target.name])) {
-            errors[e.target.name] = "*Please enter valid email-ID."
-            this.setState({
-                errors,
-                isMail: true
-            })
-        }
-        else{
-            this.setState({
-                isMail: false
-            })
-        }
-    }
+    // mailHandler = (e) => {
+    //     let fields = this.state.fields
+    //     let errors = this.state.errors
+    //     var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    //     fields[e.target.name] = e.target.value
+    //     this.setState({
+    //         fields
+    //     })
+    //     if (!pattern.test(fields[e.target.name])) {
+    //         errors[e.target.name] = "*Please enter valid email-ID."
+    //         this.setState({
+    //             errors,
+    //             isMail: true
+    //         })
+    //     }
+    //     else{
+    //         this.setState({
+    //             isMail: false
+    //         })
+    //     }
+    // }
 
-    mobileHandler = (e) => {
-        let fields = this.state.fields
-        let errors = this.state.errors
-        fields[e.target.name] = e.target.value
-        this.setState({
-            fields
-        })
-        if (!fields[e.target.name].match(/^[0-9]{10}$/)) {
-            errors[e.target.name] = "*Please enter valid mobile no."
-            this.setState({
-                errors,
-                isMobile: true
-            })
-        }
-        else{
-            this.setState({
-                isMobile: false
-            })
-        }
-    } 
+    // mobileHandler = (e) => {
+    //     let fields = this.state.fields
+    //     let errors = this.state.errors
+    //     fields[e.target.name] = e.target.value
+    //     this.setState({
+    //         fields
+    //     })
+    //     if (!fields[e.target.name].match(/^[0-9]{10}$/)) {
+    //         errors[e.target.name] = "*Please enter valid mobile no."
+    //         this.setState({
+    //             errors,
+    //             isMobile: true
+    //         })
+    //     }
+    //     else{
+    //         this.setState({
+    //             isMobile: false
+    //         })
+    //     }
+    // } 
 
-    passwordHandler = e => {
-        let fields = this.state.fields
-        let errors = this.state.errors
-        fields[e.target.name] = e.target.value
-        this.setState({
-            fields
-        })
-        if(!fields[e.target.name].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)){
-            errors[e.target.name] = "*Please enter secure and strong password."
-            this.setState({
-                errors,
-                isValidPassword: true
-            })
-        }
-         else{
-            this.setState({
-                isValidPassword : false
-            })
-        }
-    }
+    // passwordHandler = e => {
+    //     let fields = this.state.fields
+    //     let errors = this.state.errors
+    //     fields[e.target.name] = e.target.value
+    //     this.setState({
+    //         fields
+    //     })
+    //     if(!fields[e.target.name].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)){
+    //         errors[e.target.name] = "*Please enter secure and strong password."
+    //         this.setState({
+    //             errors,
+    //             isValidPassword: true
+    //         })
+    //     }
+    //      else{
+    //         this.setState({
+    //             isValidPassword : false
+    //         })
+    //     }
+    // }
 
     changeHandler = (e) => {
         let fields = this.state.fields
@@ -147,18 +147,17 @@ class RegistrationPage extends Component {
 
     submitHandler(e) {
         e.preventDefault();
-       // console.log(object)
-        // if (this.isValidForm()) {
-        //     UserService.registrationService(this.state.fields)
-        //         .then(response => {
-        //             if(response.status === 200){
-        //                 this.props.history.push("/login")
-        //             }
-        //         })
-        //         .catch(error => {
-        //             console.log(error)
-        //         })
-        // }
+        if (this.isValidForm()) {
+            UserService.registrationService(this.state.fields)
+                .then(response => {
+                    if(response.status === 200){
+                        this.props.history.push("/login")
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
     }
 
     handleClickShowPassword = () => {
@@ -273,10 +272,10 @@ class RegistrationPage extends Component {
                         {/* <input type='text' name="firstName" value={fields.firstName} onChange={this.changeHandler} placeholder='First Name' /> */}
                         <TextField
                             name="firstName"
-                            value={fields.firstName}
+                           // value={fields.firstName}
                             error={this.state.isfirstName}
-                            helperText={this.state.isfirstName ? errors.firstName : null}
-                            onChange={this.firstNameHandler}
+                           // helperText={this.state.isfirstName ? errors.firstName : null}
+                            onChange={this.changeHandler}
                             label="FirstName"
                             variant="outlined"
                             size="small"
@@ -288,14 +287,14 @@ class RegistrationPage extends Component {
                                 ),
                             }}
                         />
-                        <div className="errorMsg"></div>
+                        <div className="errorMsg">{errors.firstName}</div>
                         {/* <input type='text' name="lastName" value={fields.lastName} onChange={this.changeHandler} placeholder='Last Name' /> */}
                         <TextField
                             name="lastName"
                             value={fields.lastName}
-                            error={this.state.islastName}
-                            helperText={this.state.islastName ? errors.lastName : null}
-                            onChange={this.lastNameHandler}
+                            // error={this.state.islastName}
+                            // helperText={this.state.islastName ? errors.lastName : null}
+                            onChange={this.changeHandler}
                             label="LastName"
                             variant="outlined"
                             size="small"
@@ -307,14 +306,14 @@ class RegistrationPage extends Component {
                                 ),
                             }}
                         />
-                        <div className="errorMsg"></div>
+                        <div className="errorMsg">{errors.lastName}</div>
                         {/* <input type='text' name="emailAddress" value={fields.emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
                         <TextField
                             name="emailAddress"
                             value={fields.emailAddress}
-                            error={this.state.isMail}
-                            helperText={this.state.isMail ? errors.emailAddress : null}
-                            onChange={this.mailHandler}
+                            // error={this.state.isMail}
+                            // helperText={this.state.isMail ? errors.emailAddress : null}
+                            onChange={this.changeHandler}
                             label="Email"
                             variant="outlined"
                             size="small"
@@ -326,14 +325,14 @@ class RegistrationPage extends Component {
                                 ),
                             }}
                         />
-                        <div className="errorMsg"></div>
+                        <div className="errorMsg">{errors.emailAddress}</div>
                         {/* <input type='text' name="mobile" value={fields.mobile} onChange={this.changeHandler} placeholder='Mobile No.' /> */}
                         <TextField
                             name="mobile"
                             value={fields.mobile}
-                            error={this.state.isMobile}
-                            helperText={this.state.isMobile ? errors.mobile : null}
-                            onChange={this.mobileHandler}
+                            // error={this.state.isMobile}
+                            // helperText={this.state.isMobile ? errors.mobile : null}
+                            onChange={this.changeHandler}
                             label="MobileNo."
                             variant="outlined"
                             size="small"
@@ -345,12 +344,10 @@ class RegistrationPage extends Component {
                                 ),
                             }}
                         />
-                        <div className="errorMsg"></div>
+                        <div className="errorMsg">{errors.mobile}</div>
                         {/* <input type='password' name="password" value={fields.password} onChange={this.changeHandler} placeholder='Password' /> */}
                         <TextField
-                        style={{ maxWidth: '255.5px' }}
-                        error= {this.state.isValidPassword}
-                        helperText= {this.state.message}
+                        style={{ maxWidth: '255.5px' }}                      
                         size="small"
                         variant="outlined"
                         className="margin"
@@ -359,9 +356,9 @@ class RegistrationPage extends Component {
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                                 value={fields.password}
-                                error={this.state.isValidPassword}
-                                helperText={this.state.isValidPassword ? errors.password : null}
-                                onChange={this.passwordHandler}
+                                //error={this.state.isValidPassword}
+                                // helperText={this.state.isValidPassword ? errors.password : null}
+                                onChange={this.changeHandler}
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
@@ -374,7 +371,7 @@ class RegistrationPage extends Component {
                                             </IconButton>
                                         </InputAdornment>)}}
                             />
-                        <div className="errorMsg"></div>
+                        <div className="errorMsg">{errors.password}</div>
                         {/* <button type='submit' >Submit</button> */}
                         <Button className='btn2' href="/login" >Sign in</Button>
                         <Button className='btn1' type='submit' color="primary" variant='contained'>Signup</Button>

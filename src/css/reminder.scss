@@ -1,6 +1,13 @@
 .reminder{
-    position: fixed;
-    padding: 5px;
-    box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
-    z-index: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+        box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+        z-index: 1;
+}
+
+.btnPos{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 12px;
 }

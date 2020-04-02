@@ -5,15 +5,15 @@ import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
-import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip } from '@material-ui/core';
+import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip, Button } from '@material-ui/core';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import NoteService from '../service/NoteService';
 import DateFnsUtils from '@date-io/date-fns';
 import AllLabels from './AllLabels';
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
     KeyboardDatePicker,
+    TimePicker,
 } from '@material-ui/pickers';
 import '../css/icons.scss'
 import '../css/reminder.scss'
@@ -28,6 +28,8 @@ export class Icon extends Component {
             value: false,
             isReminder: false,
             changeColor: false,
+            selectedDate: new Date(),
+            selectedTime: new Date(),
             colors: [{ name: "White", color: "fff" }, { name: "Red", color: "f28b82" }, { name: "Orange", color: "fbbc04" }, { name: "Yellow", color: "fff475" },
             { name: "Green", color: "ccff90" }, { name: "Teal", color: "a7ffeb" }, { name: "Blue", color: "cbf0f8" }, { name: "Darkblue", color: "aecbfa" },
             { name: "Purple", color: "d7aefb" }, { name: "Pink", color: "fdcfe8" }, { name: "Brown", color: "e6c9a8" }, { name: "Gray", color: "e8eaed" }]
@@ -58,14 +60,58 @@ export class Icon extends Component {
         this.setState({ changeColor: false })
     }
 
-    reminderHandler = e => {
+    reminderHandler = () => {
         this.setState({ isReminder: !this.state.isReminder })
     }
 
-    changeBackgroundColor = (data) => {
-        console.log(data)
-        console.log(this.props.nts.noteId)
+    // remindercloseHandler = e => {
+    //     if (this.anchorEl.contains(e.target)) {
+    //         return;
+    //     }
+    //     this.setState({ isReminder: false })
+    // }
 
+    handleDateChange = (date) => {
+
+        this.setState({
+            selectedDate: date
+        })
+    }
+
+    handleTimeChange = (time) => {
+        this.setState({
+            selectedTime: time
+        })
+    }
+
+    setRemainder = () => {
+        var date = this.state.selectedDate.getFullYear() + "-" +
+            ("00" + (this.state.selectedDate.getMonth() + 1)).slice(-2) + "-" +
+            ("00" + this.state.selectedDate.getDate()).slice(-2);
+
+        //[  date.getFullYear(),
+        //     date.getMonth()+1,
+        //     date.getDate()].join('-');
+        var time = ("00" + this.state.selectedTime.getHours()).slice(-2) + ":" +
+            ("00" + this.state.selectedTime.getMinutes()).slice(-2) + ":" +
+            ("00" + this.state.selectedTime.getSeconds()).slice(-2);
+        // [time.getHours(),
+        // time.getMinutes(),
+        // time.getSeconds()].join(':');
+        var remainder = {
+            reminder: date + "T" + time
+        }
+        NoteService.addRemainderService(remainder, this.props.nts.noteId)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        this.reminderHandler()
+    }
+
+    changeBackgroundColor = (data) => {
         NoteService.changeNoteColorService(data, this.props.nts.noteId)
             .then(response => {
                 console.log(response)
@@ -117,66 +163,72 @@ export class Icon extends Component {
             <div>
                 <CardActionArea style={{ width: "100%" }} disableSpacing>
                     <div className="icon">
-                        <Tooltip title="Reminder">
-                            <IconButton onClick={this.reminderHandler}>
-                                <AddAlertOutlinedIcon fontSize="small" />
-                            </IconButton>
-                        </Tooltip>
-                        <Paper>
+                        <IconButton onClick={this.reminderHandler}>
+                            <AddAlertOutlinedIcon fontSize="small" />
+                        </IconButton>
+                        {/* <Paper>
                             {
                                 this.state.isReminder ?
-                                    <Card className="reminder">
-                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <KeyboardDatePicker
-                                            disableToolbar
-                                            variant="inline"
-                                            format="MM/dd/yyyy"
-                                            margin="normal"
-                                            id="date-picker-inline"
-                                            label="Date picker inline"
-                                            // value={selectedDate}
-                                            // onChange={handleDateChange}
-                                            KeyboardButtonProps={{
-                                                'aria-label': 'change date',
-                                            }}
-                                        />
-                                        </MuiPickersUtilsProvider>
-                                    </Card> :
+                                    // <Card className="reminder"> */}
+                        <Popper
+                            open={this.state.isReminder}
+                            placement='bottom-end'
+                            anchorEl={this.anchorEl}
+                            style={{ zIndex: 1 }}>
+                                <Card className="reminder">
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                <KeyboardDatePicker
+                                    disableToolbar
+                                    variant="inline"
+                                    margin="normal"
+                                    label="Date picker inline"
+                                    value={this.state.selectedDate}
+                                    onChange={this.handleDateChange}
+                                />
+                                <TimePicker
+                                    variant="inline"
+                                    format="HH:mm:ss"
+                                    label="Inline mode"
+                                    value={this.state.selectedTime}
+                                    onChange={this.handleTimeChange}
+                                />
+                            </MuiPickersUtilsProvider>
+                            <div className="btnPos">
+                                <Button onClick={this.setRemainder}>Done</Button>
+                            </div>
+                             </Card> {/*:
                                     null
                             }
-                        </Paper>
-                        <Tooltip title="Color">
+                        </Paper> */}
+                         </Popper>
                             <IconButton onClick={this.handleToggleCloseColor}>
                                 <ColorLensOutlinedIcon fontSize="small" />
                             </IconButton>
-                        </Tooltip>
-                        <Paper>
-                            {
-                                this.state.changeColor ?
-                                    <ClickAwayListener onClickAway={this.handleCloseColor}>
-                                        <Card className="colorBox">
-                                            {buttonColor}
-                                        </Card>
-                                    </ClickAwayListener> : null
-                            }
-                        </Paper>
-                        <Tooltip title="Archive">
+                            <Paper>
+                                {
+                                    this.state.changeColor ?
+                                        <ClickAwayListener onClickAway={this.handleCloseColor}>
+                                            <Card className="colorBox">
+                                                {buttonColor}
+                                            </Card>
+                                        </ClickAwayListener> : null
+                                }
+                            </Paper>
+
                             <IconButton
                                 onClick={this.moveToArchive}>
                                 <ArchiveOutlinedIcon fontSize="small" />
                             </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Image">
+
+
                             <IconButton>
                                 <CropOriginalOutlinedIcon fontSize="small" />
                             </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Collaborator">
+
                             <IconButton>
                                 <PersonAddOutlinedIcon fontSize="small" />
                             </IconButton>
-                        </Tooltip>
-                        <Tooltip title="More">
+
                             <IconButton
                                 buttonRef={node => { this.anchorEl = node }}
                                 aria-label="show more"
@@ -185,38 +237,38 @@ export class Icon extends Component {
                                 fontSize="small">
                                 <MoreIcon />
                             </IconButton>
-                        </Tooltip>
-                        <Popper
-                            open={open}
-                            // placement="right"
-                            anchorEl={this.anchorEl}
-                            style={{ zIndex: 1 }}>
-                            <Card>
-                                <ClickAwayListener onClickAway={this.handleClose}>
-                                    <MenuList>
-                                        <MenuItem onClick={this.moveToTrash}>Delete note</MenuItem>
-                                        <PopupState variant="popper" popupId="demo-popup-popper" style={{ zIndex: 1 }}>
-                                            {popupState => (
-                                                <div>
-                                                    <MenuItem variant="contained"  {...bindToggle(popupState)}>
-                                                        Add Label
+
+                            <Popper
+                                open={open}
+                                // placement="right"
+                                anchorEl={this.anchorEl}
+                                style={{ zIndex: 1 }}>
+                                <Card>
+                                    <ClickAwayListener onClickAway={this.handleClose}>
+                                        <MenuList>
+                                            <MenuItem onClick={this.moveToTrash}>Delete note</MenuItem>
+                                            <PopupState variant="popper" popupId="demo-popup-popper" style={{ zIndex: 1 }}>
+                                                {popupState => (
+                                                    <div>
+                                                        <MenuItem variant="contained"  {...bindToggle(popupState)}>
+                                                            Add Label
                                                        </MenuItem>
-                                                    <Popper style={{ zIndex: 1 }} {...bindPopper(popupState)} transition>
-                                                        {({ TransitionProps }) => (
-                                                            <Fade {...TransitionProps} timeout={350}>
-                                                                <Paper>
-                                                                    <AllLabels nId={this.props.nts.noteId}></AllLabels>
-                                                                </Paper>
-                                                            </Fade>
-                                                        )}
-                                                    </Popper>
-                                                </div>
-                                            )}
-                                        </PopupState>
-                                    </MenuList>
-                                </ClickAwayListener>
-                            </Card>
-                        </Popper>
+                                                        <Popper style={{ zIndex: 1 }} {...bindPopper(popupState)} transition>
+                                                            {({ TransitionProps }) => (
+                                                                <Fade {...TransitionProps} timeout={350}>
+                                                                    <Paper>
+                                                                        <AllLabels nId={this.props.nts.noteId}></AllLabels>
+                                                                    </Paper>
+                                                                </Fade>
+                                                            )}
+                                                        </Popper>
+                                                    </div>
+                                                )}
+                                            </PopupState>
+                                        </MenuList>
+                                    </ClickAwayListener>
+                                </Card>
+                            </Popper>
                     </div>
                 </CardActionArea>
             </div>

@@ -53,7 +53,6 @@ class Note extends Component {
                     <CreateNote/>
                 </div>
 
-                <div>
                 {pinned.length ?
                 <div className="heading" style={{marginLeft:"23.5%"}}><h5 style={{color:"#5f6368"}}>PINNED</h5></div>:null}
                 {pinned.length ?
@@ -70,7 +69,6 @@ class Note extends Component {
                     {notes.map(note => 
                     <DisplayAllNotes note={note}/>
                     )}
-                </div>
                 </div>
             </div>
         )
