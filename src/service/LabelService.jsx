@@ -15,6 +15,10 @@ class LabelService{
     static deleteLabelService(lid){
         return axios.delete(`${rootApi}delete?lid=${lid}`,{headers: {"header": Token }})
     }
+
+    static getNotesOfLableService(lid){
+        return axios.get(`${rootApi}getNotesOfLable?lid=${lid}`,{headers: {"header": Token }})
+    }
 }
 
 export default LabelService

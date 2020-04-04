@@ -32,6 +32,10 @@ class NoteService{
         return axios.put(`${rootApi}trash/${nId}`,data,{headers: {"header": Token }})
     }
 
+    static restoreNoteFromTrashService(nId,data){
+        return axios.put(`${rootApi}trash/${nId}`,data,{headers: {"header": Token }})
+    }
+
     static moveToArchiveService(nId,data){
         return axios.put(`${rootApi}archive/${nId}`,data,{headers: {"header": Token }})
     }
@@ -58,6 +62,14 @@ class NoteService{
 
     static addRemainderService(data,nId){
         return axios.put(`${rootApi}add/remainder?nId=${nId}`,data,{headers: {"header": Token }})
+    }
+
+    static removeReminderService(nId){
+        return axios.delete(`${rootApi}remove/remainder?nId=${nId}`,{headers: {"header": Token }})
+    }
+
+    static getRemainderNotesService(){
+        return axios.get(`${rootApi}getRemainderNotes`, {headers: {"header": Token }})
     }
 }
 export default NoteService

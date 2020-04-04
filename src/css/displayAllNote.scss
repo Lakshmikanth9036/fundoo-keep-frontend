@@ -1,10 +1,8 @@
 @media(min-width: 800px){
     .container{
     display: flex;
-    justify-content: flex-start;
     max-width: 1200px;
-    position: relative;
-    margin-left: 20%;
+    margin-left: 17%;
     margin-right: 7%;
     .cards{
         width: 260px;
@@ -13,8 +11,6 @@
 }
 
 .container{
-    flex-direction: row;  
-    align-items: flex-start;
     flex-wrap: wrap;  
 }
 
@@ -26,7 +22,7 @@
 
 .icon{
     display: flex;
-    position: relative;
+    justify-content: space-around;
 }
 
 .secondDiv{

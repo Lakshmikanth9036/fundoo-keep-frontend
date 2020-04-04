@@ -23,20 +23,6 @@ class DisplayAllNotes extends Component {
         }
     }
 
-    componentDidMount() {
-        NoteService.getAllNoteService()
-            .then(response => {
-                this.setState({
-                    notes: response.data.obj
-                })
-            })
-            .catch(
-                error => {
-                    console.log(error)
-                }
-            )
-    }
-
     updateNote = () => {
         this.setState(prevState => ({ editNote: !prevState.editNote }))
     }
@@ -49,6 +35,7 @@ class DisplayAllNotes extends Component {
             .catch(error => {
                 console.log(error)
             })
+            this.callback();
     }
 
     pinNote = (noteId) => {
@@ -58,11 +45,28 @@ class DisplayAllNotes extends Component {
         })
         .catch(error => {
             console.log(error)
+        })  
+        this.callback();
+    }
+
+    removeReminder = (noteId) => {
+        NoteService.removeReminderService(noteId)
+        .then(response => {
+            console.log(response)
         })
+        .catch(error => {
+            console.log(error)
+        })
+        this.callback();
+    }
+
+    callback = () => {
+        this.props.parentCallback();
+        window.location.reload(false);
     }
 
     render() {
-
+        var moment= require('moment');
         const { note } = this.props
         return (
             <div key={note.noteId}>
@@ -88,16 +92,23 @@ class DisplayAllNotes extends Component {
                         <CardContent>
                             {
                                 note.labels.map(label =>
-                                    <Chip variant="outlined" size="small" key={label.labelId} label={label.labelName} onDelete={() => this.deleteLabel(note.noteId, label.labelId)} />
+                                    <Chip variant="outlined" 
+                                          size="small" 
+                                          key={label.labelId} 
+                                          label={label.labelName} 
+                                          onDelete={() => this.deleteLabel(note.noteId, label.labelId)} />
                                 )
                             }
 
                             {
-                                note.reminder !== null ? <Chip  icon={<AccessTimeOutlinedIcon/>} variant="outlined" size="small" label={moment(note.reminder).format('DD MMM, YYYY')} onDelete={() => {}}/> : null
+                                note.reminder !== null ? <Chip  icon={<AccessTimeOutlinedIcon/>} 
+                                                                variant="outlined" size="small" 
+                                                                label={moment(note.reminder).format('DD MMM, HH:mm')} 
+                                                                onDelete={() => this.removeReminder(note.noteId)}/> : null
                             }
                         </CardContent>
                         <div>
-                            <Icon nts={note} />
+                            <Icon parentCallback={this.callback} nts={note} />
                         </div>
                         <div >
                             {this.state.editNote ? <UpdateNote note={note} /> : null}

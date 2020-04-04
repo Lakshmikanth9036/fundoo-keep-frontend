@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import { AppBar, Toolbar, IconButton, InputBase, Typography, Divider, ClickAwayListener } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, InputBase, Typography, Divider, ClickAwayListener, Avatar } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import ViewStreamIcon from '@material-ui/icons/ViewStream';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
+//import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import SettingsIcon from '@material-ui/icons/Settings';
 import '../css/notes.scss';
 import LabelService from '../service/LabelService';
 import EditLabel from './EditLabel';
 import {Redirect} from 'react-router-dom';
-import { withRouter } from 'react-router'; 
+import { withRouter } from 'react-router';
+import img from '../images/skull.jpg';
 
 class Nav extends Component {
 
@@ -41,8 +43,7 @@ class Nav extends Component {
 
     logout = () => {
         localStorage.clear();
-        // this.props.history.push("/login")
-        return <Redirect to="/login"/>
+        this.props.history.push("/login")
     }
 
     editLabel = () => {
@@ -58,17 +59,18 @@ class Nav extends Component {
     }
 
     allNotes = () => {
-       // this.setState({isTrash: false, isArchive:true, isNote: false})
         this.props.history.push("/dashboard/note")
     }
 
+    reminder = () => {
+        this.props.history.push("/dashboard/reminder")
+    }
+
     archive = () => {
-        //this.setState({isTrash: false, isArchive:true, isNote: false})
         this.props.history.push("/dashboard/archive");
     }
 
     trash = () => {
-       // this.setState({isTrash: true, isArchive:false, isNote: false})
         this.props.history.push("/dashboard/trash")
     }
 
@@ -79,7 +81,13 @@ class Nav extends Component {
     onEnter = e => {
         if(e.charCode === 13){
             this.props.history.push("/dashboard/search",this.state.text)
+            window.location.reload(false);
         }
+    }
+
+    labeledNotes = (labelId) => {
+        this.props.history.push("/dashboard/labeledNotes",labelId)
+        window.location.reload(false);
     }
 
     render() {
@@ -109,7 +117,7 @@ class Nav extends Component {
                                             <Typography variant="h6" noWrap style={{ color: "black", marginTop: '7px', marginLeft: '36px',fontSize:'1.1rem', fontWeight: '550' }}>
                                                 Notes
                                         </Typography></div>
-                                        <div className='sideCont'>
+                                        <div className='sideCont' onClick={this.reminder}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
                                                 <path d="M18 17v-6c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v6H4v2h16v-2h-2zm-2 0H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6zm-4 5c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2z"></path>
                                             </svg>
@@ -123,7 +131,7 @@ class Nav extends Component {
                                         <div>
                                         {
                                             this.state.labels.map(label =>
-                                                <div className='sideCont' key={label.labelId} onClick={this.labeledNotes}>
+                                                <div className='sideCont' key={label.labelId} onClick={() => this.labeledNotes(label.labelId)}>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                         <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16zM16 17H5V7h11l3.55 5L16 17z"></path>
                                                     </svg>
@@ -173,6 +181,7 @@ class Nav extends Component {
                                 <SearchIcon />
                             </div>
                             <InputBase
+                                autoComplete="off"
                                 placeholder="Search…"
                                 className='inputRoot'
                                 type="text"
@@ -188,20 +197,13 @@ class Nav extends Component {
                                 <RefreshIcon/>
                             </IconButton>
                             <IconButton>
-                                <ViewStreamIcon/>
+                                <ViewModuleIcon/>
                             </IconButton>
                             <IconButton>
                                 <SettingsIcon/>
                             </IconButton>
-                            <IconButton
-                                className='accBtn'
-                                edge="end"
-                                aria-label="account of current user"
-                                aria-controls='primary-search-account-menu'
-                                aria-haspopup="true"
-                                onClick={this.handleProfileMenuOpen}
-                            >
-                                <AccountCircle />
+                            <IconButton>
+                                <Avatar src="./images/skull.jpg"/>
                             </IconButton>
                         </div>
                     </Toolbar>

@@ -9,6 +9,8 @@ import Dashboard from './components/Dashboard'
 import Archive from './components/Archive';
 import Trash from './components/Trash';
 import Search from './components/Search';
+import Remainder from './components/Remainder';
+import LabledNotes from './components/LabledNotes';
 
 class App extends Component {
   render() {
@@ -20,9 +22,11 @@ class App extends Component {
           <Route path="/forgotPassword" component={ForgotPassword}/>
           <Route path="/resetPassword/:token" component={ ResetPassword } />
           <Route path="/dashboard/note" component={ Dashboard }/>
+          <Route path="/dashboard/reminder" component={ Remainder }/>
           <Route path="/dashboard/archive" component={ Archive }/>
           <Route path="/dashboard/trash" component={ Trash }/>
           <Route path="/dashboard/search" component={ Search }/>
+          <Route path="/dashboard/labeledNotes" component={ LabledNotes }/>
         </Switch>
       </Router>
     );
