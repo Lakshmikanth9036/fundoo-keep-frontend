@@ -64,7 +64,7 @@ class Note extends Component {
                         <Nav/>
                     </div>
                 <div>
-                    <CreateNote/>
+                    <CreateNote parentCallback={this.getParentCallback}/>
                 </div>
 
                 {pinned.length ?
@@ -72,7 +72,7 @@ class Note extends Component {
                 {pinned.length ?
                 <div className='container'>  
                     {pinned.map(note => 
-                    <DisplayAllNotes parentCallback={this.getParentCallback} note={note}/>
+                    <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note}/>
                     )}
                 </div> : null
                 }

@@ -5,10 +5,12 @@ import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
-import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip, Button } from '@material-ui/core';
+import UnarchiveOutlinedIcon from '@material-ui/icons/UnarchiveOutlined';
+import { CardActionArea, IconButton, Popper, ClickAwayListener, MenuList, MenuItem, Card, Paper, Fade, Tooltip, Button, Snackbar } from '@material-ui/core';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import NoteService from '../service/NoteService';
 import DateFnsUtils from '@date-io/date-fns';
+import CloseIcon from '@material-ui/icons/Close';
 import AllLabels from './AllLabels';
 import {
     MuiPickersUtilsProvider,
@@ -26,6 +28,7 @@ export class Icon extends Component {
         this.state = {
             open: false,
             value: false,
+            archive: false,
             isReminder: false,
             changeColor: false,
             selectedDate: new Date(),
@@ -146,7 +149,14 @@ export class Icon extends Component {
             .catch(error => {
                 console.log(error)
             })
+        this.handleClose();
         this.props.parentCallback();
+    }
+
+    handleClose = () => {
+        this.setState(prevState => {
+            return { archive: !prevState.archive }
+        })
     }
 
     render() {
@@ -217,7 +227,11 @@ export class Icon extends Component {
 
                         <IconButton
                             onClick={this.moveToArchive}>
-                            <ArchiveOutlinedIcon fontSize="small" />
+                            {
+                                this.props.isArchive ?
+                                    <UnarchiveOutlinedIcon fontSize="small" /> :
+                                    <ArchiveOutlinedIcon fontSize="small" />
+                            }
                         </IconButton>
 
 
@@ -271,6 +285,31 @@ export class Icon extends Component {
                         </Popper>
                     </div>
                 </CardActionArea>
+                <Snackbar
+                    // key={messageInfo ? messageInfo.key : undefined}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.archive}
+                    autoHideDuration={6000}
+                    onClose={this.handleClose}
+                    message={this.props.isArchive ? "Note unarchived" : "Note archived"}
+                    action={
+                        <React.Fragment>
+                            <Button color="secondary" size="small" onClick={this.handleClose}>
+                                UNDO
+                                        </Button>
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                onClick={this.handleClose}
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        </React.Fragment>
+                    }
+                />
             </div>
         )
     }

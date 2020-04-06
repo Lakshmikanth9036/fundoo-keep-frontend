@@ -15,19 +15,26 @@ class Archive extends Component {
     }
     
     componentDidMount() {
+       this.getArchiveNote();
+    }
+
+    getArchiveNote = () => {
         NoteService.getArchivedNoteService()
-            .then(response => {
-                this.setState({
-                    notes: response.data.obj
-                })
+        .then(response => {
+            this.setState({
+                notes: response.data.obj
             })
-            .catch(
-                error => {
-                    console.log(error)
-                }
-            )
+        })
+        .catch(
+            error => {
+                console.log(error)
+            }
+        )
     }
     
+    getParentCallback = () => {
+        this.getArchiveNote();
+    }
 
     render() {
 
@@ -44,7 +51,7 @@ class Archive extends Component {
                 <div className="heading" style={{marginLeft:"23.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>
                 <div className='container'>  
                     {notes.map(note => 
-                    <DisplayAllNotes note={note}/>
+                    <DisplayAllNotes parentCallback={this.getParentCallback} isArchive={true} note={note}/>
                     )}
                 </div>
             </div>

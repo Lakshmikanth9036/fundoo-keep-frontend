@@ -46,7 +46,7 @@ class DisplayAllNotes extends Component {
         .catch(error => {
             console.log(error)
         })  
-        this.callback();
+       this.callback();
     }
 
     removeReminder = (noteId) => {
@@ -57,12 +57,12 @@ class DisplayAllNotes extends Component {
         .catch(error => {
             console.log(error)
         })
-        this.callback();
+       this.callback();
     }
 
     callback = () => {
         this.props.parentCallback();
-        window.location.reload(false);
+       // window.location.reload(false);
     }
 
     render() {
@@ -108,7 +108,7 @@ class DisplayAllNotes extends Component {
                             }
                         </CardContent>
                         <div>
-                            <Icon parentCallback={this.callback} nts={note} />
+                            <Icon isArchive={this.props.isArchive} parentCallback={this.callback} nts={note} />
                         </div>
                         <div >
                             {this.state.editNote ? <UpdateNote note={note} /> : null}

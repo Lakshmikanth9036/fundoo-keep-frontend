@@ -2,20 +2,26 @@ import React, { Component } from 'react'
 import NoteService from '../service/NoteService'
 import Nav from './Nav';
 import '../css/trash.scss'
-import { Card, CardContent, Chip, CardActionArea, IconButton, Tooltip } from '@material-ui/core';
+import { Card, CardContent, Chip, CardActionArea, IconButton, Tooltip, Snackbar, Button } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import RestoreFromTrashIcon from '@material-ui/icons/RestoreFromTrash';
+import CloseIcon from '@material-ui/icons/Close';
 
 class Trash extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            notes: []
+            notes: [],
+            open: false
         }
     }
 
     componentDidMount() {
+        this.getTrashNotes();
+    }
+
+    getTrashNotes = () => {
         NoteService.getTrashNoteService()
             .then(response => {
                 this.setState({
@@ -30,7 +36,7 @@ class Trash extends Component {
     }
 
     restoreNoteFromTrash = (noteId) => {
-        
+
         NoteService.restoreNoteFromTrashService(noteId, true)
             .then(response => {
                 console.log(response)
@@ -38,6 +44,15 @@ class Trash extends Component {
             .catch(error => {
                 console.log(error)
             })
+            this.handleClose();
+            this.getTrashNotes();
+          //  window.location.reload(false);
+    }
+
+    handleClose = () => {
+        this.setState(prevState => {
+            return { open: !prevState.open }
+        })
     }
 
     render() {
@@ -63,33 +78,58 @@ class Trash extends Component {
                                     <p>{note.description}</p>
                                 </div>
                                 {note.labels.length ?
-                                <CardContent>
-                                    {
-                                        note.labels.map(label =>
-                                            <Chip variant="outlined"
-                                                size="small"
-                                                key={label.labelId}
-                                                label={label.labelName}
-                                            />
-                                        ) 
-                                    }
-                                </CardContent>: null
+                                    <CardContent>
+                                        {
+                                            note.labels.map(label =>
+                                                <Chip variant="outlined"
+                                                    size="small"
+                                                    key={label.labelId}
+                                                    label={label.labelName}
+                                                />
+                                            )
+                                        }
+                                    </CardContent> : null
                                 }
-                              <CardActionArea>
-                              <div>
-                                  <Tooltip title="Delete Forever">
-                                    <IconButton>
-                                        <DeleteForeverIcon fontSize="small"/>
-                                    </IconButton>
-                                    </Tooltip>
-                                    <Tooltip title="Restore">
-                                    <IconButton onClick={() => this.restoreNoteFromTrash(note.noteId)}>
-                                        <RestoreFromTrashIcon fontSize="small"/>
-                                    </IconButton>
-                                    </Tooltip>
-                                </div>
-                              </CardActionArea>
+                                <CardActionArea>
+                                    <div>
+                                        <Tooltip title="Delete Forever">
+                                            <IconButton>
+                                                <DeleteForeverIcon fontSize="small" />
+                                            </IconButton>
+                                        </Tooltip>
+                                        <Tooltip title="Restore">
+                                            <IconButton onClick={() => this.restoreNoteFromTrash(note.noteId)}>
+                                                <RestoreFromTrashIcon fontSize="small" />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </div>
+                                </CardActionArea>
                             </Card>
+                            <Snackbar
+                               // key={messageInfo ? messageInfo.key : undefined}
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                open={this.state.open}
+                               autoHideDuration={6000}
+                                onClose={this.handleClose}
+                                message="Note Restored"
+                                action={
+                                    <React.Fragment>
+                                        <Button color="secondary" size="small" onClick={this.handleClose}>
+                                            UNDO
+                                        </Button>
+                                        <IconButton
+                                            aria-label="close"
+                                            color="inherit"
+                                            onClick={this.handleClose}
+                                        >
+                                            <CloseIcon />
+                                        </IconButton>
+                                    </React.Fragment>
+                                }
+                            />
                         </div>
                     )}
                 </div>
