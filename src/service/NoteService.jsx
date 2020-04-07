@@ -24,6 +24,10 @@ class NoteService{
         return axios.post(`${rootApi}create`,data, {headers: {"header": Token }})
     }
 
+    static addOrCreateLableService(data,nId){
+        return axios.put(`${rootApi}add/label?nId=${nId}`,data,{headers: {"header": Token }})
+    }
+
     static removeLabelFromNoteService(labelId,noteId){
         return axios.delete(`${rootApi}remove/label?labelId=${labelId}&noteId=${noteId}`,{headers: {"header": Token }})
     }

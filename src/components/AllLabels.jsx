@@ -9,7 +9,8 @@ class AllLabels extends Component {
         super(props)
 
         this.state = {
-            labels: []
+            labels: [],
+            labelName: ''
         }
     }
 
@@ -41,18 +42,39 @@ class AllLabels extends Component {
                 console.log(error)
             }
         )
+        this.props.parentCallback();
+    }
+
+    onEnterHandler = e => {
+        if(e.charCode === 13){
+            var data = {
+                labelName: this.state.labelName
+            }
+            NoteService.addOrCreateLableService(data,this.props.nId)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(
+                error => {
+                    console.log(error)
+                }
+            )
+            this.props.parentCallback();
+        }
     }
 
     render() {
         const { labels } = this.state
         return (
-            <div>
+            <div> 
+
                 <MenuList>
                     <MenuItem>
                         <InputBase
                             placeholder="Create Label"
                             onChange={this.handlerChange}
-                            name="label"
+                            onKeyPress={this.onEnterHandler}
+                            name="labelName"
                             inputProps={{ "aria-label": "naked" }} />
                         </MenuItem>
                     {

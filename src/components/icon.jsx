@@ -98,9 +98,11 @@ export class Icon extends Component {
         var time = ("00" + this.state.selectedTime.getHours()).slice(-2) + ":" +
             ("00" + this.state.selectedTime.getMinutes()).slice(-2) + ":" +
             ("00" + this.state.selectedTime.getSeconds()).slice(-2);
+
         // [time.getHours(),
         // time.getMinutes(),
         // time.getSeconds()].join(':');
+        
         var remainder = {
             reminder: date + "T" + time
         }
@@ -149,15 +151,19 @@ export class Icon extends Component {
             .catch(error => {
                 console.log(error)
             })
-        this.handleClose();
+        this.handleSnackClose();
         this.props.parentCallback();
     }
 
-    handleClose = () => {
+    handleSnackClose = () => {
         this.setState(prevState => {
             return { archive: !prevState.archive }
         })
     }
+
+    callBack = () => {
+        this.props.parentCallback();
+    } 
 
     render() {
         const { open } = this.state
@@ -258,7 +264,7 @@ export class Icon extends Component {
                             anchorEl={this.anchorEl}
                             style={{ zIndex: 1 }}>
                             <Card>
-                                <ClickAwayListener onClickAway={this.handleClose}>
+                                {/* <ClickAwayListener onClickAway={this.handleClose}> */}
                                     <MenuList>
                                         <MenuItem onClick={this.moveToTrash}>Delete note</MenuItem>
                                         <PopupState variant="popper" popupId="demo-popup-popper" style={{ zIndex: 1 }}>
@@ -269,18 +275,18 @@ export class Icon extends Component {
                                                        </MenuItem>
                                                     <Popper style={{ zIndex: 1 }} {...bindPopper(popupState)} transition>
                                                         {({ TransitionProps }) => (
-                                                            <Fade {...TransitionProps} timeout={350}>
+                                                           <Fade {...TransitionProps} timeout={350}>
                                                                 <Paper>
-                                                                    <AllLabels nId={this.props.nts.noteId}></AllLabels>
+                                                                    <AllLabels parentCallback={this.callBack} nId={this.props.nts.noteId}></AllLabels>
                                                                 </Paper>
                                                             </Fade>
-                                                        )}
+                                                         )} 
                                                     </Popper>
                                                 </div>
                                             )}
                                         </PopupState>
                                     </MenuList>
-                                </ClickAwayListener>
+                                {/* </ClickAwayListener> */}
                             </Card>
                         </Popper>
                     </div>
@@ -293,17 +299,17 @@ export class Icon extends Component {
                     }}
                     open={this.state.archive}
                     autoHideDuration={6000}
-                    onClose={this.handleClose}
+                    onClose={this.handleSnackClose}
                     message={this.props.isArchive ? "Note unarchived" : "Note archived"}
                     action={
                         <React.Fragment>
-                            <Button color="secondary" size="small" onClick={this.handleClose}>
+                            <Button color="secondary" size="small" onClick={this.handleSnackClose}>
                                 UNDO
                                         </Button>
                             <IconButton
                                 aria-label="close"
                                 color="inherit"
-                                onClick={this.handleClose}
+                                onClick={this.handleSnackClose}
                             >
                                 <CloseIcon />
                             </IconButton>

@@ -14,6 +14,10 @@ class Search extends Component {
     }
 
     componentDidMount() {
+        this.getNoteByTitleOrDesc();
+    }
+
+    getNoteByTitleOrDesc = () => {
         NoteService.getNoteByTitleOrDescService(this.props.location.state)
             .then(response => {
                 this.setState({
@@ -27,6 +31,9 @@ class Search extends Component {
             )
     }
 
+    getParentCallback = () => {
+        this.getNoteByTitleOrDesc();
+    }
 
     render() {
 
@@ -40,7 +47,7 @@ class Search extends Component {
                     <div className='container' style={{ marginTop: "120px" }}>
                         {
                             notes.map(note =>
-                                <DisplayAllNotes note={note} />
+                                <DisplayAllNotes parentCallback={this.getParentCallback} note={note} />
                             )
                         }
                     </div> :

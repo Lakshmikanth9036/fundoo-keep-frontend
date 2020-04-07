@@ -12,7 +12,6 @@ import LabelService from '../service/LabelService';
 import EditLabel from './EditLabel';
 import {Redirect} from 'react-router-dom';
 import { withRouter } from 'react-router';
-import img from '../images/skull.jpg';
 
 class Nav extends Component {
 
@@ -23,6 +22,7 @@ class Nav extends Component {
             labels: [],
             open: false,
             edit: false,
+            view:true,
             text:''
         }
     }
@@ -59,7 +59,7 @@ class Nav extends Component {
     }
 
     allNotes = () => {
-        this.props.history.push("/dashboard/note")
+        this.props.history.push("/dashboard/note", false)
     }
 
     reminder = () => {

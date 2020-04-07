@@ -8,13 +8,13 @@ class Note extends Component {
 
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             notes:[],
-             pinned:[]
+            notes: [],
+            pinned: []
         }
     }
-    
+
     componentDidMount() {
         this.getAllNote();
         this.getAllPinnedNote();
@@ -36,16 +36,16 @@ class Note extends Component {
 
     getAllNote = () => {
         NoteService.getAllNoteService()
-        .then(response => {
-            this.setState({
-                notes: response.data.obj
+            .then(response => {
+                this.setState({
+                    notes: response.data.obj
+                })
             })
-        })
-        .catch(
-            error => {
-                console.log(error)
-            }
-        )
+            .catch(
+                error => {
+                    console.log(error)
+                }
+            )
     }
 
     getParentCallback = () => {
@@ -56,32 +56,34 @@ class Note extends Component {
 
     render() {
 
-        const { notes,pinned } = this.state
+        const { notes, pinned } = this.state
 
         return (
-            <div style={{height: '100%'}}>
-                    <div>
-                        <Nav/>
-                    </div>
+            <div style={{ height: '100%' }}>
+                
                 <div>
-                    <CreateNote parentCallback={this.getParentCallback}/>
+                    <Nav />
+                </div>
+
+                <div>
+                    <CreateNote parentCallback={this.getParentCallback} />
                 </div>
 
                 {pinned.length ?
-                <div className="heading" style={{marginLeft:"20%"}}><h5 style={{color:"#5f6368"}}>PINNED</h5></div>:null}
+                    <div className="heading" style={{ marginLeft: "20%" }}><h5 style={{ color: "#5f6368" }}>PINNED</h5></div> : null}
                 {pinned.length ?
-                <div className='container'>  
-                    {pinned.map(note => 
-                    <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note}/>
-                    )}
-                </div> : null
+                    <div className='container'>
+                        {pinned.map(note =>
+                            <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />
+                        )}
+                    </div> : null
                 }
 
                 {pinned.length ?
-                <div className="heading" style={{marginLeft:"20%"}}><h5 style={{color:"#5f6368"}}>OTHERS</h5></div>:null}
-                <div className='container'>  
-                    {notes.map(note => 
-                    <DisplayAllNotes parentCallback={this.getParentCallback} note={note}/>
+                    <div className="heading" style={{ marginLeft: "20%" }}><h5 style={{ color: "#5f6368" }}>OTHERS</h5></div> : null}
+                <div className='container' >
+                    {notes.map(note =>
+                        <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />
                     )}
                 </div>
             </div>

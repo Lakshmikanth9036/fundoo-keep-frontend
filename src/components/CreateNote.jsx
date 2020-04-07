@@ -37,8 +37,8 @@ import BrushIcon from '@material-ui/icons/Brush';
             })
         } 
         this.setState ({takeNote: !this.state.takeNote})
-        this.props.parentCallback();
-        window.location.reload(false);
+       // this.props.parentCallback();
+       // window.location.reload(false);
     }
 
     render() {

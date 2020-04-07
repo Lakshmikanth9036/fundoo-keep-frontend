@@ -18,6 +18,7 @@ export class EditLabel extends Component {
             labelName: '',
             editLabel:''
         }
+        this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange = e => {
@@ -72,7 +73,6 @@ export class EditLabel extends Component {
                                 style={{flex:1}}
                                 placeholder="Create New Label"
                                 multiline
-                                inputProps={{ 'aria-label': 'jakfh' }}
                                 name="labelName"
                                 onChange={this.handleChange}
                             />
