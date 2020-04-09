@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import LabelService from '../service/LabelService'
-import { MenuList, MenuItem, InputBase } from '@material-ui/core'
+import { MenuList, MenuItem, InputBase, IconButton } from '@material-ui/core'
 import NoteService from '../service/NoteService'
+import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
+import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 
 class AllLabels extends Component {
 
@@ -33,7 +35,7 @@ class AllLabels extends Component {
     }
 
     addLabel = (label) => {
-        NoteService.addLabelToNoteService(label,this.props.nId)
+        NoteService.addLabelToNoteService(label,this.props.note.noteId)
         .then(response => {
           console.log(response)
         })
@@ -50,7 +52,7 @@ class AllLabels extends Component {
             var data = {
                 labelName: this.state.labelName
             }
-            NoteService.addOrCreateLableService(data,this.props.nId)
+            NoteService.addOrCreateLableService(data,this.props.note.noteId)
             .then(response => {
                 console.log(response)
             })
@@ -69,6 +71,7 @@ class AllLabels extends Component {
             <div> 
 
                 <MenuList>
+                    <div style={{marginLeft:"15px"}}>Label Note</div>
                     <MenuItem>
                         <InputBase
                             placeholder="Create Label"
@@ -80,7 +83,13 @@ class AllLabels extends Component {
                     {
                         labels.map(label =>
                             <div key={label.labelId}>
-                                <MenuItem onClick={() => this.addLabel(label)}>
+                                <MenuItem style={{height:"30px"}}>
+                                    <IconButton onClick={() => this.addLabel(label)} style={{left:"-12px"}}>
+                                    {
+                                        this.props.note.labels.some(lbl => lbl.labelName === label.labelName) ?
+                                            <CheckBoxOutlinedIcon fontSize="small"/> :  <CheckBoxOutlineBlankOutlinedIcon fontSize="small"/>   
+                                    }
+                                    </IconButton>
                                     {label.labelName}
                                 </MenuItem>
                             </div>

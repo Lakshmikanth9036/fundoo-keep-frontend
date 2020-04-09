@@ -277,7 +277,7 @@ export class Icon extends Component {
                                                         {({ TransitionProps }) => (
                                                            <Fade {...TransitionProps} timeout={350}>
                                                                 <Paper>
-                                                                    <AllLabels parentCallback={this.callBack} nId={this.props.nts.noteId}></AllLabels>
+                                                                    <AllLabels parentCallback={this.callBack} note={this.props.nts}></AllLabels>
                                                                 </Paper>
                                                             </Fade>
                                                          )} 

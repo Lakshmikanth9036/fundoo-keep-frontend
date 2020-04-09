@@ -4,7 +4,10 @@
         position: relative;
         margin-left: 200px;
     }
+}
 
+.iocbtns{
+    align-items: center;
 }
 
 .cnt input{
@@ -85,10 +88,60 @@
     cursor: pointer;
 }
 
-.Img{
-    border-radius: 50%;
+.avatar{
+    display: flex;
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+    justify-content: center;
+	left: calc(50% - 50px);
 }
 
-// .slideBar :hover{
-//     background-color: rgb(250, 221, 93);
-// }
+.profile{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    right: -1040px;
+    top: 65px;
+    width: 350px;
+    height: 355px;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
+}
+
+
+.profileCont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userName{
+    margin-top: 25px;
+    color: #202124;
+    font-weight: 550;
+    font-size: 18px;
+    line-height: 22px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.email{
+    color: #3c4043;
+    margin-top: 7px;
+}
+
+.manage{
+    color: #3c4043;
+    margin-top: 25px;
+    border: 1.5px solid #dadce0;
+    padding: 10px 20px 10px;
+    border-radius: 150px;
+    font-weight: 550;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.profBtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 17px;
+}

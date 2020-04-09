@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 var rootApi = 'http://localhost:8080/user/'
+const Token = JSON.parse(localStorage.getItem('Token'))
 
 class UserService{
     static registrationService(data) {
@@ -21,6 +22,14 @@ class UserService{
     static resetPwddService(token,data){
         const resetPwdApi = `${rootApi}resetpassword/${token}/?newPassword=${data}`
         return axios.put(resetPwdApi)
+    }
+
+    static getProfilePicService(){
+        return axios.get(`${rootApi}getProfile`, {headers: {"header": Token }})
+    }
+
+    static getProfileDetailsService(){
+        return axios.get(`${rootApi}getProfileDetails`, {headers: {"header": Token }})
     }
 }
 export default UserService
