@@ -5,6 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
 // import AccountCircle from '@material-ui/icons/AccountCircle';
 //import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import pic from '../images/crystal-clear-ling.jpg';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import SettingsIcon from '@material-ui/icons/Settings';
 import '../css/notes.scss';
@@ -203,7 +204,7 @@ class Nav extends Component {
                                 <SettingsIcon/>
                             </IconButton>
                             <IconButton>
-                                <Avatar src="./images/skull.jpg"/>
+                                <Avatar src={pic}/>
                             </IconButton>
                         </div>
                     </Toolbar>

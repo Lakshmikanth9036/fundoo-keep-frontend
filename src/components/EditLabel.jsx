@@ -16,7 +16,7 @@ export class EditLabel extends Component {
             closeDialog: false,
             openDialog: true,
             labelName: '',
-            editLabel:''
+            editLabel:'',
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -25,6 +25,7 @@ export class EditLabel extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+        console.log(e.target.name+" "+e.target.value)
     }
 
     handleClose = () => {
@@ -45,6 +46,7 @@ export class EditLabel extends Component {
             }
         )
     }
+
 
     createLabel = () => {
         var data = {

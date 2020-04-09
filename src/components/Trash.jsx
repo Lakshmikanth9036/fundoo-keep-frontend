@@ -44,9 +44,10 @@ class Trash extends Component {
             .catch(error => {
                 console.log(error)
             })
-            this.handleClose();
-            this.getTrashNotes();
-          //  window.location.reload(false);
+        this.getTrashNotes();
+        window.location.reload(false);
+        this.handleClose();
+
     }
 
     handleClose = () => {
@@ -65,9 +66,9 @@ class Trash extends Component {
                     <Nav />
                 </div>
                 <div className="trash">Notes in Trash are deleted after 7 days.</div>
-                <div>
+                <div className='trashCont'>
                     {notes.map(note =>
-                        <div className='trashCont'>
+                        <div>
                             <Card className='trashNote' variant="outlined" style={{ backgroundColor: note.color, borderRadius: "12px", marginTop: "12px" }}>
                                 <div className='firstDiv'>
                                     <div className="title" onClick={this.updateNote}>
@@ -91,48 +92,46 @@ class Trash extends Component {
                                     </CardContent> : null
                                 }
                                 <CardActionArea>
-                                    <div>
-                                        <Tooltip title="Delete Forever">
-                                            <IconButton>
-                                                <DeleteForeverIcon fontSize="small" />
-                                            </IconButton>
-                                        </Tooltip>
-                                        <Tooltip title="Restore">
-                                            <IconButton onClick={() => this.restoreNoteFromTrash(note.noteId)}>
-                                                <RestoreFromTrashIcon fontSize="small" />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </div>
+                                    <Tooltip title="Delete Forever">
+                                        <IconButton>
+                                            <DeleteForeverIcon fontSize="small" />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Restore">
+                                        <IconButton onClick={() => this.restoreNoteFromTrash(note.noteId)}>
+                                            <RestoreFromTrashIcon fontSize="small" />
+                                        </IconButton>
+                                    </Tooltip>
                                 </CardActionArea>
                             </Card>
-                            <Snackbar
-                               // key={messageInfo ? messageInfo.key : undefined}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
-                                }}
-                                open={this.state.open}
-                               autoHideDuration={6000}
-                                onClose={this.handleClose}
-                                message="Note Restored"
-                                action={
-                                    <React.Fragment>
-                                        <Button color="secondary" size="small" onClick={this.handleClose}>
-                                            UNDO
-                                        </Button>
-                                        <IconButton
-                                            aria-label="close"
-                                            color="inherit"
-                                            onClick={this.handleClose}
-                                        >
-                                            <CloseIcon />
-                                        </IconButton>
-                                    </React.Fragment>
-                                }
-                            />
                         </div>
                     )}
                 </div>
+                <Snackbar
+                    // key={messageInfo ? messageInfo.key : undefined}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.open}
+                    autoHideDuration={6000}
+                    onClose={this.handleClose}
+                    message="Note Restored"
+                    action={
+                        <React.Fragment>
+                            <Button color="secondary" size="small" onClick={this.handleClose}>
+                                UNDO
+                                        </Button>
+                            <IconButton
+                                aria-label="close"
+                                color="inherit"
+                                onClick={this.handleClose}
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        </React.Fragment>
+                    }
+                />
             </div>
         )
     }
