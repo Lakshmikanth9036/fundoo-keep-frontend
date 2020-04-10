@@ -26,7 +26,7 @@ class Nav extends Component {
             view: true,
             text: '',
             profilePic: '',
-            profile: false
+            profile: false,
         }
     }
 
@@ -129,6 +129,21 @@ class Nav extends Component {
 
     profileSettings = () => {
         this.setState(prevState => ({ profile: !prevState.profile }))
+        console.log(this.state.selectedFile)
+    }
+
+    fileSelectHandler = e =>{
+        const formData = new FormData();
+        formData.append('file',e.target.files[0])
+        UserService.uploadProfileService(formData)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(
+            error => {
+                console.log(error)
+            }
+        )
     }
 
     render() {
@@ -261,15 +276,19 @@ class Nav extends Component {
                                 <Card className="profile" variant="outlined">
 
                                     <CardContent className="profileCont">
-                                        <img src={this.state.profilePic} alt="profile" className="avatar" />
-                                        {/* <Avatar src={this.state.profilePic} /> */}
+                                        <input
+                                        style={{display:'none'}}
+                                        type="file"
+                                        onChange={this.fileSelectHandler}
+                                        ref={fileInput => this.fileInput = fileInput}/>
+                                        <img src={this.state.profilePic} alt="profile" className="avatar" onClick={() => this.fileInput.click()}/>
                                         <div className="userName">{profileDetails.firstName} {profileDetails.lastName}</div>
                                         <div className="email">{profileDetails.emailAddress}</div>
-                                        <div className="manage">Manage your Fundoo Account</div>
+                                        {/* <div className="manage">Manage your Fundoo Account</div> */}
                                     </CardContent>
                                     <div><Divider /></div>
                                     <div className="profBtn">
-                                        <Button variant="outlined">Sign out of account</Button>
+                                        <Button variant="outlined" onClick={this.logout}>Sign out of account</Button>
                                     </div>
 
                                 </Card>

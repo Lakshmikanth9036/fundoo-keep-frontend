@@ -31,5 +31,9 @@ class UserService{
     static getProfileDetailsService(){
         return axios.get(`${rootApi}getProfileDetails`, {headers: {"header": Token }})
     }
+
+    static uploadProfileService(file){
+        return axios.post(`${rootApi}uploadProfile`,file,{headers: {"header": Token }});
+    }
 }
 export default UserService

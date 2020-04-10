@@ -94,7 +94,7 @@
 	height: 90px;
 	border-radius: 50%;
     justify-content: center;
-	left: calc(50% - 50px);
+	cursor: pointer;
 }
 
 .profile{
@@ -102,10 +102,9 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    right: -1040px;
+    right: -1080px;
     top: 65px;
-    width: 350px;
-    height: 355px;
+    width: 300px;
     box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
 }
 
@@ -144,4 +143,5 @@
     display: flex;
     justify-content: center;
     margin-top: 17px;
+    margin-bottom: 17px;
 }
