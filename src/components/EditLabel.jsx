@@ -16,16 +16,45 @@ export class EditLabel extends Component {
             closeDialog: false,
             openDialog: true,
             labelName: '',
-            editLabel:'',
+            labels: [],
         }
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    componentDidMount() {
+        this.setState({
+            labels: this.props.labels
+        })
+    }
+    
+    editHandler = e => {
+        const elementsIndex = this.state.labels.findIndex(element => element.labelId == e.target.name )
+        let newLabels = [...this.state.labels]
+        newLabels[elementsIndex] = {...newLabels[elementsIndex], labelName: e.target.value}
+        this.setState({
+            labels: newLabels
+        })
+    }
+
+    editLabel = (id,name) => {
+        var label = {
+            labelName: name
+        }
+        LabelService.editLabelService(label,id)
+        .then(response => {
+            console.log(response)
+        })
+        .catch(
+            error => {
+                console.log(error)
+            }
+        )
     }
 
     handleChange = e => {
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(e.target.name+" "+e.target.value)
     }
 
     handleClose = () => {
@@ -64,6 +93,9 @@ export class EditLabel extends Component {
     }
 
     render() {
+       
+        const { labels } = this.state
+
         return (
             <div className="labelsCont">
                 Edit Label
@@ -84,20 +116,20 @@ export class EditLabel extends Component {
                         </div>
 
                         {
-                            this.props.labels.map(label =>
+                            labels.map(label =>
                                 <div className="labels" key={label.labelId}>
                                     <IconButton onClick={() => this.deleteLabel(label.labelId)}>
                                         <DeleteIcon fontSize="small"/>
                                     </IconButton>
                                     <InputBase
-                                        multiline
+                                       multiline
                                         inputProps={{ 'aria-label': 'naked' }}
-                                        name="editLabel"
+                                        name={label.labelId}
                                         value={label.labelName}
-                                        onChange={this.handleChange}
+                                        onChange={this.editHandler}
                                     />
                                     <IconButton>
-                                        <EditIcon fontSize="small"/>
+                                        <EditIcon fontSize="small" onClick={() => this.editLabel(label.labelId,label.labelName)}/>
                                     </IconButton>
                                 </div>
                             )

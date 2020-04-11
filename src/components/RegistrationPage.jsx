@@ -145,7 +145,7 @@ class RegistrationPage extends Component {
     }
 
 
-    submitHandler(e) {
+    submitHandler = (e)  =>{
         e.preventDefault();
         if (this.isValidForm()) {
             UserService.registrationService(this.state.fields)

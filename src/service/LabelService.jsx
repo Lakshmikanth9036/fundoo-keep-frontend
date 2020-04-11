@@ -19,6 +19,10 @@ class LabelService{
     static getNotesOfLableService(lid){
         return axios.get(`${rootApi}getNotesOfLable?lid=${lid}`,{headers: {"header": Token }})
     }
+
+    static editLabelService(data,lid){
+        return axios.put(`${rootApi}update?lid=${lid}`,data,{headers: {"header": Token }})
+    }
 }
 
 export default LabelService
