@@ -181,7 +181,7 @@ export class Icon extends Component {
                 </div>)
         })
         return (
-            <div>
+            <div className="ic">
                 <CardActionArea style={{ width: "100%" }} disableSpacing>
                     <div className="icon">
 

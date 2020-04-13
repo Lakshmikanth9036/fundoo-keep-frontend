@@ -47,3 +47,13 @@
     flex: 1;
 }
 
+.ic{
+    visibility: hidden;
+}
+
+
+.icnhide:hover{
+    .ic{
+    visibility: visible;
+    }
+}
