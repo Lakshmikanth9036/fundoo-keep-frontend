@@ -19,6 +19,7 @@ import {
 } from '@material-ui/pickers';
 import '../css/icons.scss'
 import '../css/reminder.scss'
+import Collaborator from './Collaborator';
 
 export class Icon extends Component {
 
@@ -31,6 +32,7 @@ export class Icon extends Component {
             archive: false,
             isReminder: false,
             changeColor: false,
+            collaborator:false,
             selectedDate: new Date(),
             selectedTime: new Date(),
             colors: [{ name: "White", color: "fff" }, { name: "Red", color: "f28b82" }, { name: "Orange", color: "fbbc04" }, { name: "Yellow", color: "fff475" },
@@ -165,6 +167,12 @@ export class Icon extends Component {
         this.props.parentCallback();
     } 
 
+    collaboratorHandler = () => {
+        this.setState(prevState => {
+            return { collaborator: !prevState.collaborator }
+        })
+    }
+
     render() {
         const { open } = this.state
         const { colors } = this.state
@@ -217,6 +225,12 @@ export class Icon extends Component {
                                 </div>
                             </Card>
                         </Popper>
+
+                        <IconButton onClick={this.collaboratorHandler}>
+                            <PersonAddOutlinedIcon fontSize="small" />
+                        </IconButton>
+
+
                         <IconButton onClick={this.handleToggleCloseColor}>
                             <ColorLensOutlinedIcon fontSize="small" />
                         </IconButton>
@@ -243,10 +257,6 @@ export class Icon extends Component {
 
                         <IconButton>
                             <CropOriginalOutlinedIcon fontSize="small" />
-                        </IconButton>
-
-                        <IconButton>
-                            <PersonAddOutlinedIcon fontSize="small" />
                         </IconButton>
 
                         <IconButton
@@ -316,7 +326,11 @@ export class Icon extends Component {
                         </React.Fragment>
                     }
                 />
+                <div>
+                    {this.state.collaborator ? <Collaborator parentCallback={this.callBack} note={this.props.nts}/> : null }
+                </div>
             </div>
+            
         )
     }
 }

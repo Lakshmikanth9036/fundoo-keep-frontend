@@ -16,3 +16,52 @@
     border-color:  1px "black";
 }
 
+.clr{
+    display: flex;
+    padding: 8px;
+    border-style: solid;
+    border-radius: 50%;
+    color: #8e9194;
+}
+
+.owner{
+    display: flex;
+    align-items: center;
+}
+
+.ownMail{
+    margin-left: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.own{
+    font-style: italic;
+}
+
+.coll{
+    margin-left: -12px;
+}
+
+.colMail{
+    display: flex;
+    align-items: center;
+}
+
+.colMailId{
+    flex: 1;
+    margin-left: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.colHeader{
+    flex: 1;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.colDiv{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}

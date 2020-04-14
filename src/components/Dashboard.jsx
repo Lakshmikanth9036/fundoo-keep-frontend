@@ -3,6 +3,7 @@ import CreateNote from './CreateNote';
 import DisplayAllNotes from './DisplayAllNotes';
 import Nav from './Nav';
 import NoteService from '../service/NoteService';
+import CollaboratorService from '../service/CollaboratorService';
 
 class Note extends Component {
 
@@ -11,13 +12,15 @@ class Note extends Component {
 
         this.state = {
             notes: [],
-            pinned: []
+            pinned: [],
+            coll:[]
         }
     }
 
     componentDidMount() {
         this.getAllNote();
         this.getAllPinnedNote();
+        this.getCollNotes();
     }
 
     getAllPinnedNote = () => {
@@ -48,6 +51,20 @@ class Note extends Component {
             )
     }
 
+    getCollNotes = () => {
+        CollaboratorService.getCollNotesService()
+        .then(response => {
+            this.setState({
+                coll: response.data.obj
+            })
+        })
+        .catch(
+            error => {
+                console.log(error)
+            }
+        )
+    }
+
     getParentCallback = () => {
         this.getAllNote();
         this.getAllPinnedNote();
@@ -56,7 +73,7 @@ class Note extends Component {
 
     render() {
 
-        const { notes, pinned } = this.state
+        const { notes, pinned, coll } = this.state
 
         return (
             <div style={{ height: '100%' }}>
@@ -82,6 +99,10 @@ class Note extends Component {
                 {pinned.length ?
                     <div className="heading" style={{ marginLeft: "20%" }}><h5 style={{ color: "#5f6368" }}>OTHERS</h5></div> : null}
                 <div className='container' >
+                    {
+                        coll.map(note => 
+                            <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />)
+                    }
                     {notes.map(note =>
                         <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />
                     )}

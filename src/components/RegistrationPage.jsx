@@ -173,7 +173,6 @@ class RegistrationPage extends Component {
 
         if (!fields["firstName"]) {
             formIsValid = false
-            console.log("first")
             this.setState({isfirstName:true})
             errors["firstName"] = "*Please enter your first name"
         }
