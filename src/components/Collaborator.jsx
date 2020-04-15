@@ -82,9 +82,9 @@ export class Collaborator extends Component {
         }
     }
 
-    removeColl = (cId,mail) => {
+    removeColl = (cId) => {
        // console.log(cId+" -- "+this.props.note.noteId)
-       CollaboratorService.deleteCollaboratorService(this.props.note.noteId,cId,mail)
+       CollaboratorService.deleteCollaboratorService(this.props.note.noteId,cId)
             .then(response => {
                 console.log(response)
             })
@@ -93,7 +93,7 @@ export class Collaborator extends Component {
                     console.log(error)
                 }
             )
-            this.props.parentCallback();
+             this.props.parentCallback();
     }
 
     render() {
@@ -117,7 +117,7 @@ export class Collaborator extends Component {
                                     <Avatar alt="Coll">C</Avatar>
                                     <div className='colMailId'>{col.to}</div>
                                     <div>
-                                        <IconButton onClick={() => this.removeColl(col.cid,col.from)}>
+                                        <IconButton onClick={() => this.removeColl(col.cid)}>
                                             <CloseIcon fontSize="small"/>
                                         </IconButton>
                                     </div>

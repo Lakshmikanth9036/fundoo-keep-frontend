@@ -9,8 +9,8 @@ class CollaboratorService {
         return axios.post(`${rootApi}add?emailAddress=${mail}&nId=${nId}`,true,{headers: {"header": Token }})
     }
 
-    static deleteCollaboratorService(nId,cId,mail){
-        return axios.delete(`${rootApi}deleteCollaborator?cId=${cId}&mail=${mail}&nId=${nId}`)
+    static deleteCollaboratorService(nId,cId){
+        return axios.delete(`${rootApi}deleteCollaborator?cId=${cId}&nId=${nId}`,{headers: {"header": Token }})
     }
 
     static getCollNotesService(){
