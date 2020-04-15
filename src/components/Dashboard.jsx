@@ -13,7 +13,8 @@ class Note extends Component {
         this.state = {
             notes: [],
             pinned: [],
-            coll:[]
+            coll:[],
+            list: false
         }
     }
 
@@ -71,15 +72,28 @@ class Note extends Component {
         window.location.reload(false);
     }
 
+    changeListView = () => {
+            this.setState(prevState => ({ list: !prevState.list }))
+    }
+
     render() {
 
         const { notes, pinned, coll } = this.state
+        let classes = ''
+
+        if(this.state.list){
+            classes = 'listCont'
+        }
+        else{
+            classes = 'container'
+        }
 
         return (
             <div style={{ height: '100%' }}>
                 
                 <div>
-                    <Nav />
+                    <Nav view={this.state.view}
+                        changeView={this.changeListView}/>
                 </div>
 
                 <div>
@@ -87,9 +101,9 @@ class Note extends Component {
                 </div>
 
                 {pinned.length ?
-                    <div className="heading" style={{ marginLeft: "20%" }}><h5 style={{ color: "#5f6368" }}>PINNED</h5></div> : null}
+                    <div className="heading" style={this.state.list ? {marginLeft: "30%" }  : {marginLeft: "20%"}}><h5 style={{ color: "#5f6368" }}>PINNED</h5></div> : null}
                 {pinned.length ?
-                    <div className='container'>
+                    <div className={classes}>
                         {pinned.map(note =>
                             <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />
                         )}
@@ -97,14 +111,22 @@ class Note extends Component {
                 }
 
                 {pinned.length ?
-                    <div className="heading" style={{ marginLeft: "20%" }}><h5 style={{ color: "#5f6368" }}>OTHERS</h5></div> : null}
-                <div className='container' >
+                    <div className="heading" style={this.state.list ? {marginLeft: "30%" }  : {marginLeft: "20%"}}><h5 style={{ color: "#5f6368" }}>OTHERS</h5></div> : null}
+                <div className={classes} >
                     {
                         coll.map(note => 
-                            <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />)
+                            <DisplayAllNotes 
+                            isArchive={false} 
+                            parentCallback={this.getParentCallback} 
+                            note={note} 
+                            />)
                     }
                     {notes.map(note =>
-                        <DisplayAllNotes isArchive={false} parentCallback={this.getParentCallback} note={note} />
+                        <DisplayAllNotes 
+                        isArchive={false} 
+                        parentCallback={this.getParentCallback} 
+                        note={note} 
+                        />
                     )}
                 </div>
             </div>

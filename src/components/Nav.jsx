@@ -3,7 +3,7 @@ import { AppBar, Toolbar, IconButton, InputBase, Typography, Divider, ClickAwayL
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
-//import ViewStreamIcon from '@material-ui/icons/ViewStream';
+import ViewStreamIcon from '@material-ui/icons/ViewStream';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import SettingsIcon from '@material-ui/icons/Settings';
 import '../css/notes.scss';
@@ -23,7 +23,6 @@ class Nav extends Component {
             labels: [],
             open: false,
             edit: false,
-            view: true,
             text: '',
             profilePic: '',
             profile: false,
@@ -96,7 +95,7 @@ class Nav extends Component {
     }
 
     allNotes = () => {
-        this.props.history.push("/dashboard/note", false)
+        this.props.history.push("/dashboard/note")
     }
 
     reminder = () => {
@@ -129,7 +128,6 @@ class Nav extends Component {
 
     profileSettings = () => {
         this.setState(prevState => ({ profile: !prevState.profile }))
-        console.log(this.state.selectedFile)
     }
 
     fileSelectHandler = e =>{
@@ -257,8 +255,12 @@ class Nav extends Component {
                                 <RefreshIcon />
                             </IconButton>
 
-                            <IconButton>
-                                <ViewModuleIcon />
+                            <IconButton onClick={this.props.changeView}>
+                                {
+                                this.props.view ? 
+                                <ViewModuleIcon />:
+                                <ViewStreamIcon/>
+                                }
                             </IconButton>
 
                             <IconButton>

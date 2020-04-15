@@ -1,4 +1,11 @@
 .updateIcons{
     display: flex;
     flex:1;
+
+    .ic{
+        .icon{
+            display: flex;
+            justify-content: space-around;
+        }
+    }
 }
