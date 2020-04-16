@@ -12,6 +12,7 @@ import EditLabel from './EditLabel';
 import { Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import UserService from '../service/UserService';
+import ViewContext from './ViewContext';
 
 class Nav extends Component {
 
@@ -28,6 +29,8 @@ class Nav extends Component {
             profile: false,
         }
     }
+
+    static contextType = ViewContext;
 
     componentDidMount() {
         this.getAllLabel();
@@ -123,7 +126,7 @@ class Nav extends Component {
 
     labeledNotes = (labelId) => {
         this.props.history.push("/dashboard/labeledNotes", labelId)
-        window.location.reload(false);
+        this.props.parentCallback();
     }
 
     profileSettings = () => {
@@ -255,9 +258,9 @@ class Nav extends Component {
                                 <RefreshIcon />
                             </IconButton>
 
-                            <IconButton onClick={this.props.changeView}>
+                            <IconButton onClick={this.context.viewController}>
                                 {
-                                this.props.view ? 
+                                this.context.view ? 
                                 <ViewModuleIcon />:
                                 <ViewStreamIcon/>
                                 }

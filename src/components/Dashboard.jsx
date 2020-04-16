@@ -4,6 +4,7 @@ import DisplayAllNotes from './DisplayAllNotes';
 import Nav from './Nav';
 import NoteService from '../service/NoteService';
 import CollaboratorService from '../service/CollaboratorService';
+import ViewContext from './ViewContext'
 
 class Note extends Component {
 
@@ -14,9 +15,10 @@ class Note extends Component {
             notes: [],
             pinned: [],
             coll:[],
-            list: false
         }
     }
+
+    static contextType = ViewContext;
 
     componentDidMount() {
         this.getAllNote();
@@ -72,16 +74,12 @@ class Note extends Component {
         window.location.reload(false);
     }
 
-    changeListView = () => {
-            this.setState(prevState => ({ list: !prevState.list }))
-    }
-
     render() {
 
         const { notes, pinned, coll } = this.state
         let classes = ''
 
-        if(this.state.list){
+        if(this.context.view){
             classes = 'listCont'
         }
         else{
@@ -92,8 +90,7 @@ class Note extends Component {
             <div style={{ height: '100%' }}>
                 
                 <div>
-                    <Nav view={this.state.view}
-                        changeView={this.changeListView}/>
+                    <Nav parentCallback={this.getParentCallback}/>
                 </div>
 
                 <div>
@@ -101,7 +98,7 @@ class Note extends Component {
                 </div>
 
                 {pinned.length ?
-                    <div className="heading" style={this.state.list ? {marginLeft: "30%" }  : {marginLeft: "20%"}}><h5 style={{ color: "#5f6368" }}>PINNED</h5></div> : null}
+                    <div className="heading" style={this.context.view ? {marginLeft: "30%" }  : {marginLeft: "20%"}}><h5 style={{ color: "#5f6368" }}>PINNED</h5></div> : null}
                 {pinned.length ?
                     <div className={classes}>
                         {pinned.map(note =>
@@ -111,7 +108,7 @@ class Note extends Component {
                 }
 
                 {pinned.length ?
-                    <div className="heading" style={this.state.list ? {marginLeft: "30%" }  : {marginLeft: "20%"}}><h5 style={{ color: "#5f6368" }}>OTHERS</h5></div> : null}
+                    <div className="heading" style={this.context.view ? {marginLeft: "30%" }  : {marginLeft: "20%"}}><h5 style={{ color: "#5f6368" }}>OTHERS</h5></div> : null}
                 <div className={classes} >
                     {
                         coll.map(note => 

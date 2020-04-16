@@ -11,10 +11,29 @@ import Trash from './components/Trash';
 import Search from './components/Search';
 import Remainder from './components/Remainder';
 import LabledNotes from './components/LabledNotes';
+import ViewContext from './components/ViewContext';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       view: false
+    }
+  }
+  
+  viewHandler = () => {
+    this.setState(prevState => {
+      return {view: !prevState.view}
+    })
+  }
+
   render() {
     return (
+      <ViewContext.Provider
+      value={{view: this.state.view , viewController: this.viewHandler}}
+      >
       <Router>
         <Switch>
           <Route path="/register" component={ RegistrationPage } />
@@ -29,6 +48,7 @@ class App extends Component {
           <Route path="/dashboard/labeledNotes" component={ LabledNotes }/>
         </Switch>
       </Router>
+      </ViewContext.Provider>
     );
   }
 }

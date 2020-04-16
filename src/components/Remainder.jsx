@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Nav from './Nav'
 import DisplayAllNotes from './DisplayAllNotes'
 import NoteService from '../service/NoteService'
+import ViewContext from './ViewContext'
 
 class Remainder extends Component {
     constructor(props) {
@@ -11,6 +12,8 @@ class Remainder extends Component {
             notes: []
         }
     }
+
+    static contextType = ViewContext;
 
     componentDidMount() {
         NoteService.getRemainderNotesService()
@@ -31,13 +34,22 @@ class Remainder extends Component {
 
         const { notes } = this.state
 
+        let classes = ''
+
+        if(this.context.view){
+            classes = 'listCont'
+        }
+        else{
+            classes = 'container'
+        }
+
         return (
             <div>
                 <div>
                     <Nav />
                 </div>
-             <div style={{ marginTop: "120px",marginLeft:"20%" }}><h5 style={{color:"#5f6368"}}>REMINDER</h5></div>
-                <div className='container'>
+             <div style={this.context.view ? {marginTop: "120px", marginLeft: "30%" }  :{ marginTop: "120px",marginLeft:"20%" }}><h5 style={{color:"#5f6368"}}>REMINDER</h5></div>
+                <div className={classes}>
                     {notes.map(note =>
                         <DisplayAllNotes key={note.noteId} note={note} />
                     )}
