@@ -12,6 +12,8 @@ import NoteService from '../service/NoteService';
 import DateFnsUtils from '@date-io/date-fns';
 import CloseIcon from '@material-ui/icons/Close';
 import AllLabels from './AllLabels';
+// import DateTime from 'react-datetime';
+
 import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
@@ -220,6 +222,7 @@ export class Icon extends Component {
                                         onChange={this.handleTimeChange}
                                     />
                                 </MuiPickersUtilsProvider>
+
                                 <div className="btnPos">
                                     <Button onClick={this.setRemainder}>Done</Button>
                                 </div>
