@@ -12,6 +12,7 @@ import Search from './components/Search';
 import Remainder from './components/Remainder';
 import LabledNotes from './components/LabledNotes';
 import ViewContext from './components/ViewContext';
+import PrivateRoute from './auth/PriviteRoute';
 
 class App extends Component {
 
@@ -36,16 +37,17 @@ class App extends Component {
       >
       <Router>
         <Switch>
-          <Route path="/register" component={ RegistrationPage } />
           <Route path="/login" component={LoginPage}/>
+          <Route path="/register" component={ RegistrationPage } />
           <Route path="/forgotPassword" component={ForgotPassword}/>
           <Route path="/resetPassword/:token" component={ ResetPassword } />
           <Route path="/dashboard/note" component={ Dashboard }/>
-          <Route path="/dashboard/reminder" component={ Remainder }/>
-          <Route path="/dashboard/archive" component={ Archive }/>
-          <Route path="/dashboard/trash" component={ Trash }/>
-          <Route path="/dashboard/search" component={ Search }/>
-          <Route path="/dashboard/labeledNotes" component={ LabledNotes }/>
+          <PrivateRoute path="/dashboard/reminder" component={ Remainder }/>
+          <PrivateRoute path="/dashboard/archive" component={ Archive }/>
+          <PrivateRoute path="/dashboard/trash" component={ Trash }/>
+          <PrivateRoute path="/dashboard/search" component={ Search }/>
+          <PrivateRoute path="/dashboard/labeledNotes" component={ LabledNotes }/>
+           <Route component={LoginPage}/> 
         </Switch>
       </Router>
       </ViewContext.Provider>
