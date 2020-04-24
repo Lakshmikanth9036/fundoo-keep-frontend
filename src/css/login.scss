@@ -26,10 +26,8 @@
 }
 
 .login .btnn1{
-	position: relative;
-	left: 30%;
-	background-color: #1a73e8;
-	margin-bottom: 12px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .login .btnn2{

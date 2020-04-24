@@ -4,7 +4,13 @@ import jwt from 'jsonwebtoken';
 
 const Token = JSON.parse(localStorage.getItem('Token'))
 const verify = () => {
-   return jwt.decode(Token,{complete: true});
+    if(jwt.decode(Token,{complete: true}) !== null && typeof Token !== 'undefined'){
+        return true;
+    }
+    else{
+        localStorage.clear();
+        return false;
+    }
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (

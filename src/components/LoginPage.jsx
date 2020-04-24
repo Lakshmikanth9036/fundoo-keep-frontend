@@ -153,8 +153,10 @@ class LoginPage extends Component {
                         <div className="errorMsg"></div>
                         {/* <button type='submit'>Login</button> */}
                         <Button className='btnn2' href="/forgotPassword">Forgot password?</Button><br />
+                        <div className='btnn1'>
                         <Button className='btnn2' href="/register" >Sigin Up</Button>
-                        <Button className='btnn1' type='submit' color="primary" variant='contained'>Signin</Button>
+                        <Button  type='submit' color="primary" variant='contained'>Signin</Button>
+                        </div>
                     </form>
                 </Card>
             </div>

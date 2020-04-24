@@ -47,7 +47,7 @@ class App extends Component {
           <PrivateRoute path="/dashboard/trash" component={ Trash }/>
           <PrivateRoute path="/dashboard/search" component={ Search }/>
           <PrivateRoute path="/dashboard/labeledNotes" component={ LabledNotes }/>
-           <Route component={LoginPage}/> 
+          <Route component={LoginPage}/> 
         </Switch>
       </Router>
       </ViewContext.Provider>
