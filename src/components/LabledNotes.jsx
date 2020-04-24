@@ -34,7 +34,6 @@ class LabledNotes extends Component {
         )
     }
 
-
     render() {
 
         const { notes } = this.state
@@ -59,7 +58,7 @@ class LabledNotes extends Component {
                 </div>
                 <div className={classes} style={{ marginTop: "20px" }}>
                     {notes.map(note =>
-                        <DisplayAllNotes key={note.noteId} note={note} />
+                        <DisplayAllNotes parentCallback={this.getLabeledNotes} key={note.noteId} note={note} />
                     )}
                 </div>
             </div>

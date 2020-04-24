@@ -1,26 +1,26 @@
-import React from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 
 const Token = JSON.parse(localStorage.getItem('Token'))
+
 const verify = () => {
-    if(jwt.decode(Token,{complete: true}) !== null && typeof Token !== 'undefined'){
-        return true;
-    }
-    else{
-        localStorage.clear();
-        return false;
-    }
+    console.log(jwt.decode(Token, { complete: true }))
+    return jwt.decode(Token, { complete: true })
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
-<div>
-    <Route {...rest} render={(props) => (
-      Token == null
-        ? <Redirect to='/login' />
-        : verify() ? <Component {...props} /> : <Redirect to='/login' />
-    )} />
+    <div>
+        <Route {...rest} render={(props) => (
+            Token == null || typeof Token === "undefined"
+                ? <Redirect to='/login' />
+                : verify() ? <Component {...props} />
+                    : <Fragment>
+                        {localStorage.clear()}
+                        <Redirect to='/login' />
+                    </Fragment>
+        )} />
     </div>
 )
 
-  export default PrivateRoute;
+export default PrivateRoute;

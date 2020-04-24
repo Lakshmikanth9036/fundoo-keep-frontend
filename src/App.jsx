@@ -41,7 +41,7 @@ class App extends Component {
           <Route path="/register" component={ RegistrationPage } />
           <Route path="/forgotPassword" component={ForgotPassword}/>
           <Route path="/resetPassword/:token" component={ ResetPassword } />
-          <Route path="/dashboard/note" component={ Dashboard }/>
+          <PrivateRoute path="/dashboard/note" component={ Dashboard }/>
           <PrivateRoute path="/dashboard/reminder" component={ Remainder }/>
           <PrivateRoute path="/dashboard/archive" component={ Archive }/>
           <PrivateRoute path="/dashboard/trash" component={ Trash }/>
