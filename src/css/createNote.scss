@@ -1,5 +1,10 @@
-@media(min-width: 800px){
+@media(min-width: 900px){
     .inpDiv{
+        display: flex;
+        flex-basis: 100%;
+        min-width: 620px;
+    }
+    .inpDiv1{
         display: flex;
         flex-basis: 100%;
         min-width: 620px;
@@ -25,16 +30,21 @@
     padding: 10px;
 }
 
+.inpDiv{
+    display: flex;
+    flex-basis:30%;
+}
+
 .inpDiv1{
-    flex-basis: 100%;
-    min-width: 620px;
+    display: flex;
+    flex-basis:30%;
+    flex-direction: column;
     padding: 5px;
 }
 
 .inp1{
-    padding-top: 10px;
-    padding-left: 15px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    padding: 10px;
 }
 
 .icbtn{
@@ -43,7 +53,9 @@
 }
 
 .close{
-    position: relative;
-    left:60%;
-    font-family: 'Product Sans',Arial,sans-serif;
+    margin-right: 5px;
+}
+
+.createActionArea{
+    display: flex;
 }

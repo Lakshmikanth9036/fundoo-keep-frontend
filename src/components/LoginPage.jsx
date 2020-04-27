@@ -101,6 +101,7 @@ class LoginPage extends Component {
                     <form onSubmit={this.submitHandler}>
 
                         <TextField
+                         autoComplete="off"
                             className="margin"
                             name="mailOrMobile"
                            error={this.state.isMailOrMobile}

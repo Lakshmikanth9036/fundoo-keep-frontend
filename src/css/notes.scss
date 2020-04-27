@@ -2,13 +2,20 @@
     .iocbtns{
         display: flex;
         position: relative;
-        margin-left: 200px;
+    }
+    .search{
+        margin-left: 50px;
+        width: 60%;
     }
 }
 
 @media(max-width: 800px){
     .iocbtns{
         display: none;
+    }
+    .search{
+        margin-left: 10px;
+        width: 100%;
     }
 }
 
@@ -33,21 +40,27 @@
 .niciv{
     padding-left: 4px;
     color: #5f6368;
-    font-family: 'Product Sans',Arial,sans-serif;
+    font-family: "Open Sans";
     font-size: 22px;
     line-height: 24px;
     position: relative;
     top: -1.5px;
 }
 
+.search_btn_continer{
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+}
+
 .search{
     display: flex;
+    align-items: center;
+    align-self: center;
     position: relative;
-    width: 750px;
     height: 45px;
     border-style:solid;
-    border-radius: 7px;
-    margin-left: 80px;
+    border-radius: 7px;  
     background-color: #ffff;
     box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
 }
@@ -79,7 +92,7 @@
     box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
     width: 300px;
     z-index: 3;
-    transition: all 0.3s ease-out;
+    transition: all 0.5s ease-out;
     .sideCont:hover{
         background-color: #f1d06d ;
     }
@@ -124,8 +137,8 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    right: -1080px;
-    top: 65px;
+    right: -1020px;
+    top: 63px;
     width: 300px;
     box-shadow: 2px 0px 5px rgba(0,0,0,0.5);
 }

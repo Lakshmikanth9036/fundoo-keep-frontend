@@ -63,7 +63,7 @@ class Archive extends Component {
                 <div className="heading" style={this.context.view ? {marginLeft: "30%" } : {marginLeft:"23.5%"}}><h5 style={{color:"#5f6368"}}>Archive</h5></div>
                 <div className={classes}>  
                     {notes.map(note => 
-                    <DisplayAllNotes parentCallback={this.getParentCallback} isArchive={true} note={note}/>
+                    <DisplayAllNotes  key={note.noteId} parentCallback={this.getParentCallback} isArchive={true} note={note}/>
                     )}
                 </div>
             </div>

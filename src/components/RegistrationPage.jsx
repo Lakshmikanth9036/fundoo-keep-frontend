@@ -10,7 +10,6 @@ import EmailIcon from '@material-ui/icons/Email';
 import ContactPhoneRoundedIcon from '@material-ui/icons/ContactPhoneRounded';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import UserService from '../service/UserService'
 
 class RegistrationPage extends Component {
 
@@ -296,5 +295,3 @@ class RegistrationPage extends Component {
 }
 
 export default RegistrationPage
-
-

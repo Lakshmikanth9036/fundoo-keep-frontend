@@ -51,10 +51,11 @@ import BrushIcon from '@material-ui/icons/Brush';
                             <div className='inpDiv'>
                                 <div className='inp'>
                                 <InputBase
+                                    style={{font:"inherit", paddingLeft: "10px"}}
                                     placeholder="Take a note..."
                                     inputProps={{"aria-label":"naked"}}
-                                    onClick={this.expandTakeNote}/>
-                               
+                                    onClick={this.expandTakeNote}
+                                />
                              </div>
                              <IconButton>
                                     <CheckBoxIcon/>
@@ -72,24 +73,24 @@ import BrushIcon from '@material-ui/icons/Brush';
                             <div className='inpDiv1'>
                                 <div className='inp1'>
                                 <InputBase
-                                    style={{width: "100%"}}
+                                    style={{fontFamily:"Open Sans"}}
                                     placeholder="Title"
                                     onChange={this.handlerChange}
                                     name="title"
                                     multiline
                                     inputProps={{"aria-label":"naked"}}/>
-                                    
+                                    <br/>
                                 <InputBase
-                                    style={{width: "100%"}}
+                                   style={{fontFamily:"Open Sans"}}
                                     placeholder="Take a note..."
                                     onChange={this.handlerChange}
                                     name="description"
                                     multiline
                                     inputProps={{"aria-label":"naked"}}/>
                                     </div>
-                                    <div class='icbtn'>
-                                       <div>
-                                 <IconButton>
+                                    <div className='createActionArea'>
+                                    <div className='icbtn'>
+                                    <IconButton>
                                         <ColorLensIcon fontSize="small" />
                                     </IconButton>
                                     <IconButton>
@@ -101,8 +102,14 @@ import BrushIcon from '@material-ui/icons/Brush';
                                     <IconButton>
                                         <PersonAddIcon fontSize="small" />
                                     </IconButton>
-                                    </div> 
-                                     <div className="close"><Button onClick={this.expandTakeNote}>close</Button></div>
+                                    </div>
+                                     <div className="close"><Button 
+                                        style={{
+                                            fontFamily:"Open Sans", 
+                                            fontWeight: "bold", 
+                                            fontSize: '15px',
+                                            textTransform: 'capitalize'}} 
+                                            onClick={this.expandTakeNote}>close</Button></div>
                                 </div>
                                   
                             </div> : null}

@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 const Token = JSON.parse(localStorage.getItem('Token'))
 
 const verify = () => {
-    console.log(jwt.decode(Token, { complete: true }))
     return jwt.decode(Token, { complete: true })
 }
 
@@ -13,9 +12,13 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     <div>
         <Route {...rest} render={(props) => (
             Token == null || typeof Token === "undefined"
-                ? <Redirect to='/login' />
+                ? <Fragment>
+                    {alert('Please login first')}
+                    <Redirect to='/login' />
+                </Fragment>
                 : verify() ? <Component {...props} />
                     : <Fragment>
+                        {alert('Please login first')}
                         {localStorage.clear()}
                         <Redirect to='/login' />
                     </Fragment>
