@@ -13,63 +13,43 @@ class LoginPage extends Component {
         super(props)
 
         this.state = {
-            mailOrMobile:'',
-            password:'',
-            isValidPassword:false,
-            isMailOrMobile:false,
-            showPassword: false
+            fields: {},
+            errors: {},
+            valid: {
+                firstName: false,
+                lastName: false,
+                emailAddress: false,
+                mobile: false,
+                password: false
+            },
+            showPassword: false,
+            isValid: false
         }
     }
 
     submitHandler = e => {
         e.preventDefault()
-        var data = {
-            mailOrMobile: this.state.mailOrMobile,
-            password: this.state.password
-        }
-            UserService.loginService(data)
-                .then(response => {
-                    localStorage.setItem('Token', JSON.stringify(response.data.token))
-                    // localStorage.setItem('response', JSON.stringify(response.data))
-                    if (response.status === 200) {
-                        this.props.history.push("/dashboard/note")
-                    }
-                }).catch(err => {
-                    this.props.history.push("/login")
-                })
-        }
-
-    passwordHandler = e => {
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-        if(!this.state.password.match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)){
-            this.setState({
-                isValidPassword : true,
+        console.log(this.state.fields)
+        UserService.loginService(this.state.fields)
+            .then(response => {
+                localStorage.setItem('Token', JSON.stringify(response.data.token))
+                // localStorage.setItem('response', JSON.stringify(response.data))
+                if (response.status === 200) {
+                    this.props.history.push("/dashboard/note")
+                }
+            }).catch(err => {
+                this.props.history.push("/login")
             })
-         }
-         else{
-            this.setState({
-                isValidPassword : false,
-            })
-        }
     }
 
-    changeHandler = e => {
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+    changeHandler = (e) => {
+        let fields = { ...this.state.fields }
+        fields[e.target.name] = e.target.value
+        let isValid = this.isValidForm(fields);
         this.setState({
-            [e.target.name] : e.target.value
+            fields: fields,
+            isValid: isValid
         })
-        if(!pattern.test(this.state.mailOrMobile) && !this.state.mailOrMobile.match(/^[0-9]{11}$/)){
-            this.setState({
-                isMailOrMobile : true,
-            })
-        }
-        else{
-            this.setState({
-                isMailOrMobile : false,
-            })
-        }
     }
 
     handleClickShowPassword = () => {
@@ -77,8 +57,53 @@ class LoginPage extends Component {
         this.setState({ showPassword })
     }
 
+    isValidForm = (fields) => {
+
+        let valid = { ...this.state.valid };
+        let errors = { ...this.state.errors };
+        let formIsValid = true;
+
+        if (!fields["mailOrMobile"]) {
+            formIsValid = false;
+        }
+
+        if (typeof fields["mailOrMobile"] !== "undefined") {
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(fields["mailOrMobile"]) && !fields["mailOrMobile"].match(/^[0-9]{10}$/)) {
+                formIsValid = false;
+                valid["mailOrMobile"] = true;
+                errors["mailOrMobile"] = "*Please enter vaild Email or Mobile No.";
+            }
+            else {
+                valid["mailOrMobile"] = false;
+            }
+        }
+
+        if (!fields["password"]) {
+            formIsValid = false
+        }
+
+        if (typeof fields["password"] !== "undefined") {
+            if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
+                formIsValid = false;
+                valid["password"] = true
+                errors["password"] = "*Please enter secure and strong password.";
+            }
+            else {
+                valid["password"] = false
+            }
+        }
+
+        this.setState({
+            errors: errors,
+            valid: valid
+        })
+        return formIsValid
+    }
+
     render() {
-        const { mailOrMobile, password,showPassword } = this.state
+        const { fields, errors, valid } = this.state
+        const { showPassword } = this.state
 
         return (
             <div>
@@ -101,16 +126,16 @@ class LoginPage extends Component {
                     <form onSubmit={this.submitHandler}>
 
                         <TextField
-                         autoComplete="off"
+                            autoComplete="off"
                             className="margin"
                             name="mailOrMobile"
-                           error={this.state.isMailOrMobile}
-                            value={mailOrMobile}
+                            value={fields.mailOrMobile}
+                            error={valid.mailOrMobile}
+                            helperText={valid.mailOrMobile ? errors.mailOrMobile : null}
                             onChange={this.changeHandler}
                             label="Email or Mobile"
                             variant="outlined"
                             size="small"
-                            helperText={this.state.isMailOrMobile ? "Enter valid mail or mobile" : null}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -126,8 +151,9 @@ class LoginPage extends Component {
                             <OutlinedInput */}
                         <TextField
                             style={{ maxWidth: '255.5px' }}
-                            error= {this.state.isValidPassword}
-                            helperText= {this.state.isValidPassword ? "Enter the valid password!!!" : null}
+                            value={fields.password}
+                            error={valid.password}
+                            helperText={valid.password ? errors.password : null}
                             size="small"
                             variant="outlined"
                             className="margin"
@@ -135,8 +161,7 @@ class LoginPage extends Component {
                             name="password"
                             label="Password"
                             type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={this.passwordHandler}
+                            onChange={this.changeHandler}
                             // endAdornment={
                             InputProps={{
                                 endAdornment: (
@@ -145,18 +170,18 @@ class LoginPage extends Component {
                                             aria-label="toggle password visibility"
                                             onClick={this.handleClickShowPassword}
                                             edge="end">
-                                            {showPassword ? <Visibility style={{color:"black"}}/> : <VisibilityOff style={{color:"black"}}/>}
+                                            {showPassword ? <Visibility style={{ color: "black" }} /> : <VisibilityOff style={{ color: "black" }} />}
                                         </IconButton>
                                     </InputAdornment>)
-                            } }
+                            }}
                         />
                         {/* </FormControl> */}
                         <div className="errorMsg"></div>
                         {/* <button type='submit'>Login</button> */}
                         <Button className='btnn2' href="/forgotPassword">Forgot password?</Button><br />
                         <div className='btnn1'>
-                        <Button className='btnn2' href="/register" >Sigin Up</Button>
-                        <Button  type='submit' color="primary" variant='contained'>Signin</Button>
+                            <Button className='btnn2' href="/register" >Sigin Up</Button>
+                            <Button disabled={!this.state.isValid} type='submit' color="primary" variant='contained'>Signin</Button>
                         </div>
                     </form>
                 </Card>

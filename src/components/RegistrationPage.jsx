@@ -44,7 +44,7 @@ class RegistrationPage extends Component {
 
 
     submitHandler = (e)  =>{
-        e.preventDefault();
+        // e.preventDefault();
         console.log(this.state.fields)
         
         //     UserService.registrationService(this.state.fields)
