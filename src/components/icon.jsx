@@ -143,7 +143,7 @@ export class Icon extends Component {
             .catch(error => {
                 console.log(error)
             })
-        this.props.parentCallback();
+        this.callBack();
     }
 
     moveToArchive = () => {
@@ -237,16 +237,16 @@ export class Icon extends Component {
                         <IconButton onClick={this.handleToggleCloseColor}>
                             <ColorLensOutlinedIcon fontSize="small" />
                         </IconButton>
-                        <Paper>
-                            {
-                                this.state.changeColor ?
+                        <Popper
+                            open={this.state.changeColor}
+                            placement='top-end'
+                            anchorEl={this.anchorEl}>
                                     <ClickAwayListener onClickAway={this.handleCloseColor}>
                                         <Card className="colorBox">
                                             {buttonColor}
                                         </Card>
-                                    </ClickAwayListener> : null
-                            }
-                        </Paper>
+                                    </ClickAwayListener>
+                        </Popper>
 
                         <IconButton
                             onClick={this.moveToArchive}>

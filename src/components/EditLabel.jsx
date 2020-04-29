@@ -28,7 +28,8 @@ export class EditLabel extends Component {
     }
     
     editHandler = e => {
-        const elementsIndex = this.state.labels.findIndex(element => element.labelId == e.target.name )
+        const elementsIndex = this.state.labels.findIndex(element => element.labelId === +e.target.name )
+        console.log(e.target.value)
         let newLabels = [...this.state.labels]
         newLabels[elementsIndex] = {...newLabels[elementsIndex], labelName: e.target.value}
         this.setState({

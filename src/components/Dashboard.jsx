@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import CreateNote from './CreateNote';
 import DisplayAllNotes from './DisplayAllNotes';
 import Nav from './Nav';
-import NoteService from '../service/NoteService';
 import CollaboratorService from '../service/CollaboratorService';
-import ViewContext from './ViewContext'
+import ViewContext from './ViewContext';
+import { connect } from  'react-redux';
+import * as actions from '../actions/index';
 
 class Note extends Component {
 
@@ -12,8 +13,6 @@ class Note extends Component {
         super(props)
 
         this.state = {
-            notes: [],
-            pinned: [],
             coll:[],
         }
     }
@@ -21,38 +20,38 @@ class Note extends Component {
     static contextType = ViewContext;
 
     componentDidMount() {
-        this.getAllNote();
-        this.getAllPinnedNote();
+        this.props.onInitOtherNote();
+        this.props.onInitPinnedNote();
         this.getCollNotes();
     }
 
-    getAllPinnedNote = () => {
-        NoteService.getAllPinnedNoteService()
-            .then(response => {
-                this.setState({
-                    pinned: response.data.obj
-                })
-            })
-            .catch(
-                error => {
-                    console.log(error)
-                }
-            )
-    }
+    // getAllPinnedNote = () => {
+    //     NoteService.getAllPinnedNoteService()
+    //         .then(response => {
+    //             this.setState({
+    //                 pinned: response.data.obj
+    //             })
+    //         })
+    //         .catch(
+    //             error => {
+    //                 console.log(error)
+    //             }
+    //         )
+    // }
 
-    getAllNote = () => {
-        NoteService.getAllNoteService()
-            .then(response => {
-                this.setState({
-                    notes: response.data.obj
-                })
-            })
-            .catch(
-                error => {
-                    console.log(error)
-                }
-            )
-    }
+    // getAllNote = () => {
+    //     NoteService.getAllNoteService()
+    //         .then(response => {
+    //             this.setState({
+    //                 notes: response.data.obj
+    //             })
+    //         })
+    //         .catch(
+    //             error => {
+    //                 console.log(error)
+    //             }
+    //         )
+    // }
 
     getCollNotes = () => {
         CollaboratorService.getCollNotesService()
@@ -69,14 +68,14 @@ class Note extends Component {
     }
 
     getParentCallback = () => {
-        this.getAllNote();
-        this.getAllPinnedNote();
-        window.location.reload(false);
+        this.props.onInitOtherNote();
+        this.props.onInitPinnedNote();
     }
 
     render() {
 
-        const { notes, pinned, coll } = this.state
+        const { notes, pinned } = this.props
+        const { coll } = this.state
         let classes = ''
 
         if(this.context.view){
@@ -131,4 +130,18 @@ class Note extends Component {
     }
 }
 
-export default Note
+const mapStateToProps = state => {
+    return {
+        notes: state.notes,
+        pinned: state.pinned
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+       onInitOtherNote: () => dispatch(actions.getOtherNotes()),
+       onInitPinnedNote: () => dispatch(actions.getPinnedNotes())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Note);

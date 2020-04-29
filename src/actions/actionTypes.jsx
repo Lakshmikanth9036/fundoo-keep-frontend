@@ -1,0 +1,6 @@
+export const OTHER_NOTES = 'OTHER_NOTES';
+export const PINNED_NOTES = 'PINNED_NOTES';
+export const REMINDER_NOTES = 'REMINDER_NOTES';
+export const LABELED_NOTES = 'LABELED_NOTES';
+export const TRASH_NOTES = 'TRASH_NOTES';
+export const ARCHIVE_NOTES = 'ARCHIVE_NOTES';

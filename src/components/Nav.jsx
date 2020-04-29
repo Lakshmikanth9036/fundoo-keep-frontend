@@ -12,6 +12,8 @@ import EditLabel from './EditLabel';
 import { withRouter } from 'react-router';
 import UserService from '../service/UserService';
 import ViewContext from './ViewContext';
+import * as actions from '../actions/index';
+import { connect } from  'react-redux';
 
 class Nav extends Component {
 
@@ -131,8 +133,9 @@ class Nav extends Component {
     }
 
     labeledNotes = (labelId) => {
+        this.props.onInitLabeledNote(labelId)
         this.props.history.push("/dashboard/labeledNotes", labelId)
-        this.props.parentCallback();
+        // this.props.parentCallback();
     }
 
     profileSettings = () => {
@@ -312,4 +315,10 @@ class Nav extends Component {
     }
 }
 
-export default withRouter(Nav);
+const mapDispatchToProps = dispatch => {
+    return {
+       onInitLabeledNote: (state) => dispatch(actions.getLabeledNotes(state))
+    }
+}
+
+export default connect(null,mapDispatchToProps)(withRouter(Nav));

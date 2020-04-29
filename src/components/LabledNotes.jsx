@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import DisplayAllNotes from './DisplayAllNotes'
-import Nav from './Nav'
-import LabelService from '../service/LabelService'
-import CreateNote from './CreateNote'
-import ViewContext from './ViewContext'
+import React, { Component } from 'react';
+import DisplayAllNotes from './DisplayAllNotes';
+import Nav from './Nav';
+import CreateNote from './CreateNote';
+import ViewContext from './ViewContext';
+import { connect } from  'react-redux';
+import * as actions from '../actions/index';
 
 class LabledNotes extends Component {
     constructor(props) {
@@ -17,26 +18,26 @@ class LabledNotes extends Component {
     static contextType = ViewContext;
 
     componentDidMount() {
-       this.getLabeledNotes();
+        this.props.onInitLabeledNote(this.props.location.state)
     }
 
-    getLabeledNotes = () => {
-        LabelService.getNotesOfLableService(this.props.location.state)
-        .then(response => {
-            this.setState({
-                notes: response.data.obj
-            })
-        })
-        .catch(
-            error => {
-                console.log(error)
-            }
-        )
-    }
+    // getLabeledNotes = () => {
+    //     LabelService.getNotesOfLableService(this.props.location.state)
+    //     .then(response => {
+    //         this.setState({
+    //             notes: response.data.obj
+    //         })
+    //     })
+    //     .catch(
+    //         error => {
+    //             console.log(error)
+    //         }
+    //     )
+    // }
 
     render() {
 
-        const { notes } = this.state
+        const { notes } = this.props
 
         let classes = ''
 
@@ -66,4 +67,16 @@ class LabledNotes extends Component {
     }
 }
 
-export default LabledNotes
+const mapStateToProps = state => {
+    return {
+        notes: state.notes
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+       onInitLabeledNote: (state) => dispatch(actions.getLabeledNotes(state))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(LabledNotes);
