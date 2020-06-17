@@ -184,6 +184,7 @@ class RegistrationPage extends Component {
                         {/* <input type='text' name="firstName" value={fields.firstName} onChange={this.changeHandler} placeholder='First Name' /> */}
                         <TextField
                             name="firstName"
+                            id="firstName"
                             value={fields.firstName}
                             error={valid.firstName}
                             helperText={valid.firstName ? errors.firstName : null}
@@ -203,6 +204,7 @@ class RegistrationPage extends Component {
                         {/* <input type='text' name="lastName" value={fields.lastName} onChange={this.changeHandler} placeholder='Last Name' /> */}
                         <TextField
                             name="lastName"
+                            id="lastName"
                             value={fields.lastName}
                             error={valid.lastName}
                             helperText={valid.lastName ? errors.lastName : null}
@@ -222,6 +224,7 @@ class RegistrationPage extends Component {
                         {/* <input type='text' name="emailAddress" value={fields.emailAddress} onChange={this.changeHandler} placeholder="Email" /> */}
                         <TextField
                             name="emailAddress"
+                            id="emailAddress"
                             value={fields.emailAddress}
                             error={valid.emailAddress}
                             helperText={valid.emailAddress ? errors.emailAddress : null}
@@ -241,6 +244,7 @@ class RegistrationPage extends Component {
                         {/* <input type='text' name="mobile" value={fields.mobile} onChange={this.changeHandler} placeholder='Mobile No.' /> */}
                         <TextField
                             name="mobile"
+                            id="mobile"
                             value={fields.mobile}
                             error={valid.mobile}
                             helperText={valid.mobile ? errors.mobile : null}
@@ -264,7 +268,7 @@ class RegistrationPage extends Component {
                         variant="outlined"
                         className="margin"
                         label="Password"
-                                id="outlined-adornment-password"
+                                id="password"
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                                 value={fields.password}

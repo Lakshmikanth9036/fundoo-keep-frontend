@@ -129,6 +129,7 @@ class LoginPage extends Component {
                             autoComplete="off"
                             className="margin"
                             name="mailOrMobile"
+                            id="mailOrMobile"
                             value={fields.mailOrMobile}
                             error={valid.mailOrMobile}
                             helperText={valid.mailOrMobile ? errors.mailOrMobile : null}
@@ -157,7 +158,7 @@ class LoginPage extends Component {
                             size="small"
                             variant="outlined"
                             className="margin"
-                            id="outlined-adornment-password"
+                            id="password"
                             name="password"
                             label="Password"
                             type={showPassword ? 'text' : 'password'}
@@ -181,7 +182,7 @@ class LoginPage extends Component {
                         <Button className='btnn2' href="/forgotPassword">Forgot password?</Button><br />
                         <div className='btnn1'>
                             <Button className='btnn2' href="/register" >Sigin Up</Button>
-                            <Button disabled={!this.state.isValid} type='submit' color="primary" variant='contained'>Signin</Button>
+                            <Button disabled={!this.state.isValid} type='submit' id="signIn" color="primary" variant='contained'>Signin</Button>
                         </div>
                     </form>
                 </Card>

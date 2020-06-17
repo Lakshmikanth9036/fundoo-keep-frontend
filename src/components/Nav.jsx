@@ -251,6 +251,7 @@ class Nav extends Component {
                                 style={{fontFamily:"Open Sans"}}
                                 placeholder="Search…"
                                 className='inputRoot'
+                                id="search-by-tile-or-description"
                                 type="text"
                                 name="text"
                                 onChange={this.seachChangeHandler}

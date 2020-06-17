@@ -16,7 +16,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
                     {alert('Please login first')}
                     <Redirect to='/login' />
                 </Fragment>
-                : verify() ? <Component {...props} />
+                : 
+                verify() ? <Component {...props} />
                     : <Fragment>
                         {alert('Please login first')}
                         {localStorage.clear()}
